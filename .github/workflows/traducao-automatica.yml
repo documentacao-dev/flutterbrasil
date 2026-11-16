@@ -1,0 +1,63 @@
+name: Tradução automática
+
+# Roda a skill `traduzir` (.claude/skills/traduzir/SKILL.md) no Claude Code:
+# sync com o upstream, tradução em Haiku, verificar.py, commit, PR, review em
+# Sonnet, correção em Haiku e auto-merge quando tudo fica verde.
+#
+# Precisa do secret CLAUDE_CODE_OAUTH_TOKEN (gerado com `claude setup-token`),
+# de preferência na org documentacao-dev, e do app do Claude instalado na org.
+
+on:
+  schedule:
+    # Toda segunda às 9h UTC (6h em Brasília).
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      paginas:
+        description: 'Caminhos de páginas para traduzir só elas (vazio = ciclo completo)'
+        required: false
+        default: ''
+      sem_merge:
+        description: 'Parar no PR revisado, sem auto-merge'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+concurrency:
+  group: traducao-automatica
+  cancel-in-progress: false
+
+jobs:
+  traduzir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ambiente (Dart, upstream, dependências)
+        run: |
+          bash tool/traducao/setup.sh
+          echo "$HOME/.dart-sdk/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+
+      - name: Ciclo de tradução (skill traduzir)
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Use a skill `traduzir` (.claude/skills/traduzir/SKILL.md) e siga
+            todas as etapas, do sync ao merge.
+            Argumentos: ${{ inputs.paginas }} ${{ inputs.sem_merge && 'sem-merge' || '' }}
+            O ambiente já foi preparado por tool/traducao/setup.sh.
+            Tradução e correção sempre em subagentes com model "haiku";
+            review com o agente revisar-traducao (model "sonnet").
+          claude_args: >-
+            --model sonnet
+            --allowedTools "Agent,Skill,Read,Edit,Write,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(python3 tool/traducao/:*),Bash(bash tool/traducao/:*),Bash(dart:*),Bash(rm -rf .traducao-pendente),Bash(ls:*),Bash(cat:*),Bash(wc:*)"

@@ -31,6 +31,12 @@ export PATH="$HOME/.dart-sdk/bin:$HOME/.pub-cache/bin:$PATH"
 git fetch upstream main
 ```
 
+**Branch já preparada pelo workflow.** No Actions, a fase `preparar` do
+`traducao-automatica.yml` já detectou o trabalho, rodou o sync, as notas de
+lançamento, o `gerar_todo.py` e o `verificar.py`, e publicou a branch
+`traducao/AAAA-MM-DD`. Nesse caso, comece na etapa 3 e não rode o
+`sincronizar_upstream.py` de novo.
+
 Árvore limpa e `main` atualizada. Se já existir um PR aberto com o label
 `traducao-automatica`, **não abra outro**: continue nele (faça checkout da
 branch dele e pule para a etapa que faltar).

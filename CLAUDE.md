@@ -84,6 +84,12 @@ auto-merge) está na skill `.claude/skills/traduzir/SKILL.md`. Rode `/traduzir`
 numa sessão local ou na web; o workflow `traducao-automatica.yml` roda a mesma
 skill toda segunda e por disparo manual (Actions → Tradução automática).
 
+No workflow, as etapas determinísticas rodam **sem Claude**, na fase
+`preparar`: detectar commits novos do upstream e páginas pendentes (sem nada,
+o workflow para com custo zero), sync, notas de lançamento, `gerar_todo.py` e
+`verificar.py`. O Claude só entra depois, na branch já sincronizada, para
+traduzir, abrir o PR, revisar e ligar o merge.
+
 - Tradução e correção: subagentes **Haiku**. Review: agente
   `revisar-traducao` em **Sonnet**, de contexto limpo, que só aponta.
 - Auto-merge só com `verificar.py` zerado e review sem problema grave; senão o

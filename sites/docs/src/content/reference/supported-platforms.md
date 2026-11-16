@@ -1,55 +1,56 @@
 ---
-title: Supported deployment platforms
-shortTitle: Supported platforms
-description: The platforms that Flutter supports by platform version.
+ia-translate: true
+title: Plataformas de implantação suportadas
+shortTitle: Plataformas suportadas
+description: As plataformas que Flutter suporta por versão de plataforma.
 showBreadcrumbs: false
 ---
 
-As of Flutter {{site.documentedFlutterVersion}},
-Flutter supports deploying apps on the following combinations of
-hardware architectures and operating system versions.
-These combinations are called _platforms_.
+Na versão Flutter {{site.documentedFlutterVersion}},
+Flutter suporta a implantação de apps nas seguintes combinações de
+arquiteturas de hardware e versões de sistema operacional.
+Essas combinações são chamadas de _plataformas_.
 
-Flutter categorizes platforms as follows:
+Flutter categoriza as plataformas da seguinte forma:
 
-* **Supported**: The platforms and versions that the Flutter team supports.
-* **CI-tested**: The Flutter team tests these platforms on every commit.
-* **Unsupported**: The Flutter team doesn't test or support these platforms.
+* **Supported** (Suportadas): As plataformas e versões que o time Flutter suporta.
+* **CI-tested** (Testadas em CI): O time Flutter testa essas plataformas em cada commit.
+* **Unsupported** (Não suportadas): O time Flutter não testa ou suporta essas plataformas.
 
-Based on these categories,
-Flutter supports deploying to the following platforms.
+Com base nessas categorias,
+Flutter suporta a implantação nas seguintes plataformas.
 
-## Mobile platforms
+## Plataformas móveis {:#mobile-platforms}
 
 <PlatformsGrid>
   <PlatformCard
     name="Android"
     icon="mobile"
     arch="x64, Arm32, Arm64"
-    supported="24 to 37"
-    ci-tested="24 to 37"
-    unsupported="23 and earlier"
+    supported="24 a 37"
+    ci-tested="24 a 37"
+    unsupported="23 e anteriores"
     deploy-to-link="/deployment/android"
   />
   <PlatformCard
     name="iOS"
     icon="mobile"
     arch="Arm64"
-    supported="15 to 27"
-    ci-tested="18 and 26"
-    unsupported="14 and earlier"
+    supported="15 a 27"
+    ci-tested="18 e 26"
+    unsupported="14 e anteriores"
     deploy-to-link="/deployment/ios"
   />
 </PlatformsGrid>
 
-## Desktop platforms
+## Plataformas desktop {:#desktop-platforms}
 
-:::warning macOS Intel (x64) deprecation
-Flutter is phasing out support for Intel-based Macs.
-macOS Tahoe (26) is the last release for Intel-based Macs.
-macOS Golden Gate (27) requires Apple Silicon.
-For details on the timeline and impact,
-refer to the [macOS Intel deprecation strategy][].
+:::warning Descontinuação do macOS Intel (x64)
+O Flutter está descontinuando o suporte a Macs baseados em Intel.
+O macOS Tahoe (26) é a última versão para Macs baseados em Intel.
+O macOS Golden Gate (27) exige Apple Silicon.
+Para detalhes sobre o cronograma e o impacto,
+consulte a [estratégia de descontinuação do macOS Intel][macOS Intel deprecation strategy].
 
 [macOS Intel deprecation strategy]: {{site.main-url}}/go/macos-intel-deprecation
 :::
@@ -61,16 +62,16 @@ refer to the [macOS Intel deprecation strategy][].
     arch="x64, Arm64"
     supported="10, 11"
     ci-tested="10"
-    unsupported="8 and earlier"
+    unsupported="8 e anteriores"
     deploy-to-link="/deployment/windows"
   />
   <PlatformCard
     name="macOS"
     icon="laptop_mac"
     arch="x64, Arm64"
-    supported="Monterey (12) to Golden Gate (27)"
-    ci-tested="Sequoia (15) and Tahoe (26)"
-    unsupported="Big Sur (11) and earlier"
+    supported="Monterey (12) a Golden Gate (27)"
+    ci-tested="Sequoia (15) e Tahoe (26)"
+    unsupported="Big Sur (11) e anteriores"
     deploy-to-link="/deployment/macos"
   />
   <PlatformCard
@@ -78,9 +79,9 @@ refer to the [macOS Intel deprecation strategy][].
     icon="computer"
     arch="x64, Arm64"
     deploy-to="Linux"
-    supported="10 to 13"
+    supported="10 a 13"
     ci-tested="12"
-    unsupported="9 and earlier"
+    unsupported="9 e anteriores"
     deploy-to-link="/deployment/linux"
   />
   <PlatformCard
@@ -88,14 +89,14 @@ refer to the [macOS Intel deprecation strategy][].
     icon="computer"
     arch="x64, Arm64"
     deploy-to="Linux"
-    supported="20.04 LTS to 24.04 LTS"
+    supported="20.04 LTS a 24.04 LTS"
     ci-tested="22.04 LTS"
-    unsupported="25.10 and earlier non-LTS"
+    unsupported="25.10 e anteriores, não LTS"
     deploy-to-link="/deployment/linux"
   />
 </PlatformsGrid>
 
-## Web platforms
+## Plataformas web {:#web-platforms}
 
 :::version-note
 In Flutter 3.50 and later,
@@ -110,9 +111,9 @@ only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
     icon="language"
     arch="JavaScript, WebAssembly"
     deploy-to="web"
-    supported="[Latest 2](https://chromereleases.googleblog.com/search/label/Stable%20updates)"
+    supported="[Últimas 2](https://chromereleases.googleblog.com/search/label/Stable%20updates)"
     ci-tested="145"
-    unsupported="95 and earlier"
+    unsupported="95 e anteriores"
     deploy-to-link="/deployment/web"
   />
   <PlatformCard
@@ -120,9 +121,9 @@ only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
     icon="language"
     arch="JavaScript, WebAssembly (147+ with opt-in)"
     deploy-to="web"
-    supported="[Latest 2](https://www.mozilla.org/en-US/firefox/releases/)"
+    supported="[Últimas 2](https://www.mozilla.org/en-US/firefox/releases/)"
     ci-tested="148"
-    unsupported="98 and earlier"
+    unsupported="98 e anteriores"
     deploy-to-link="/deployment/web"
   />
   <PlatformCard
@@ -130,9 +131,9 @@ only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
     icon="language"
     arch="JavaScript, WebAssembly (26.2+ with opt-in)"
     deploy-to="web"
-    supported="15.6 and newer"
+    supported="15.6 e posteriores"
     ci-tested="26"
-    unsupported="15.5 and earlier"
+    unsupported="15.5 e anteriores"
     deploy-to-link="/deployment/web"
   />
   <PlatformCard
@@ -140,25 +141,25 @@ only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
     icon="language"
     arch="JavaScript, WebAssembly"
     deploy-to="web"
-    supported="[Latest 2](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel)"
+    supported="[Últimas 2](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel)"
     ci-tested="145"
-    unsupported="95 and earlier"
+    unsupported="95 e anteriores"
     deploy-to-link="/deployment/web"
   />
 </PlatformsGrid>
 
 [wasm-compatibility]: /platform-integration/web/wasm#learn-more-about-browser-compatibility
 
-## Previous Flutter versions
+## Versões anteriores do Flutter {:#previous-flutter-versions}
 
-To learn about support for previous versions of Flutter,
-consult the following resources:
+Para conhecer o suporte a versões anteriores do Flutter,
+consulte os seguintes recursos:
 
-*   [Flutter SDK release notes][].
-    Find breaking changes and support updates listed by release.
-*   [Supported platforms page history][supported-platforms-history].
-    To find historical support matrices,
-    view previous versions of this page.
+*   [Notas de lançamento do SDK do Flutter][Flutter SDK release notes].
+    Encontre as mudanças incompatíveis e as atualizações de suporte listadas por versão.
+*   [Histórico da página de plataformas suportadas][supported-platforms-history].
+    Para encontrar as matrizes de suporte históricas,
+    visualize as versões anteriores desta página.
 
 [Flutter SDK release notes]: /release/release-notes
 [supported-platforms-history]: {{site.repo.this}}/commits/main/sites/docs/src/content/reference/supported-platforms.md

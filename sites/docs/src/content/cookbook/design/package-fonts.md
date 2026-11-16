@@ -1,32 +1,32 @@
 ---
-title: Export fonts from a package
-description: How to export fonts from a package.
+ia-translate: true
+title: Exportar fonts de um package
+description: Como exportar fonts de um package.
 ---
 
 <?code-excerpt path-base="cookbook/design/package_fonts"?>
 
-Rather than declaring a font as part of an app,
-you can declare a font as part of a separate package.
-This is a convenient way to share the same font across
-several different projects,
-or for coders publishing their packages to [pub.dev][].
-This recipe uses the following steps:
+Em vez de declarar uma font como parte de um app,
+você pode declarar uma font como parte de um package separado.
+Esta é uma maneira conveniente de compartilhar a mesma font entre
+vários projetos diferentes,
+ou para programadores que publicam seus packages no [pub.dev][].
+Esta receita usa os seguintes passos:
 
-  1. Add a font to a package.
-  2. Add the package and font to the app.
-  3. Use the font.
+  1. Adicionar uma font a um package.
+  2. Adicionar o package e a font ao app.
+  3. Usar a font.
 
 :::note
-Check out the [google_fonts][] package for direct access
-to almost 1000 open-sourced font families.
+Confira o package [google_fonts][] para acesso direto
+a quase 1000 famílias de fonts open-source.
 :::
 
-## 1. Add a font to a package
+## 1. Adicionar uma font a um package {:#1-add-a-font-to-a-package}
 
-To export fonts, place the files in your package's `lib` directory
-or one of its subdirectories.
-This example uses `lib/fonts` in a Flutter package named `awesome_package`.
-Place the package directory next to your app directory.
+Para exportar fonts, coloque os arquivos no diretório `lib` do seu package ou em um de seus subdiretórios.
+Este exemplo usa `lib/fonts` em um package Flutter chamado `awesome_package`.
+Coloque o diretório do package ao lado do diretório do seu app.
 
 <FileTree>
 
@@ -40,17 +40,17 @@ Place the package directory next to your app directory.
 
 </FileTree>
 
-## 2. Add the package and fonts to the app
+## 2. Adicionar o package e fonts ao app {:#2-add-the-package-and-fonts-to-the-app}
 
-Now you can use the fonts in the package by
-updating the `pubspec.yaml` in the *app's* root directory.
+Agora você pode usar as fonts no package
+atualizando o `pubspec.yaml` no diretório raiz do *app*.
 
 {% render "docs/cookbook/material-ui-dependency.md", site: site %}
 
-### Add the package to the app
+### Adicionar o package ao app {:#add-the-package-to-the-app}
 
-From your app's directory, add `awesome_package`
-using a [path package descriptor][].
+No diretório do seu app, adicione `awesome_package`
+usando um [descritor de package de caminho][path package descriptor].
 
 ```console
 $ flutter pub add "awesome_package:{path: ../awesome_package}"
@@ -58,14 +58,14 @@ $ flutter pub add "awesome_package:{path: ../awesome_package}"
 
 [path package descriptor]: {{site.dart-site}}/tools/pub/dependencies#path-package-descriptor
 
-### Declare the font assets
+### Declarar os assets de font {:#declare-the-font-assets}
 
-In your app's `pubspec.yaml`, declare the font files from `awesome_package`.
+No `pubspec.yaml` do seu app, declare os arquivos de font do `awesome_package`.
 
-To declare package fonts, prefix the path to the font with
+Para declarar fonts de package, prefixe o caminho para a font com
 `packages/awesome_package`.
-This tells Flutter to look in the `lib` folder
-of the package for the font.
+Isso diz ao Flutter para procurar na pasta `lib`
+do package pela font.
 
 ```yaml
 flutter:
@@ -79,11 +79,11 @@ flutter:
 
 <a id="use" aria-hidden="true"></a>
 
-## 3. Use the font
+## 3. Usar a font {:#3-use-the-font}
 
-Use a [`TextStyle`][] to change the appearance of text.
-To use package fonts, declare which font you'd like to use and
-which package the font belongs to.
+Use um [`TextStyle`][] para mudar a aparência do texto.
+Para usar fonts de package, declare qual font você gostaria de usar e
+a qual package a font pertence.
 
 <?code-excerpt "lib/main.dart (TextStyle)"?>
 ```dart
@@ -93,11 +93,11 @@ child: Text(
 ),
 ```
 
-## Complete example
+## Exemplo completo {:#complete-example}
 
 ### Fonts
 
-The Raleway and RobotoMono fonts were downloaded from
+As fonts Raleway e RobotoMono foram baixadas do
 [Google Fonts][].
 
 ### `pubspec.yaml`

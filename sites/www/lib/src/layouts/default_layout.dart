@@ -127,12 +127,6 @@ class DefaultLayout extends PageLayout {
                 content: socialImageAlt,
               ),
 
-            if (kGenerateMode)
-              const meta(
-                name: 'google-site-verification',
-                content: 'HFqxhSbf9YA_0rBglNLzDiWnrHiK_w4cqDh2YD2GEY4',
-              ),
-
             // Preload font and other script sources.
             const link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
             const link(
@@ -178,52 +172,10 @@ class DefaultLayout extends PageLayout {
               },
             ),
 
-            // Load the managed cookie banner styles before our theme overrides.
-            const link(
-              rel: 'stylesheet',
-              href:
-                  'https://www.gstatic.com/glue/cookienotificationbar/'
-                  'cookienotificationbar.min.css',
-            ),
-
             // Set site styles.
             link(
               href: cacheBustedBuildAssetUrl('/main.css'),
               rel: 'stylesheet',
-            ),
-
-            // Initialize GTM after the cookie banner indicates.
-            // If changing or removing the cookie banner setup,
-            // ensure this setup is updated as well.
-            if (kGenerateMode)
-              const script(
-                content: '''
-                  window.dataLayer = window.dataLayer || [];
-                  function glueCookieNotificationBarLoaded() {
-                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                    })(window,document,'script','dataLayer','GTM-ND4LWWZ');
-                  }
-                ''',
-              ),
-
-            // The managed cookie script handles
-            // regional visibility and dismissal.
-            // If you change or remove this script,
-            // revisit GTM initialization above.
-            // Google could also update this script independently
-            // requiring changes to our GTM setup.
-            const script(
-              src:
-                  'https://www.gstatic.com/glue/cookienotificationbar/'
-                  'cookienotificationbar.min.js',
-              attributes: {
-                'data-glue-cookie-notification-bar-category': '2A',
-                'data-glue-cookie-notification-bar-site-id': 'flutter.dev',
-              },
-              defer: true,
             ),
           ],
           lang: 'en',

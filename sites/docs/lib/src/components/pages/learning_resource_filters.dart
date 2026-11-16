@@ -6,9 +6,7 @@ import 'dart:math';
 
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
-import 'package:site_shared/analytics.dart';
 import 'package:site_shared/components/common/button.dart';
-import 'package:universal_web/js_interop.dart';
 import 'package:universal_web/web.dart' as web;
 
 import '../../models/learning_resource_model.dart';
@@ -60,22 +58,12 @@ class _LearningResourceFiltersState extends State<LearningResourceFilters> {
     }
   }
 
-  /// Populates [_resources] from [resourceCards] and registers click analytics.
+  /// Populates [_resources] from [resourceCards].
   void _recreateResources(web.NodeList resourceCards) {
     for (var i = 0; i < resourceCards.length; i++) {
       final element = resourceCards.item(i) as web.Element;
       final info = LearningResource.fromElement(element);
       _resources.add(info);
-
-      element.addEventListener(
-        'click',
-        ((web.Event event) {
-          analytics.sendEvent('learning_resource_index_click', {
-            'learning_resource_type': info.type,
-            'learning_resource_title': info.name,
-          });
-        }).toJS,
-      );
     }
     _filteredResourcesCount = _resources.length;
   }

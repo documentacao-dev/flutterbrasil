@@ -36,9 +36,6 @@ abstract class FlutterDocsLayout extends DashLayout {
   String get twitterDefaultImageUrl =>
       '/assets/images/flutter-logo-sharing.png';
 
-  @override
-  String get tagManagerId => 'GTM-ND4LWWZ';
-
   String get defaultSidenav => 'default';
 
   bool get allowBreadcrumbs => true;
@@ -83,11 +80,6 @@ abstract class FlutterDocsLayout extends DashLayout {
           );
         },
       ),
-      if (productionBuild)
-        const meta(
-          name: 'google-site-verification',
-          content: 'HFqxhSbf9YA_0rBglNLzDiWnrHiK_w4cqDh2YD2GEY4',
-        ),
     ];
   }
 

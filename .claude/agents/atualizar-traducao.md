@@ -4,7 +4,7 @@ description: >-
   Atualiza páginas já traduzidas cujo inglês mudou no upstream, resolvendo os
   arquivos com marcadores diff3 em .traducao-pendente/ gerados por
   tool/traducao/sincronizar_upstream.py.
-model: sonnet
+model: haiku
 ---
 
 # Atualizar traduções após sincronizar com o upstream

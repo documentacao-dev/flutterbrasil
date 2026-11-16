@@ -39,12 +39,14 @@ Comandos úteis depois disso:
 - **Traduzir páginas novas:** agente `translate-pt-br`
   (`.claude/agents/translate-pt-br.md`, modelo **Haiku**). É rápido e barato
   para tradução direta. O portão de qualidade é o `verificar.py`; se um arquivo
-  falhar duas vezes, refaça-o com um modelo maior.
+  falhar duas vezes, refaça-o no Haiku com o erro do `verificar.py` no prompt
+  ou corrija o trecho à mão na orquestração. Não troque de modelo.
 - **Atualizar páginas já traduzidas** (arquivos diff3 de
   `.traducao-pendente/`): agente `atualizar-traducao`
-  (`.claude/agents/atualizar-traducao.md`, modelo **Sonnet**). Comparar
-  inglês antigo, inglês novo e português exige mais cuidado para não perder
-  texto, por isso não use Haiku nessa etapa.
+  (`.claude/agents/atualizar-traducao.md`, modelo **Haiku**). Comparar
+  inglês antigo, inglês novo e português exige cuidado para não perder
+  texto: confira o resultado com `tool/traducao/verificar.py` e procure
+  trechos que ficaram em inglês.
 - Código Dart, workflows e dados de configuração: resolva diretamente, sem
   agente, e valide com `dart analyze` e com o build.
 
@@ -218,3 +220,11 @@ Ao sincronizar, confira se continuam funcionando:
 - Trabalhe em branch e abra PR para a `main`.
 - Commits de tradução: `translate: <caminho>`; sincronização:
   `Merge upstream flutter/website main`.
+
+## Modelo da tradução: sempre Haiku
+
+Toda tradução e retradução de página (tradução nova, sync com o upstream, revisão de trecho) roda no **Haiku** (`model: haiku`, hoje Claude Haiku 5.5), local ou na nuvem (Claude Code na web, GitHub App, rotinas agendadas).
+
+- Os agentes em `.claude/agents/` já declaram `model: haiku`. Não troque.
+- Se um orquestrador disparar subagentes para traduzir, passe `model: "haiku"` na ferramenta Agent.
+- O modelo principal da sessão fica só com a orquestração: merge do upstream, scripts de conferência, commits e PR. Ele não traduz páginas.

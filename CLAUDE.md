@@ -77,6 +77,19 @@ importantes:
 - Termos técnicos consagrados ficam em inglês (widget, hot reload, package,
   plugin, build, stateful/stateless etc.).
 
+## Ciclo automático: skill `traduzir`
+
+O ciclo inteiro (sync, tradução, verificação, commit, PR, review, correção e
+auto-merge) está na skill `.claude/skills/traduzir/SKILL.md`. Rode `/traduzir`
+numa sessão local ou na web; o workflow `traducao-automatica.yml` roda a mesma
+skill toda segunda e por disparo manual (Actions → Tradução automática).
+
+- Tradução e correção: subagentes **Haiku**. Review: agente
+  `revisar-traducao` em **Sonnet**, de contexto limpo, que só aponta.
+- Auto-merge só com `verificar.py` zerado e review sem problema grave; senão o
+  PR fica com o label `precisa-humano`.
+- Os passos abaixo continuam valendo: a skill é a forma de executá-los.
+
 ## Regra principal: manter as traduções em dia com o upstream
 
 **Traduzir páginas novas não basta: toda página já traduzida precisa ser
@@ -192,8 +205,8 @@ Quando uma checagem nova pegar um caso que escapou, acrescente-a ao
 ## Automações do GitHub
 
 Só ficam no repositório os workflows que fazem algo aqui: `docs.yml` (build,
-links e validação do `firebase.json`), `traducao.yml`, `firebase-preview.yml`
-e `firebase-deploy.yml`. O preview mantém **um único comentário por PR**,
+links e validação do `firebase.json`), `traducao.yml`, `traducao-automatica.yml`,
+`firebase-preview.yml` e `firebase-deploy.yml`. O preview mantém **um único comentário por PR**,
 editado a cada push, em vez de comentar de novo.
 
 O Dependabot e os workflows que só servem ao flutter/website (`codeql`,
@@ -223,8 +236,9 @@ Ao sincronizar, confira se continuam funcionando:
 
 ## Modelo da tradução: sempre Haiku
 
-Toda tradução e retradução de página (tradução nova, sync com o upstream, revisão de trecho) roda no **Haiku** (`model: haiku`, hoje Claude Haiku 5.5), local ou na nuvem (Claude Code na web, GitHub App, rotinas agendadas).
+Toda tradução e retradução de página (tradução nova, sync com o upstream, correção de trecho) roda no **Haiku** (`model: haiku`, hoje Claude Haiku 5.5), local ou na nuvem (Claude Code na web, GitHub App, rotinas agendadas).
 
-- Os agentes em `.claude/agents/` já declaram `model: haiku`. Não troque.
+- Os agentes de tradução em `.claude/agents/` (`translate-pt-br`, `atualizar-traducao`) declaram `model: haiku`. Não troque.
 - Se um orquestrador disparar subagentes para traduzir, passe `model: "haiku"` na ferramenta Agent.
 - O modelo principal da sessão fica só com a orquestração: merge do upstream, scripts de conferência, commits e PR. Ele não traduz páginas.
+- Exceção: o **review** (agente `revisar-traducao`) roda em **Sonnet**. Ele só aponta problemas; quem corrige é o Haiku.

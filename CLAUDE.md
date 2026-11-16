@@ -43,8 +43,9 @@ Comandos úteis depois disso:
 - **Atualizar páginas já traduzidas** (arquivos diff3 de
   `.traducao-pendente/`): agente `atualizar-traducao`
   (`.claude/agents/atualizar-traducao.md`, modelo **Haiku**). Comparar
-  inglês antigo, inglês novo e português exige mais cuidado para não perder
-  texto, por isso não use Haiku nessa etapa.
+  inglês antigo, inglês novo e português exige cuidado para não perder
+  texto: confira o resultado com `tool/traducao/verificar.py` e procure
+  trechos que ficaram em inglês.
 - Código Dart, workflows e dados de configuração: resolva diretamente, sem
   agente, e valide com `dart analyze` e com o build.
 

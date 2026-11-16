@@ -10,6 +10,7 @@ import '../components/common/page_header.dart';
 import '../components/common/prev_next.dart';
 import '../components/layout/toc.dart';
 import '../components/layout/trailing_content.dart';
+import '../components/layout/untranslated_notice.dart';
 import '../models/page_navigation_model.dart';
 import 'flutter_layout.dart';
 
@@ -82,7 +83,8 @@ class DocLayout extends FlutterDocsLayout {
                 description: pageDescription,
                 showBreadcrumbs: showBreadcrumbsFor(page),
               ),
-
+              if (UntranslatedNotice.appliesTo(page))
+                const UntranslatedNotice(),
               child,
               PrevNext(
                 previousPage: PageNavigationEntry.fromData(pageData['prev']),

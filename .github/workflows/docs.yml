@@ -15,20 +15,12 @@ on:
       - 'pubspec.lock'
       - 'analysis_options.yaml'
       - '.github/workflows/docs.yml'
+  # Sem filtro `paths` no pull_request: "Build and check links" é check
+  # obrigatório da main e precisa existir em todo PR. Quando o PR não mexe no
+  # site, o job termina em sucesso sem buildar (passo "Detectar mudanças").
   pull_request:
     branches:
       - main
-    paths:
-      - 'sites/docs/**'
-      - 'examples/**'
-      - 'packages/excerpter/**'
-      - 'packages/site_shared/**'
-      - 'tool/dash_site/**'
-      - 'tool/config/linkcheck-skip-list.txt'
-      - 'pubspec.yaml'
-      - 'pubspec.lock'
-      - 'analysis_options.yaml'
-      - '.github/workflows/docs.yml'
   schedule:
     - cron: '0 0 * * 0'
 
@@ -62,16 +54,53 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(fromJSON('["flutter/website", "documentacao-dev/flutterbrasil"]'), github.repository)
     timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
+      # Em PR, só builda se algum arquivo do site mudou (a mesma lista do
+      # filtro `paths` do push). Fora disso o job passa sem fazer nada, mas
+      # o check existe, então a proteção da main não trava o PR.
+      - name: Detectar mudanças no site
+        id: mudancas
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "site=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          arquivos=$(gh api --paginate \
+            "repos/${{ github.repository }}/pulls/$PR/files" --jq '.[].filename')
+          site=false
+          while IFS= read -r f; do
+            case "$f" in
+              sites/docs/*|examples/*|packages/excerpter/*|packages/site_shared/*|\
+              tool/dash_site/*|tool/config/linkcheck-skip-list.txt|\
+              pubspec.yaml|pubspec.lock|analysis_options.yaml|\
+              .github/workflows/docs.yml)
+                site=true; break ;;
+            esac
+          done <<< "$arquivos"
+          echo "site=$site" >> "$GITHUB_OUTPUT"
+          if [ "$site" = false ]; then
+            echo "PR sem mudanças no site: build e checagem de links pulados." \
+              | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: steps.mudancas.outputs.site == 'true'
         with:
           persist-credentials: false
       - uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d
+        if: steps.mudancas.outputs.site == 'true'
         with:
           sdk: 3.14.0-315.3.beta
       - name: Fetch Dart dependencies
+        if: steps.mudancas.outputs.site == 'true'
         run: dart pub get
       - name: Install firebase-tools
+        if: steps.mudancas.outputs.site == 'true'
         # Pinned because the hosting emulator fails to
         # start with firebase-tools 15.31.0.
         # Once https://github.com/firebase/firebase-tools/issues/11168 is fixed,
@@ -84,10 +113,13 @@ jobs:
           sudo chmod +rx /usr/local/bin/firebase
           firebase --version
       - name: Build site
+        if: steps.mudancas.outputs.site == 'true'
         run: dart run dash_site --site=docs build
       - name: Check for broken Markdown link references
+        if: steps.mudancas.outputs.site == 'true'
         run: dart run dash_site --site=docs check-link-references
       - name: Check for broken internal links
+        if: steps.mudancas.outputs.site == 'true'
         run: dart run dash_site --site=docs check-links
 
   firebase-validate:

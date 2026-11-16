@@ -39,7 +39,8 @@ Comandos úteis depois disso:
 - **Traduzir páginas novas:** agente `translate-pt-br`
   (`.claude/agents/translate-pt-br.md`, modelo **Haiku**). É rápido e barato
   para tradução direta. O portão de qualidade é o `verificar.py`; se um arquivo
-  falhar duas vezes, refaça-o com um modelo maior.
+  falhar duas vezes, refaça-o no Haiku com o erro do `verificar.py` no prompt
+  ou corrija o trecho à mão na orquestração. Não troque de modelo.
 - **Atualizar páginas já traduzidas** (arquivos diff3 de
   `.traducao-pendente/`): agente `atualizar-traducao`
   (`.claude/agents/atualizar-traducao.md`, modelo **Haiku**). Comparar

@@ -33,8 +33,6 @@ abstract class DashLayout implements PageLayout {
   String get twitterSiteTag;
   String get twitterDefaultImageUrl;
 
-  String get tagManagerId;
-
   /// Returns page-specific URLs to eagerly speculate on, in addition to
   /// the document-level rules that match all internal links.
   ///
@@ -146,52 +144,9 @@ abstract class DashLayout implements PageLayout {
       ),
       for (final font in fontUrls) link(rel: 'stylesheet', href: font),
 
-      // Load the managed cookie banner styles before our theme overrides.
-      const link(
-        rel: 'stylesheet',
-        href:
-            'https://www.gstatic.com/glue/cookienotificationbar/'
-            'cookienotificationbar.min.css',
-      ),
-
       link(
         rel: 'stylesheet',
         href: cacheBustedBuildAssetUrl(stylesUrl),
-      ),
-
-      // Initialize GTM after the cookie banner indicates.
-      // If changing or removing the cookie banner setup,
-      // ensure this setup is updated as well.
-      if (productionBuild)
-        script(
-          content:
-              '''
-window.dataLayer = window.dataLayer || [];
-function glueCookieNotificationBarLoaded() {
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','$tagManagerId');
-}
-''',
-        ),
-
-      // The managed cookie script handles
-      // regional visibility and dismissal.
-      // If you change or remove this script,
-      // revisit GTM initialization above.
-      // Google could also update this script independently
-      // requiring changes to our GTM setup.
-      script(
-        src:
-            'https://www.gstatic.com/glue/cookienotificationbar/'
-            'cookienotificationbar.min.js',
-        attributes: {
-          'data-glue-cookie-notification-bar-category': '2B',
-          'data-glue-cookie-notification-bar-site-id': siteHost,
-        },
-        defer: true,
       ),
 
       // Set site scripts.

@@ -4,7 +4,6 @@
 
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
-import 'package:site_shared/analytics.dart';
 import 'package:site_shared/components/common/button.dart';
 import 'package:site_shared/util.dart';
 
@@ -109,14 +108,6 @@ final class LearningResourceFiltersNotifier extends ChangeNotifier {
   void setTag(LearningResourceTag tag, bool isSelected) {
     if (isSelected) {
       selectedTags.add(tag);
-
-      analytics.sendEvent(
-        'learning_resource_index_filter_selected',
-        {
-          'learning_resource_filter_name': tag.label.toLowerCase(),
-          'learning_resource_filter_type': 'tags',
-        },
-      );
     } else {
       selectedTags.remove(tag);
     }
@@ -127,14 +118,6 @@ final class LearningResourceFiltersNotifier extends ChangeNotifier {
   void setType(LearningResourceType type, {required bool isSelected}) {
     if (isSelected) {
       selectedTypes.add(type);
-
-      analytics.sendEvent(
-        'learning_resource_index_filter_selected',
-        {
-          'learning_resource_filter_name': type.label.toLowerCase(),
-          'learning_resource_filter_type': 'type',
-        },
-      );
     } else {
       selectedTypes.remove(type);
     }

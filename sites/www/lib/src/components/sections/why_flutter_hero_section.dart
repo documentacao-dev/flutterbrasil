@@ -4,7 +4,6 @@
 
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
-import 'package:site_shared/analytics.dart';
 
 import '../../utils/visibility_observer.dart';
 import '../common/icon.dart';
@@ -124,13 +123,6 @@ class _HeroCopy extends StatelessComponent {
         href: whitepaperUrl,
         classes: 'btn why-flutter-hero-btn',
         attributes: const {'download': 'flutter-whitepaper-2026.pdf'},
-        events: {
-          'click': (event) {
-            analytics.sendEvent('whitepaper_download', {
-              'file': 'flutter-whitepaper-2026.pdf',
-            });
-          },
-        },
         const [Icon(symbol: 'download'), .text('Download 2026 Whitepaper')],
       ),
     ]);

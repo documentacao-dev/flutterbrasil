@@ -42,7 +42,7 @@ Comandos úteis depois disso:
   falhar duas vezes, refaça-o com um modelo maior.
 - **Atualizar páginas já traduzidas** (arquivos diff3 de
   `.traducao-pendente/`): agente `atualizar-traducao`
-  (`.claude/agents/atualizar-traducao.md`, modelo **Sonnet**). Comparar
+  (`.claude/agents/atualizar-traducao.md`, modelo **Haiku**). Comparar
   inglês antigo, inglês novo e português exige mais cuidado para não perder
   texto, por isso não use Haiku nessa etapa.
 - Código Dart, workflows e dados de configuração: resolva diretamente, sem

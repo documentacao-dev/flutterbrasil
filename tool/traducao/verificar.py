@@ -300,7 +300,7 @@ def checar_arquivo(caminho, ref, sync, gerador):
     return erros, avisos
 
 
-REPO_FORK = 'ulisseshen/flutterbrasil'
+REPO_FORK = 'documentacao-dev/flutterbrasil'
 JOBS_OBRIGATORIOS = ('linkcheck', 'firebase-validate')
 
 

@@ -34,7 +34,7 @@ extension PageSourceInfoExtension on Page {
     final repoLinks = siteData['repo'] as Map<String, Object?>? ?? {};
     final repoUrl =
         repoLinks['this'] as String? ??
-        'https://github.com/ulisseshen/flutterbrasil';
+        'https://github.com/documentacao-dev/flutterbrasil';
     final inputPath = pageData['inputPath'] as String?;
     final siteUrl =
         siteData['url'] as String? ?? 'https://docs.flutterbrasil.dev';

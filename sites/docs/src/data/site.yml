@@ -9,8 +9,8 @@ main-url: https://flutterbrasil.dev
 showBanner: true
 
 repo:
-  organization: https://github.com/ulisseshen
-  this: https://github.com/ulisseshen/flutterbrasil
+  organization: https://github.com/documentacao-dev
+  this: https://github.com/documentacao-dev/flutterbrasil
   flutter: https://github.com/flutter/flutter
   rfc: https://github.com/flutter/rfc
   games: https://github.com/flutter/games

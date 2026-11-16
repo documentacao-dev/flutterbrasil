@@ -1,13 +1,14 @@
 ---
-title: Flutter 3.50.0 release notes
-shortTitle: 3.50.0 release notes
-description: Release notes for Flutter 3.50.0.
+title: Notas de lançamento do Flutter 3.50.0
+shortTitle: Notas de lançamento 3.50.0
+description: Notas de lançamento do Flutter 3.50.0.
 skipTemplateRendering: true
+ia-translate: true
 ---
 
-This page has release notes for Flutter 3.50.
+Esta página contém as notas de lançamento do Flutter 3.50.
 
-## What's changed
+## O que mudou {:#whats-changed}
 
 ### Framework
 
@@ -851,7 +852,7 @@ This page has release notes for Flutter 3.50.
 * [beta] [flutter_tools] Exit cleanly when Windows path exceeds MAX_PATH (OS Error 206) by @flutteractionsbot in [195072](https://github.com/flutter/flutter/pull/195072)
 * [beta] [flutter_tools] Log --[no-]deprecated-js-interop build/fail analytics by @kevmoo in [195630](https://github.com/flutter/flutter/pull/195630)
 
-### Documentation
+### Documentação {:#documentation}
 
 * Use ServicesBinding.instance.exitApplication instead of exit(0) in multiple_windows example by @mattkae in [189364](https://github.com/flutter/flutter/pull/189364)
 * Migrates the platform_channel example to material_ui by @QuncCccccc in [190253](https://github.com/flutter/flutter/pull/190253)
@@ -865,7 +866,7 @@ This page has release notes for Flutter 3.50.
 * Migrate syntax rules to analyzer plugin by @bkonyi in [191037](https://github.com/flutter/flutter/pull/191037)
 * Migrate ios driver tests batch 3 to simulators by @okorohelijah in [191333](https://github.com/flutter/flutter/pull/191333)
 
-### Other changes
+### Outras mudanças {:#other-changes}
 
 * Roll pub packages by @flutter-pub-roller-bot in [189149](https://github.com/flutter/flutter/pull/189149)
 * Promote android_hardware_smoke_tests out of bringup in CI by @andywolff in [189081](https://github.com/flutter/flutter/pull/189081)
@@ -1222,7 +1223,7 @@ This page has release notes for Flutter 3.50.
 * [beta] Expose engineId on native plugin bindings and registrars on Android, iOS, and macOS by @tarrinneal in [196145](https://github.com/flutter/flutter/pull/196145)
 * [flutter-3.50-candidate.0] Sync engine.version to 371f77202a73e8dff57a8b3bff75bca55c090aee by @flutteractionsbot in [196215](https://github.com/flutter/flutter/pull/196215)
 
-## New contributors
+## Novos contribuidores {:#new-contributors}
 
 * @Akhrameev made their first contribution in [188627](https://github.com/flutter/flutter/pull/188627)
 * @gnoliyil made their first contribution in [188891](https://github.com/flutter/flutter/pull/188891)
@@ -1294,4 +1295,4 @@ This page has release notes for Flutter 3.50.
 * @aayushkedawat made their first contribution in [193079](https://github.com/flutter/flutter/pull/193079)
 * @RobertOdrowaz made their first contribution in [191350](https://github.com/flutter/flutter/pull/191350)
 
-**Full Changelog**: https://github.com/flutter/flutter/compare/3.47.0...3.50.0
+**Changelog completo**: https://github.com/flutter/flutter/compare/3.47.0...3.50.0

@@ -99,10 +99,10 @@ consulte a [estratégia de descontinuação do macOS Intel][macOS Intel deprecat
 ## Plataformas web {:#web-platforms}
 
 :::version-note
-In Flutter 3.50 and later,
-apps built with `--wasm` use WebAssembly in
-Firefox and WebKit-based browsers (Safari and all browsers on iOS)
-only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
+No Flutter 3.50 e posteriores,
+apps compilados com `--wasm` usam WebAssembly no
+Firefox e nos navegadores baseados em WebKit (Safari e todos os navegadores no iOS)
+somente se você [habilitá-los na `wasmAllowList` do seu app][wasm-compatibility].
 :::
 
 <PlatformsGrid>
@@ -119,7 +119,7 @@ only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
   <PlatformCard
     name="Firefox"
     icon="language"
-    arch="JavaScript, WebAssembly (147+ with opt-in)"
+    arch="JavaScript, WebAssembly (147+ com opt-in)"
     deploy-to="web"
     supported="[Últimas 2](https://www.mozilla.org/en-US/firefox/releases/)"
     ci-tested="148"
@@ -129,7 +129,7 @@ only if you [enable them in your app's `wasmAllowList`][wasm-compatibility].
   <PlatformCard
     name="Safari"
     icon="language"
-    arch="JavaScript, WebAssembly (26.2+ with opt-in)"
+    arch="JavaScript, WebAssembly (26.2+ com opt-in)"
     deploy-to="web"
     supported="15.6 e posteriores"
     ci-tested="26"

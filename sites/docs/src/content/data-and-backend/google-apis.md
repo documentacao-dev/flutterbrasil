@@ -137,11 +137,11 @@ class _LikedVideosPage extends StatelessWidget {
 }
 ```
 
-Subscribe to `authenticationEvents` before calling
-`attemptLightweightAuthentication()` so your app receives a sign-in event
-if the plugin restores a previous session.
-Import `dart:async` for `StreamSubscription` and `unawaited`.
-Cancel the subscription when the widget is disposed.
+Assine `authenticationEvents` antes de chamar
+`attemptLightweightAuthentication()`, para que o app receba um evento de login
+se o plugin restaurar uma sessão anterior.
+Importe `dart:async` para `StreamSubscription` e `unawaited`.
+Cancele a assinatura quando o widget for descartado.
 
 <?code-excerpt "lib/main.dart (post-init)" plaster="none"?>
 ```dart

@@ -8,10 +8,10 @@ description: Aprenda as diferentes formas de incorporar views Flutter em conteú
 Views Flutter e conteúdo web podem ser compostos para produzir uma aplicação web
 de diferentes formas. Escolha uma das seguintes dependendo do seu caso de uso:
 
-* Uma view Flutter controla a página inteira ([full page mode][full page mode], incluindo
+* Uma view Flutter controla a página inteira ([modo de página inteira][full page mode], incluindo
   [incorporações `iframe`](#iframe-embedding))
 * Múltiplas views Flutter adicionadas dinamicamente a uma aplicação web existente
-  ([embedded mode][embedded mode])
+  ([modo incorporado][embedded mode])
 * Uma única view Flutter renderizada dentro de um elemento HTML específico
   ([`hostElement` customizado][custom `hostElement`])
 
@@ -19,7 +19,7 @@ de diferentes formas. Escolha uma das seguintes dependendo do seu caso de uso:
 [embedded mode]: #embedded-mode
 [custom `hostElement`]: #custom-element-hostelement
 
-## Full page mode
+## Modo de página inteira {:#full-page-mode}
 
 No modo de página inteira, a aplicação web Flutter assume o controle de toda a
 janela do navegador e cobre seu viewport completamente ao renderizar.
@@ -42,7 +42,7 @@ Quando Flutter web é lançado sem referenciar `multiViewEnabled` ou um
 `hostElement`, ele usa o modo de página inteira.
 
 Para aprender mais sobre o arquivo `flutter_bootstrap.js`,
-consulte [Customize app initialization][Customize app initialization].
+consulte [Personalize a inicialização do app][Customize app initialization].
 
 [Customize app initialization]: /platform-integration/web/initialization
 
@@ -57,7 +57,7 @@ e Flutter irá preenchê-lo completamente.
 ```
 
 Para aprender mais sobre os prós e contras de um `iframe`,
-consulte a documentação do [Inline Frame element][Inline Frame element] no MDN.
+consulte a documentação do [elemento `<iframe>`][Inline Frame element] no MDN.
 
 [Inline Frame element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
 
@@ -79,7 +79,7 @@ com base nos seus requisitos de isolamento, desempenho e comunicação:
 
 {:.table .table-striped}
 
-## Embedded mode
+## Modo incorporado {:#embedded-mode}
 
 Aplicações web Flutter também podem renderizar conteúdo em um número arbitrário de
 elementos (comumente `div`s) de outra aplicação web; isso é chamado de "embedded
@@ -316,7 +316,7 @@ final initialData = ui_web.views.getInitialData(viewId) as YourJsInteropType;
 
 Para aprender como definir a classe `YourJsInteropType` para mapear o objeto `initialData`
 passado do JS para que seja type-safe no seu programa Dart, consulte:
-[JS Interoperability][JS Interoperability] no dartbrasil.dev.
+[Interoperabilidade com JavaScript][JS Interoperability] no dartbrasil.dev.
 
 [JS Interoperability]: {{site.dart-site}}/interop/js-interop
 
@@ -351,7 +351,7 @@ não tentará "corrigir" constantes contraditórias como passar `max-height: 100
 no CSS, mas `maxHeight: Infinity` para o Flutter.
 
 Para aprender mais, consulte a [classe `ViewConstraints`][`ViewConstraints` class],
-e [Understanding constraints][Understanding constraints].
+e [Entendendo constraints][Understanding constraints].
 
 [`ViewConstraints` class]: {{site.api}}/flutter/dart-ui/ViewConstraints-class.html
 [Understanding constraints]: /ui/layout/constraints
@@ -381,7 +381,7 @@ se o suporte de visualização única for descontinuado, não afetará seu app.
 :::
 
 Para aprender mais sobre outras opções de configuração,
-consulte [Customizing web app initialization][Customizing web app initialization].
+consulte [Personalizando a inicialização do app web][Customizing web app initialization].
 
 [Customizing web app initialization]: /platform-integration/web/initialization
 
@@ -428,23 +428,23 @@ ao seu elemento host:
 <div id="flutter_host"></div>
 ```
 
-## Optimize host pages and third-party scripts {: #landing-pages-and-third-party-scripts }
+## Otimize as páginas host e os scripts de terceiros {: #landing-pages-and-third-party-scripts }
 
-When embedding a Flutter view into an existing web page (such as a dashboard,
-content-rich page, or app that loads third-party scripts), apply the following
-patterns to protect initial page-load performance and avoid cross-origin header
-conflicts.
+Ao incorporar uma view Flutter em uma página web existente (como um dashboard,
+uma página com muito conteúdo ou um app que carrega scripts de terceiros),
+aplique os padrões a seguir para proteger o desempenho do carregamento inicial
+da página e evitar conflitos de cabeçalhos cross-origin.
 
-### Lazy-load embedded views below the fold {: #lazy-load-embedded-views }
+### Carregue sob demanda (lazy load) as views incorporadas abaixo da dobra {: #lazy-load-embedded-views }
 
-By default, `flutter_bootstrap.js` calls `_flutter.loader.load()` immediately,
-which can compete with host HTML, CSS, and critical images during initial page
-load.
+Por padrão, o `flutter_bootstrap.js` chama `_flutter.loader.load()` imediatamente,
+o que pode competir com o HTML, o CSS e as imagens críticas da página host
+durante o carregamento inicial.
 
-When an embedded Flutter view sits below the fold or opens on interaction,
-defer `_flutter.loader.load()` in a custom `web/flutter_bootstrap.js` file
-by using an `IntersectionObserver` (or a `click` or `pointerenter` listener) to
-protect initial Largest Contentful Paint (LCP):
+Quando uma view Flutter incorporada fica abaixo da dobra ou abre por interação,
+adie o `_flutter.loader.load()` em um arquivo `web/flutter_bootstrap.js`
+personalizado, usando um `IntersectionObserver` (ou um listener de `click` ou
+`pointerenter`) para proteger o Largest Contentful Paint (LCP) inicial:
 
 ```js title="web/flutter_bootstrap.js"
 {% raw %}{{flutter_js}}{% endraw %}
@@ -479,42 +479,43 @@ if (document.readyState === 'loading') {
 }
 ```
 
-### Prevent Cumulative Layout Shift (CLS) {: #prevent-cls }
+### Evite o Cumulative Layout Shift (CLS) {: #prevent-cls }
 
-In addition to the [mandatory CSS properties](#mandatory-css-properties)
-required for Flutter to compute non-zero view bounds,
-mounting a Flutter view into a container whose height changes after layout
-triggers a Cumulative Layout Shift (CLS) on the host page.
+Além das [propriedades CSS obrigatórias](#mandatory-css-properties)
+necessárias para o Flutter calcular limites de view diferentes de zero,
+montar uma view Flutter em um contêiner cuja altura muda depois do layout
+dispara um Cumulative Layout Shift (CLS) na página host.
 
-To keep surrounding page content stable while Flutter initializes:
+Para manter o conteúdo ao redor estável enquanto o Flutter inicializa:
 
-* Size `#flutter_host` to its final layout dimensions upfront by using explicit
-  `width` and `height` values or the CSS `aspect-ratio` property
-  (for example, `width: 100%; aspect-ratio: 16 / 9;`).
-* Render a lightweight HTML or CSS skeleton placeholder inside `#flutter_host`
-  that matches the reserved dimensions until Flutter paints its first frame.
+* Defina o tamanho de `#flutter_host` com as dimensões finais do layout desde
+  o início, usando valores explícitos de `width` e `height` ou a propriedade CSS
+  `aspect-ratio` (por exemplo, `width: 100%; aspect-ratio: 16 / 9;`).
+* Renderize um placeholder leve de esqueleto em HTML ou CSS dentro de
+  `#flutter_host`, com as mesmas dimensões reservadas, até o Flutter pintar o
+  primeiro frame.
 
-### Coexist with third-party cross-origin scripts and iframes {: #coexist-with-third-party-scripts }
+### Conviva com scripts e iframes cross-origin de terceiros {: #coexist-with-third-party-scripts }
 
-When you build with the `--wasm` flag, multi-threaded WebAssembly rendering
-requires cross-origin isolation (`COOP` and `COEP` HTTP response headers).
-On host pages that load third-party scripts, analytics, external images, or
-cross-origin embeds, choose the header strategy that matches the page:
+Ao compilar com a flag `--wasm`, a renderização WebAssembly multithread exige
+isolamento cross-origin (os cabeçalhos de resposta HTTP `COOP` e `COEP`).
+Em páginas host que carregam scripts de terceiros, analytics, imagens externas
+ou embeds cross-origin, escolha a estratégia de cabeçalhos que corresponda à página:
 
-* **Third-party scripts, analytics, and images**:
-  Configure the server to send `Cross-Origin-Opener-Policy: same-origin` and
-  `Cross-Origin-Embedder-Policy: credentialless` rather than `require-corp`.
-  With `credentialless`, the browser loads cross-origin subresources without
-  requiring third-party servers to return `Cross-Origin-Resource-Policy`
-  headers.
-* **Third-party cross-origin `<iframe>` embeds**:
-  When the host document sets the `Cross-Origin-Embedder-Policy` header, the
-  browser blocks cross-origin `<iframe>` elements that don't opt in to COEP.
-  When the host page embeds incompatible third-party iframes, omit the `COEP`
-  and `COOP` headers.
-  Without cross-origin isolation, Flutter's WebAssembly build automatically
-  runs in single-threaded mode; set `suppressMultithreadingWarning: true` to
-  silence the console warning:
+* **Scripts, analytics e imagens de terceiros**:
+  configure o servidor para enviar `Cross-Origin-Opener-Policy: same-origin` e
+  `Cross-Origin-Embedder-Policy: credentialless`, em vez de `require-corp`.
+  Com `credentialless`, o navegador carrega subrecursos cross-origin sem exigir
+  que os servidores de terceiros retornem cabeçalhos
+  `Cross-Origin-Resource-Policy`.
+* **Embeds de `<iframe>` cross-origin de terceiros**:
+  quando o documento host define o cabeçalho `Cross-Origin-Embedder-Policy`, o
+  navegador bloqueia os elementos `<iframe>` cross-origin que não aderem ao COEP.
+  Quando a página host incorpora iframes de terceiros incompatíveis, omita os
+  cabeçalhos `COEP` e `COOP`.
+  Sem isolamento cross-origin, o build WebAssembly do Flutter roda
+  automaticamente em modo single-thread; defina `suppressMultithreadingWarning: true`
+  para silenciar o aviso no console:
 
   ```js title="web/flutter_bootstrap.js"
   {% raw %}{{flutter_js}}{% endraw %}
@@ -528,12 +529,12 @@ cross-origin embeds, choose the header strategy that matches the page:
   });
   ```
 
-  If you provide a custom `onEntrypointLoaded` callback (for example, in
-  [multi-view mode](#enable-multi-view-mode)), pass the configuration object to
-  both `load()` and `initializeEngine()`.
-  This configuration preserves WebAssembly (`dart2wasm`) single-threaded
-  execution without breaking third-party cross-origin iframes.
-  For additional details about loader flags,
-  refer to [Customize the Flutter loader][customize-flutter-loader].
+  Se você fornecer um callback `onEntrypointLoaded` personalizado (por exemplo,
+  no [modo multi-view](#enable-multi-view-mode)), passe o objeto de configuração
+  tanto para `load()` quanto para `initializeEngine()`.
+  Essa configuração preserva a execução WebAssembly (`dart2wasm`) single-thread
+  sem quebrar os iframes cross-origin de terceiros.
+  Para mais detalhes sobre as flags do loader,
+  consulte [Personalize o loader do Flutter][customize-flutter-loader].
 
 [customize-flutter-loader]: /platform-integration/web/initialization#customize-the-flutter-loader

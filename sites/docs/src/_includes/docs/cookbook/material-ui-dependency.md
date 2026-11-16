@@ -1,6 +1,8 @@
+<!-- ia-translate: true -->
+
 :::note
-This recipe uses the
-[`material_ui`]({{site.pub-pkg}}/material_ui) package.
-If your app doesn't already depend on it,
-run `flutter pub add material_ui` from your app's directory.
+Esta receita usa o pacote
+[`material_ui`]({{site.pub-pkg}}/material_ui).
+Se o seu app ainda não depende dele,
+execute `flutter pub add material_ui` no diretório do seu app.
 :::

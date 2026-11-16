@@ -1,49 +1,50 @@
 ---
-ia-translate: true
-title: Construir um formulário com validação
-description: Como construir um formulário que valida entrada.
+title: Build a form with validation
+description: How to build a form that validates input.
 ---
 
 <?code-excerpt path-base="cookbook/forms/validation"?>
 
-Apps frequentemente exigem que os usuários insiram informações em um campo de texto.
-Por exemplo, você pode exigir que os usuários façam login com um endereço de e-mail
-e uma combinação de senha.
+Apps often require users to enter information into a text field.
+For example, you might require users to log in with an email address
+and password combination.
 
-Para tornar os apps seguros e fáceis de usar, verifique se as
-informações que o usuário forneceu são válidas. Se o usuário preencheu corretamente
-o formulário, processe as informações. Se o usuário enviar informações incorretas,
-exiba uma mensagem de erro amigável informando o que deu
-errado.
+To make apps secure and easy to use, check whether the
+information the user has provided is valid. If the user has correctly filled
+out the form, process the information. If the user submits incorrect
+information, display a friendly error message letting them know what went
+wrong.
 
-Neste exemplo, aprenda como adicionar validação a um formulário que possui
-um único campo de texto usando as seguintes etapas:
+In this example, learn how to add validation to a form that has
+a single text field using the following steps:
 
-1.  Criar um `Form` com uma `GlobalKey`.
-1.  Adicionar um `TextFormField` com lógica de validação.
-1.  Criar um botão para validar e enviar o formulário.
+1.  Create a `Form` with a `GlobalKey`.
+1.  Add a `TextFormField` with validation logic.
+1.  Create a button to validate and submit the form.
 
-## 1. Criar um `Form` com uma `GlobalKey` {:#1-create-a-form-with-a-globalkey}
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
 
-Crie um [`Form`][`Form`].
-O widget `Form` atua como um contêiner para agrupar e
-validar múltiplos campos de formulário.
+## 1. Create a `Form` with a `GlobalKey`
 
-Ao criar o formulário, forneça uma [`GlobalKey`][`GlobalKey`].
-Isso atribui um identificador único ao seu `Form`.
-Também permite que você valide o formulário posteriormente.
+Create a [`Form`][].
+The `Form` widget acts as a container for grouping and
+validating multiple form fields.
 
-Crie o formulário como um `StatefulWidget`.
-Isso permite que você crie uma `GlobalKey<FormState>()` única uma vez.
-Você pode então armazená-la como uma variável e acessá-la em diferentes pontos.
+When creating the form, provide a [`GlobalKey`][].
+This assigns a unique identifier to your `Form`.
+It also allows you to validate the form later.
 
-Se você fizesse isso como um `StatelessWidget`, você precisaria armazenar esta chave _em algum lugar_.
-Como é um recurso caro, você não gostaria de gerar uma nova
-`GlobalKey` cada vez que executar o método `build`.
+Create the form as a `StatefulWidget`.
+This allows you to create a unique `GlobalKey<FormState>()` once.
+You can then store it as a variable and access it at different points.
+
+If you made this a `StatelessWidget`, you'd need to store this key _somewhere_.
+As it is resource expensive, you wouldn't want to generate a new
+`GlobalKey` each time you run the `build` method.
 
 <?code-excerpt "lib/form.dart"?>
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Define a custom Form widget.
 class MyCustomForm extends StatefulWidget {
@@ -79,29 +80,29 @@ class _MyCustomFormState extends State<MyCustomForm> {
 ```
 
 :::tip
-Usar uma `GlobalKey` é a maneira recomendada de acessar um formulário.
-No entanto, se você tiver uma árvore de widgets mais complexa,
-você pode usar o método [`Form.of()`][`Form.of()`] para
-acessar o formulário dentro de widgets aninhados.
+Using a `GlobalKey` is the recommended way to access a form.
+However, if you have a more complex widget tree,
+you can use the [`Form.of()`][] method to
+access the form within nested widgets.
 :::
 
-## 2. Adicionar um `TextFormField` com lógica de validação {:#2-add-a-textformfield-with-validation-logic}
+## 2. Add a `TextFormField` with validation logic
 
-Embora o `Form` esteja no lugar,
-ele não tem uma maneira para os usuários inserirem texto.
-Esse é o trabalho de um [`TextFormField`][`TextFormField`].
-O widget `TextFormField` renderiza um campo de texto do Material Design
-e pode exibir erros de validação quando eles ocorrem.
+Although the `Form` is in place,
+it doesn't have a way for users to enter text.
+That's the job of a [`TextFormField`][].
+The `TextFormField` widget renders a Material Design text field
+and can display validation errors when they occur.
 
-Valide a entrada fornecendo uma função `validator()` para o
-`TextFormField`. Se a entrada do usuário não for válida,
-a função `validator` retorna uma `String` contendo
-uma mensagem de erro.
-Se não houver erros, o validador deve retornar `null`.
+Validate the input by providing a `validator()` function to the
+`TextFormField`. If the user's input isn't valid,
+the `validator` function returns a `String` containing
+an error message.
+If there are no errors, the validator must return `null`.
 
-Para este exemplo, crie um `validator` que garanta que o
-`TextFormField` não esteja vazio. Se estiver vazio,
-retorne uma mensagem de erro amigável.
+For this example, create a `validator` that ensures the
+`TextFormField` isn't empty. If it is empty,
+return a friendly error message.
 
 <?code-excerpt "lib/main.dart (TextFormField)"?>
 ```dart
@@ -117,20 +118,20 @@ TextFormField(
 ```
 
 :::tip
-Para validar campos automaticamente conforme o usuário interage com eles
-ou quando um campo perde o foco, configure a propriedade [`autovalidateMode`][]
-no seu `Form` ou `TextFormField` usando [`AutovalidateMode`][]
-(como `AutovalidateMode.onUserInteraction` ou `AutovalidateMode.onUnfocus`).
+To validate fields automatically as the user interacts with them
+or when a field loses focus, configure the [`autovalidateMode`][]
+property on your `Form` or `TextFormField` using [`AutovalidateMode`][]
+(such as `AutovalidateMode.onUserInteraction` or `AutovalidateMode.onUnfocus`).
 :::
 
-## 3. Criar um botão para validar e enviar o formulário {:#3-create-a-button-to-validate-and-submit-the-form}
+## 3. Create a button to validate and submit the form
 
-Agora que você tem um formulário com um campo de texto,
-forneça um botão que o usuário possa tocar para enviar as informações.
+Now that you have a form with a text field,
+provide a button that the user can tap to submit the information.
 
-Quando o usuário tentar enviar o formulário, verifique se o formulário é válido.
-Se for, exiba uma mensagem de sucesso.
-Se não for (o campo de texto não tem conteúdo) exiba a mensagem de erro.
+When the user attempts to submit the form, check if the form is valid.
+If it is, display a success message.
+If it isn't (the text field has no content) display the error message.
 
 <?code-excerpt "lib/main.dart (ElevatedButton)" replace="/^child\: //g"?>
 ```dart
@@ -149,24 +150,28 @@ ElevatedButton(
 ),
 ```
 
-### Como isso funciona? {:#how-does-this-work}
+### How does this work?
 
-Para validar o formulário, use a `_formKey` criada na
-etapa 1. Você pode usar o accessor `_formKey.currentState`
-para acessar o [`FormState`][`FormState`],
-que é automaticamente criado pelo Flutter ao construir um `Form`.
+To validate the form, use the `_formKey` created in
+step 1. You can use the `_formKey.currentState`
+accessor to access the [`FormState`][],
+which is automatically created by Flutter when building a `Form`.
 
-A classe `FormState` contém o método `validate()`.
-Quando o método `validate()` é chamado, ele executa a função `validator()`
-para cada campo de texto no formulário.
-Se tudo estiver correto, o método `validate()` retorna `true`.
-Se algum campo de texto contiver erros, o método `validate()`
-reconstrói o formulário para exibir quaisquer mensagens de erro e retorna `false`.
+The `FormState` class contains the `validate()` method.
+When the `validate()` method is called, it runs the `validator()`
+function for each text field in the form.
+If everything looks good, the `validate()` method returns `true`.
+If any text field contains errors, the `validate()` method
+rebuilds the form to display any error messages and returns `false`.
 
-## Exemplo interativo {:#interactive-example}
+## Interactive example
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Flutter form validation hands-on example in DartPad" run="true"
+// DartPad doesn't support `material_ui` yet,
+// so this example imports Material from the Flutter SDK.
+// To run locally, depend on `material_ui` and use this import instead:
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -250,8 +255,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
   <img src="/assets/images/docs/cookbook/form-validation.png" alt="Form Validation Demo" />
 </noscript>
 
-Para aprender como recuperar esses valores, consulte a
-receita [Retrieve the value of a text field][Retrieve the value of a text field].
+To learn how to retrieve these values, consult the
+[Retrieve the value of a text field][] recipe.
 
 
 [`AutovalidateMode`]: {{site.api}}/flutter/widgets/AutovalidateMode.html

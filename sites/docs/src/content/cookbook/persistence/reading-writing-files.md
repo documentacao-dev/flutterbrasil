@@ -1,62 +1,63 @@
 ---
-ia-translate: true
-title: Ler e escrever arquivos
-description: Como ler de e escrever em arquivos no disco.
+title: Read and write files
+description: How to read from and write to files on disk.
 ---
 
 <?code-excerpt path-base="cookbook/persistence/reading_writing_files/"?>
 
-Em alguns casos, você precisa ler e escrever arquivos em disco.
-Por exemplo, você pode precisar persistir dados entre inicializações do app,
-ou baixar dados da internet e salvá-los para uso offline posterior.
+In some cases, you need to read and write files to disk.
+For example, you might need to persist data across app launches,
+or download data from the internet and save it for later offline use.
 
-Para salvar arquivos em disco em apps móveis ou desktop,
-combine o plugin [`path_provider`][`path_provider`] com a biblioteca [`dart:io`][`dart:io`].
+To save files to disk on mobile or desktop apps,
+combine the [`path_provider`][] plugin with the [`dart:io`][] library.
 
-Esta receita usa os seguintes passos:
+This recipe uses the following steps:
 
-  1. Encontre o caminho local correto.
-  2. Crie uma referência para a localização do arquivo.
-  3. Escreva dados no arquivo.
-  4. Leia dados do arquivo.
+  1. Find the correct local path.
+  2. Create a reference to the file location.
+  3. Write data to the file.
+  4. Read data from the file.
 
-Para aprender mais, assista a este vídeo Package of the Week
-sobre o pacote `path_provider`:
+To learn more, watch this Package of the Week video
+on the `path_provider` package:
 
 <YouTubeEmbed id="Ci4t-NkOY3I" title="path_provider | Flutter package of the week"></YouTubeEmbed>
 
 :::note
-Esta receita não funciona com apps web neste momento.
-Para acompanhar a discussão sobre este problema,
-confira o `flutter/flutter` [issue #45296]({{site.repo.flutter}}/issues/45296).
+This recipe doesn't work with web apps at this time.
+To follow the discussion on this issue,
+check out `flutter/flutter` [issue #45296]({{site.repo.flutter}}/issues/45296).
 :::
 
-## 1. Encontre o caminho local correto {:#1-find-the-correct-local-path}
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
 
-Este exemplo exibe um contador. Quando o contador muda,
-escreva dados em disco para que você possa lê-los novamente quando o app for carregado.
-Onde você deve armazenar esses dados?
+## 1. Find the correct local path
 
-O pacote [`path_provider`][`path_provider`]
-fornece uma maneira independente de plataforma para acessar locais comumente usados no
-sistema de arquivos do dispositivo. O plugin atualmente suporta acesso a
-duas localizações do sistema de arquivos:
+This example displays a counter. When the counter changes,
+write data on disk so you can read it again when the app loads.
+Where should you store this data?
 
-*Diretório temporário*
-: Um diretório temporário (cache) que o sistema pode
-  limpar a qualquer momento. No iOS, isso corresponde ao
-  [`NSCachesDirectory`][`NSCachesDirectory`]. No Android, este é o valor que
-  [`getCacheDir()`][`getCacheDir()`] retorna.
+The [`path_provider`][] package
+provides a platform-agnostic way to access commonly used locations on the
+device's file system. The plugin currently supports access to
+two file system locations:
 
-*Diretório de documentos*
-: Um diretório para o app armazenar arquivos que apenas
-  ele pode acessar. O sistema limpa o diretório apenas quando o app
-  é deletado.
-  No iOS, isso corresponde ao `NSDocumentDirectory`.
-  No Android, este é o diretório `AppData`.
+*Temporary directory*
+: A temporary directory (cache) that the system can
+  clear at any time. On iOS, this corresponds to the
+  [`NSCachesDirectory`][]. On Android, this is the value that
+  [`getCacheDir()`][] returns.
 
-Este exemplo armazena informações no diretório de documentos.
-Você pode encontrar o caminho para o diretório de documentos da seguinte forma:
+*Documents directory*
+: A directory for the app to store files that only
+  it can access. The system clears the directory only when the app
+  is deleted.
+  On iOS, this corresponds to the `NSDocumentDirectory`.
+  On Android, this is the `AppData` directory.
+
+This example stores information in the documents directory.
+You can find the path to the documents directory as follows:
 
 <?code-excerpt "lib/main.dart (localPath)"?>
 ```dart
@@ -70,11 +71,11 @@ import 'package:path_provider/path_provider.dart';
   }
 ```
 
-## 2. Crie uma referência para a localização do arquivo {:#2-create-a-reference-to-the-file-location}
+## 2. Create a reference to the file location
 
-Uma vez que você sabe onde armazenar o arquivo, crie uma referência para a
-localização completa do arquivo. Você pode usar a classe [`File`][`File`]
-da biblioteca [`dart:io`][`dart:io`] para realizar isso.
+Once you know where to store the file, create a reference to the
+file's full location. You can use the [`File`][]
+class from the [`dart:io`][] library to achieve this.
 
 <?code-excerpt "lib/main.dart (localFile)"?>
 ```dart
@@ -84,13 +85,13 @@ Future<File> get _localFile async {
 }
 ```
 
-## 3. Escreva dados no arquivo {:#3-write-data-to-the-file}
+## 3. Write data to the file
 
-Agora que você tem um `File` para trabalhar,
-use-o para ler e escrever dados.
-Primeiro, escreva alguns dados no arquivo.
-O contador é um inteiro, mas é escrito no
-arquivo como uma string usando a sintaxe `'$counter'`.
+Now that you have a `File` to work with,
+use it to read and write data.
+First, write some data to the file.
+The counter is an integer, but is written to the
+file as a string using the `'$counter'` syntax.
 
 <?code-excerpt "lib/main.dart (writeCounter)"?>
 ```dart
@@ -102,10 +103,10 @@ Future<File> writeCounter(int counter) async {
 }
 ```
 
-## 4. Leia dados do arquivo {:#4-read-data-from-the-file}
+## 4. Read data from the file
 
-Agora que você tem alguns dados em disco, você pode lê-los.
-Mais uma vez, use a classe `File`.
+Now that you have some data on disk, you can read it.
+Once again, use the `File` class.
 
 <?code-excerpt "lib/main.dart (readCounter)"?>
 ```dart
@@ -124,7 +125,7 @@ Future<int> readCounter() async {
 }
 ```
 
-## Exemplo completo {:#complete-example}
+## Complete example
 
 <?code-excerpt "lib/main.dart"?>
 ```dart

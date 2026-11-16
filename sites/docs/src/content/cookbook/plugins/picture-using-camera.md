@@ -1,67 +1,68 @@
 ---
-title: Tirar uma foto usando a câmera
-description: Como usar um plugin de câmera no celular.
-ia-translate: true
+title: Take a picture using the camera
+description: How to use a camera plugin on mobile.
 ---
 
 <?code-excerpt path-base="cookbook/plugins/picture_using_camera/"?>
 
-Muitos aplicativos exigem trabalhar com as câmeras do dispositivo para
-tirar fotos e vídeos. O Flutter fornece o plugin [`camera`][]
-para esse propósito. O plugin `camera` fornece ferramentas para obter uma lista das
-câmeras disponíveis, exibir uma visualização vinda de uma câmera específica
-e tirar fotos ou vídeos.
+Many apps require working with the device's cameras to
+take photos and videos.  Flutter provides the [`camera`][] plugin
+for this purpose. The `camera` plugin provides tools to get a list of the
+available cameras, display a preview coming from a specific camera,
+and take photos or videos.
 
 :::note
-O plugin [`camera_android_camerax`][],
-construído sobre a biblioteca Android [CameraX][],
-melhora a resolução da imagem com seleção automática
-da resolução com base na capacidade do dispositivo.
-Este plugin também ajuda a lidar com _peculiaridades do dispositivo_,
-definidas como hardware de câmera que pode
-não funcionar como esperado.
+The [`camera_android_camerax`][] plugin,
+built on top of the [CameraX][] Android library,
+improves image resolution with automatic selection
+of the resolution based on the device's capability.
+This plugin also helps deal with _device quirks_,
+defined as camera hardware that might
+not work as expected.
 
-Para mais informações,
-confira a palestra do Google I/O 2024,
-[Construindo experiências de câmera perfeitas no Flutter com CameraX][camerax-video].
+For more information,
+check out the Google I/O 2024 talk,
+[Building picture perfect camera experiences in Flutter with CameraX][camerax-video].
 :::
 
 [`camera_android_camerax`]: {{site.pub-pkg}}/camera_android_camerax
 [CameraX]: https://developer.android.com/training/camerax
 [camerax-video]: {{site.yt.watch}}?v=d1sRCa5k2Sg&t=1s
 
-Esta receita demonstra como usar o plugin `camera` para exibir uma visualização,
-tirar uma foto e exibi-la usando as seguintes etapas:
+This recipe demonstrates how to use the `camera` plugin to display a preview,
+take a photo, and display it using the following steps:
 
-  1. Adicionar as dependências necessárias.
-  2. Obter uma lista das câmeras disponíveis.
-  3. Criar e inicializar o `CameraController`.
-  4. Usar um `CameraPreview` para exibir o feed da câmera.
-  5. Tirar uma foto com o `CameraController`.
-  6. Exibir a foto com um widget `Image`.
+  1. Add the required dependencies.
+  2. Get a list of the available cameras.
+  3. Create and initialize the `CameraController`.
+  4. Use a `CameraPreview` to display the camera's feed.
+  5. Take a picture with the `CameraController`.
+  6. Display the picture with an `Image` widget.
 
-## 1. Adicionar as dependências necessárias {:#1-add-the-required-dependencies}
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
 
-Para completar esta receita, você precisa adicionar três dependências ao seu aplicativo:
+## 1. Add the required dependencies
+
+To complete this recipe, you need to add three dependencies to your app:
 
 [`camera`][]
-: Fornece ferramentas para trabalhar com as câmeras do dispositivo.
+: Provides tools to work with the cameras on the device.
 
 [`path_provider`][]
-: Encontra os caminhos corretos para armazenar imagens.
+: Finds the correct paths to store images.
 
 [`path`][]
-: Cria caminhos que funcionam em qualquer plataforma.
+: Creates paths that work on any platform.
 
-Para adicionar os pacotes como dependências, execute `flutter pub add`:
+To add the packages as dependencies, run `flutter pub add`:
 
 ```console
 $ flutter pub add camera path_provider path
 ```
 
 :::tip
-No iOS, as seguintes linhas devem ser adicionadas dentro de
-`ios/Runner/Info.plist` para acessar a câmera e o microfone:
+On iOS, the following lines must be added inside
+`ios/Runner/Info.plist` to access the camera and microphone:
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -71,9 +72,9 @@ No iOS, as seguintes linhas devem ser adicionadas dentro de
 ```
 :::
 
-## 2. Obter uma lista das câmeras disponíveis {:#2-get-a-list-of-the-available-cameras}
+## 2. Get a list of the available cameras
 
-Em seguida, obtenha uma lista de câmeras disponíveis usando o plugin `camera`.
+Next, get a list of available cameras using the `camera` plugin.
 
 <?code-excerpt "lib/main.dart (init)"?>
 ```dart
@@ -88,20 +89,20 @@ final cameras = await availableCameras();
 final firstCamera = cameras.first;
 ```
 
-## 3. Criar e inicializar o `CameraController` {:#3-create-and-initialize-the-cameracontroller}
+## 3. Create and initialize the `CameraController`
 
-Depois de ter uma câmera, use as seguintes etapas para
-criar e inicializar um `CameraController`.
-Este processo estabelece uma conexão com
-a câmera do dispositivo que permite controlar a câmera
-e exibir uma visualização do feed da câmera.
+Once you have a camera, use the following steps to
+create and initialize a `CameraController`.
+This process establishes a connection to
+the device's camera that allows you to control the camera
+and display a preview of the camera's feed.
 
-  1. Criar um `StatefulWidget` com uma classe `State` complementar.
-  2. Adicionar uma variável à classe `State` para armazenar o `CameraController`.
-  3. Adicionar uma variável à classe `State` para armazenar o `Future`
-     retornado de `CameraController.initialize()`.
-  4. Criar e inicializar o controlador no método `initState()`.
-  5. Descartar o controlador no método `dispose()`.
+  1. Create a `StatefulWidget` with a companion `State` class.
+  2. Add a variable to the `State` class to store the `CameraController`.
+  3. Add a variable to the `State` class to store the `Future`
+     returned from `CameraController.initialize()`.
+  4. Create and initialize the controller in the `initState()` method.
+  5. Dispose of the controller in the `dispose()` method.
 
 <?code-excerpt "lib/main_step3.dart (controller)" remove="ignore:"?>
 ```dart
@@ -151,23 +152,23 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 ```
 
 :::warning
-Se você não inicializar o `CameraController`,
-você *não pode* usar a câmera para exibir uma visualização e tirar fotos.
+If you don't initialize the `CameraController`,
+you *cannot* use the camera to display a preview and take pictures.
 :::
 
-## 4. Usar um `CameraPreview` para exibir o feed da câmera {:#4-use-a-camerapreview-to-display-the-cameras-feed}
+## 4. Use a `CameraPreview` to display the camera's feed
 
-Em seguida, use o widget `CameraPreview` do pacote `camera` para
-exibir uma visualização do feed da câmera.
+Next, use the `CameraPreview` widget from the `camera` package to
+display a preview of the camera's feed.
 
-:::note Lembre-se
-Você deve esperar até que o controlador termine
-de inicializar antes de trabalhar com a câmera. Portanto,
-você deve esperar pelo `_initializeControllerFuture()`, criado
-na etapa anterior, ser concluído antes de mostrar um `CameraPreview`.
+:::note Remember
+You must wait until the controller has finished
+initializing before working with the camera. Therefore,
+you must wait for the `_initializeControllerFuture()`, created
+in the previous step, to complete before showing a `CameraPreview`.
 :::
 
-Use um [`FutureBuilder`][] exatamente para esse propósito.
+Use a [`FutureBuilder`][] for exactly this purpose.
 
 <?code-excerpt "lib/main.dart (FutureBuilder)" replace="/body: //g;/^\),$/)/g"?>
 ```dart
@@ -188,26 +189,26 @@ FutureBuilder<void>(
 )
 ```
 
-## 5. Tirar uma foto com o `CameraController` {:#5-take-a-picture-with-the-cameracontroller}
+## 5. Take a picture with the `CameraController`
 
-Você pode usar o `CameraController` para tirar fotos usando o
-método [`takePicture()`][], que retorna um [`XFile`][],
-uma abstração de `File` simplificada e multiplataforma.
-Tanto no Android quanto no iOS, a nova imagem é armazenada em seus
-respectivos diretórios de cache,
-e o `path` para essa localização é retornado no `XFile`.
+You can use the `CameraController` to take pictures using the
+[`takePicture()`][] method, which returns an [`XFile`][],
+a cross-platform, simplified `File` abstraction.
+On both Android and IOS, the new image is stored in their
+respective cache directories,
+and the `path` to that location is returned in the `XFile`.
 
-Neste exemplo, crie um `FloatingActionButton` que tira uma foto
-usando o `CameraController` quando um usuário toca no botão.
+In this example, create a `FloatingActionButton` that takes a picture
+using the `CameraController` when a user taps on the button.
 
-Tirar uma foto requer 2 etapas:
+Taking a picture requires 2 steps:
 
-  1. Garantir que a câmera esteja inicializada.
-  2. Usar o controlador para tirar uma foto e garantir
-     que ele retorne um `Future<XFile>`.
+  1. Ensure that the camera is initialized.
+  2. Use the controller to take a picture and ensure
+     that it returns a `Future<XFile>`.
 
-É uma boa prática envolver essas operações em um bloco `try / catch` para
-lidar com quaisquer erros que possam ocorrer.
+It is good practice to wrap these operations in a `try / catch` block in order
+to handle any errors that might occur.
 
 <?code-excerpt "lib/main_step5.dart (FAB)" replace="/^floatingActionButton: //g;/^\),$/)/g"?>
 ```dart
@@ -231,22 +232,22 @@ FloatingActionButton(
   child: const Icon(Icons.camera_alt),
 )
 ```
-## 6. Exibir a foto com um widget `Image` {:#6-display-the-picture-with-an-image-widget}
+## 6. Display the picture with an `Image` widget
 
-Se você tirar a foto com sucesso, poderá então exibir a foto salva
-usando um widget `Image`. Neste caso, a foto é armazenada como um arquivo no
-dispositivo.
+If you take the picture successfully, you can then display the saved picture
+using an `Image` widget. In this case, the picture is stored as a file on
+the device.
 
-Portanto, você deve fornecer um `File` para o construtor `Image.file`.
-Você pode criar uma instância da classe `File` passando o caminho criado na
-etapa anterior.
+Therefore, you must provide a `File` to the `Image.file` constructor.
+You can create an instance of the `File` class by passing the path created in
+the previous step.
 
 <?code-excerpt "lib/image_file.dart (ImageFile)" replace="/^return\ //g"?>
 ```dart
 Image.file(File('path/to/my/picture.png'));
 ```
 
-## Exemplo completo {:#complete-example}
+## Complete example
 
 <?code-excerpt "lib/main.dart"?>
 ```dart

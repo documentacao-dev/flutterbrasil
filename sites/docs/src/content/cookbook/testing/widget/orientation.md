@@ -1,49 +1,50 @@
 ---
-ia-translate: true
-title: Testar orientação
-description: Como testar se um app está em modo retrato ou paisagem.
+title: Test orientation
+description: How to test if an app is in portrait or landscape mode.
 ---
 
-No Flutter, você pode construir diferentes layouts dependendo de uma dada
-[orientação][orientation]. Por exemplo, você pode apresentar dados em duas colunas se o app
-está em modo retrato, e três colunas se em modo paisagem.
-Adicionalmente, você pode criar testes que verificam se o número correto de colunas
-está sendo exibido para cada orientação.
+In Flutter, you can build different layouts depending on a given
+[orientation][]. For example, you could present data in two columns if the app
+is in portrait mode, and three columns if in landscape mode.
+Additionally, you can create tests that check if the correct number of columns
+are being shown for each orientation.
 
-Nesta receita, você pode aprender como verificar se a orientação de um app é
-`portrait` ou `landscape`, e também quantas colunas são exibidas para cada
-orientação.
+In this recipe, you can learn how check if the orientation of an app is
+`portrait` or `landscape`, and also how many columns are displayed for each
+orientation.
 
-Esta receita usa os seguintes passos:
+This recipe uses the following steps:
 
-  1.  Crie um app que atualiza o layout do conteúdo,
-      baseado na orientação.
-  1.  Crie um grupo de testes de orientação.
-  1.  Crie um teste de orientação retrato.
-  1.  Crie um teste de orientação paisagem.
-  1.  Execute os testes.
+  1.  Create an app that updates the layout of the content,
+      based on the orientation.
+  1.  Create an orientation test group.
+  1.  Create a portrait orientation test.
+  1.  Create a landscape orientation test.
+  1.  Run the tests.
 
-## 1. Crie um app que atualiza baseado na orientação {:#1-create-an-app-that-updates-based-on-orientation}
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
 
-Crie um app Flutter que muda quantas colunas são exibidas quando um
-app está em modo retrato ou paisagem:
+## 1. Create an app that updates based on orientation
 
-1.  Crie um novo projeto Flutter chamado `orientation_tests`.
+Create a Flutter app that changes how many columns are shown when an
+app is in portrait or landscape mode:
+
+1.  Create a new Flutter project called `orientation_tests`.
 
     ```console
     flutter create orientation_tests
     ```
 
-2.  Siga os passos em [Atualizar a UI baseado na orientação][Update the UI based on orientation] para
-    configurar o projeto.
+2.  Follow the steps in [Update the UI based on orientation][] to
+    set up the project.
 
-## 2. Crie um grupo de testes de orientação {:#2-create-an-orientation-test-group}
+## 2. Create an orientation test group
 
-Depois que você configurar seu projeto `orientation_tests`, complete estes passos para
-agrupar seus futuros testes de orientação:
+After you've set up your `orientation_tests` project, complete these steps to
+group your future orientation tests:
 
-1.  No seu projeto Flutter, abra `test/widget_test.dart`.
-1.  Substitua o conteúdo existente pelo seguinte:
+1.  In your Flutter project, open `test/widget_test.dart`.
+1.  Replace the existing contents with the following:
 
     <?code-excerpt "cookbook/testing/widget/orientation_tests/test/widget_test.dart (scaffolding)"?>
     ```dart title="widget_test.dart"
@@ -58,14 +59,14 @@ agrupar seus futuros testes de orientação:
     }
     ```
 
-## 3. Crie um teste de orientação retrato {:#3-create-a-portrait-orientation-test}
+## 3. Create a portrait orientation test
 
-Adicione o teste de orientação retrato ao grupo `Orientation`.
-Este teste garante que a orientação é `portrait` e que
-apenas `2` colunas de dados aparecem no app:
+Add the portrait orientation test to the `Orientation` group.
+This test makes sure that the orientation is `portrait` and that
+only `2` columns of data appear in the app:
 
-1.  Em `test/widget_test.dart`, substitua `...` dentro do grupo `Orientation`
-    pelo seguinte teste:
+1.  In `test/widget_test.dart`, replace `...` inside of the `Orientation` group
+    with the following test:
 
     <?code-excerpt "cookbook/testing/widget/orientation_tests/test/widget_test.dart (portrait-mode-test)"?>
     ```dart title="widget_test.dart"
@@ -97,14 +98,14 @@ apenas `2` colunas de dados aparecem no app:
     });
     ```
 
-## 4. Crie um teste de orientação paisagem {:#4-create-a-landscape-orientation-test}
+## 4. Create a landscape orientation test
 
-Adicione o teste de orientação paisagem ao grupo `Orientation`.
-Este teste garante que a orientação é `landscape` e que
-apenas `3` colunas de dados aparecem no app:
+Add the landscape orientation test to the `Orientation` group.
+This test makes sure that the orientation is `landscape` and that
+only `3` columns of data appear in the app:
 
-1.  Em `test/widget_test.dart`, dentro do grupo `Orientation`,
-    adicione o seguinte teste após o teste de paisagem:
+1.  In `test/widget_test.dart`, inside of the `Orientation` group,
+    add the following test after the landscape test:
 
     <?code-excerpt "cookbook/testing/widget/orientation_tests/test/widget_test.dart (landscape-mode-test)"?>
     ```dart title="widget_test.dart"
@@ -136,15 +137,15 @@ apenas `3` colunas de dados aparecem no app:
     });
     ```
 
-## 5. Execute os testes {:#5-run-the-tests}
+## 5. Run the tests
 
-Execute os testes usando o seguinte comando a partir da raiz do projeto:
+Run the tests using the following command from the root of the project:
 
 ```console
 flutter test test/widget_test.dart
 ```
 
-## Exemplo completo {:#complete-example}
+## Complete example
 
 <?code-excerpt "cookbook/testing/widget/orientation_tests/test/widget_test.dart"?>
 ```dart title="widget_test.dart"

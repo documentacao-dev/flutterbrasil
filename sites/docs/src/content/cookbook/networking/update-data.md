@@ -1,33 +1,34 @@
 ---
-ia-translate: true
-title: Atualizar dados pela internet
-description: Como usar o pacote http para atualizar dados pela internet.
+title: Update data over the internet
+description: How to use the http package to update data over the internet.
 ---
 
 <?code-excerpt path-base="cookbook/networking/update_data/"?>
 
-Atualizar dados pela internet é necessário para a maioria dos apps.
-O pacote `http` tem tudo o que você precisa!
+Updating data over the internet is necessary for most apps.
+The `http` package has got that covered!
 
-Esta receita usa os seguintes passos:
+This recipe uses the following steps:
 
-  1. Adicionar o pacote `http`.
-  2. Atualizar dados pela internet usando o pacote `http`.
-  3. Converter a resposta em um objeto Dart customizado.
-  4. Obter os dados da internet.
-  5. Atualizar o `title` existente a partir da entrada do usuário.
-  6. Atualizar e exibir a resposta na tela.
+  1. Add the `http` package.
+  2. Update data over the internet using the `http` package.
+  3. Convert the response into a custom Dart object.
+  4. Get the data from the internet.
+  5. Update the existing `title` from user input.
+  6. Update and display the response on screen.
 
-## 1. Adicionar o pacote `http` {:#1-add-the-http-package}
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
 
-Para adicionar o pacote `http` como uma dependência,
-execute `flutter pub add`:
+## 1. Add the `http` package
+
+To add the `http` package as a dependency,
+run `flutter pub add`:
 
 ```console
 $ flutter pub add http
 ```
 
-Importe o pacote `http`.
+Import the `http` package.
 
 <?code-excerpt "lib/main.dart (Http)"?>
 ```dart
@@ -37,10 +38,10 @@ import 'package:material_ui/material_ui.dart';
 
 {% render "docs/cookbook/networking/internet-permission.md" %}
 
-## 2. Atualizando dados pela internet usando o pacote `http` {:#2-updating-data-over-the-internet-using-the-http-package}
+## 2. Updating data over the internet using the `http` package
 
-Esta receita cobre como atualizar o título de um álbum no
-[JSONPlaceholder][JSONPlaceholder] usando o método [`http.put()`][`http.put()`].
+This recipe covers how to update an album title to the
+[JSONPlaceholder][] using the [`http.put()`][] method.
 
 <?code-excerpt "lib/main_step2.dart (updateAlbum)"?>
 ```dart
@@ -55,32 +56,32 @@ Future<http.Response> updateAlbum(String title) {
 }
 ```
 
-O método `http.put()` retorna um `Future` que contém um `Response`.
+The `http.put()` method returns a `Future` that contains a `Response`.
 
-* [`Future`][`Future`] é uma classe central do Dart para trabalhar com
-  operações assíncronas. Um objeto `Future` representa um potencial
-  valor ou erro que estará disponível em algum momento no futuro.
-* A classe `http.Response` contém os dados recebidos de uma chamada
-  http bem-sucedida.
-* O método `updateAlbum()` recebe um argumento, `title`,
-  que é enviado ao servidor para atualizar o `Album`.
+* [`Future`][] is a core Dart class for working with
+  async operations. A `Future` object represents a potential
+  value or error that will be available at some time in the future.
+* The `http.Response` class contains the data received from a successful
+  http call.
+* The `updateAlbum()` method takes an argument, `title`,
+  which is sent to the server to update the `Album`.
 
-## 3. Converter o `http.Response` em um objeto Dart customizado {:#3-convert-the-http-response-to-a-custom-dart-object}
+## 3. Convert the `http.Response` to a custom Dart object
 
-Embora seja fácil fazer uma requisição de rede,
-trabalhar com um `Future<http.Response>` bruto
-não é muito conveniente. Para facilitar sua vida,
-converta o `http.Response` em um objeto Dart.
+While it's easy to make a network request,
+working with a raw `Future<http.Response>`
+isn't very convenient. To make your life easier,
+convert the `http.Response` into a Dart object.
 
-### Criar uma classe Album {:#create-an-album-class}
+### Create an Album class
 
-Primeiro, crie uma classe `Album` que contém os dados da
-requisição de rede. Ela inclui um construtor factory que
-cria um `Album` a partir de JSON.
+First, create an `Album` class that contains the data from the
+network request. It includes a factory constructor that
+creates an `Album` from JSON.
 
-Converter JSON com [pattern matching][pattern matching] é apenas uma opção.
-Para mais informações, veja o artigo completo sobre
-[JSON and serialization][JSON and serialization].
+Converting JSON with [pattern matching][] is only one option.
+For more information, see the full article on
+[JSON and serialization][].
 
 <?code-excerpt "lib/main.dart (Album)"?>
 ```dart
@@ -99,22 +100,22 @@ class Album {
 }
 ```
 
-### Converter o `http.Response` em um `Album` {:#convert-the-http-response-to-an-album}
+### Convert the `http.Response` to an `Album`
 
-Agora, use os seguintes passos para atualizar a função `updateAlbum()`
-para retornar um `Future<Album>`:
+Now, use the following steps to update the `updateAlbum()`
+function to return a `Future<Album>`:
 
-  1. Converta o corpo da resposta em um `Map` JSON com o
-     pacote `dart:convert`.
-  2. Se o servidor retornar uma resposta `UPDATED` com um código de
-     status 200, então converta o `Map` JSON em um `Album`
-     usando o método factory `fromJson()`.
-  3. Se o servidor não retornar uma resposta `UPDATED` com um
-     código de status 200, então lance uma exceção.
-     (Mesmo no caso de uma resposta do servidor "404 Not Found",
-     lance uma exceção. Não retorne `null`.
-     Isso é importante ao examinar
-     os dados no `snapshot`, como mostrado abaixo.)
+  1. Convert the response body into a JSON `Map` with the
+     `dart:convert` package.
+  2. If the server returns an `UPDATED` response with a status
+     code of 200, then convert the JSON `Map` into an `Album`
+     using the `fromJson()` factory method.
+  3. If the server doesn't return an `UPDATED` response with a
+     status code of 200, then throw an exception.
+     (Even in the case of a "404 Not Found" server response,
+     throw an exception. Do not return `null`.
+     This is important when examining
+     the data in `snapshot`, as shown below.)
 
 <?code-excerpt "lib/main.dart (updateAlbum)"?>
 ```dart
@@ -139,13 +140,13 @@ Future<Album> updateAlbum(String title) async {
 }
 ```
 
-Ótimo!
-Agora você tem uma função que atualiza o título de um álbum.
+Hooray!
+Now you've got a function that updates the title of an album.
 
-### Obter os dados da internet {:#get-the-data-from-the-internet}
+### Get the data from the internet
 
-Obtenha os dados da internet antes de poder atualizá-los.
-Para um exemplo completo, veja a receita [Fetch data][Fetch data].
+Get the data from internet before you can update it.
+For a complete example, see the [Fetch data][] recipe.
 
 <?code-excerpt "lib/main.dart (fetchAlbum)"?>
 ```dart
@@ -166,20 +167,20 @@ Future<Album> fetchAlbum() async {
 }
 ```
 
-Idealmente, você usará este método para definir
-`_futureAlbum` durante `initState` para buscar
-os dados da internet.
+Ideally, you will use this method to set
+`_futureAlbum` during `initState` to fetch
+the data from the internet.
 
-## 4. Atualizar o título existente a partir da entrada do usuário {:#4-update-the-existing-title-from-user-input}
+## 4. Update the existing title from user input
 
-Crie um `TextField` para inserir um título e um `ElevatedButton`
-para atualizar os dados no servidor.
-Defina também um `TextEditingController` para
-ler a entrada do usuário de um `TextField`.
+Create a `TextField` to enter a title and a `ElevatedButton`
+to update the data on server.
+Also define a `TextEditingController` to
+read the user input from a `TextField`.
 
-Quando o `ElevatedButton` é pressionado,
-o `_futureAlbum` é definido com o valor retornado pelo
-método `updateAlbum()`.
+When the `ElevatedButton` is pressed,
+the `_futureAlbum` is set to the value returned by
+`updateAlbum()` method.
 
 <?code-excerpt "lib/main_step5.dart (Column)"?>
 ```dart
@@ -205,30 +206,30 @@ Column(
 );
 ```
 
-Ao pressionar o botão **Update Data**, uma requisição de rede
-envia os dados no `TextField` para o servidor como uma requisição `PUT`.
-A variável `_futureAlbum` é usada no próximo passo.
+On pressing the **Update Data** button, a network request
+sends the data in the `TextField` to the server as a `PUT` request.
+The `_futureAlbum` variable is used in the next step.
 
-## 5. Exibir a resposta na tela {:#5-display-the-response-on-screen}
+## 5. Display the response on screen
 
-Para exibir os dados na tela, use o
-widget [`FutureBuilder`][`FutureBuilder`].
-O widget `FutureBuilder` vem com o Flutter e
-facilita trabalhar com fontes de dados assíncronas.
-Você deve fornecer dois parâmetros:
+To display the data on screen, use the
+[`FutureBuilder`][] widget.
+The `FutureBuilder` widget comes with Flutter and
+makes it easy to work with async data sources.
+You must provide two parameters:
 
-  1. O `Future` com o qual você quer trabalhar. Neste caso,
-     o future retornado pela função `updateAlbum()`.
-  2. Uma função `builder` que diz ao Flutter o que renderizar,
-     dependendo do estado do `Future`: carregando,
-     sucesso ou erro.
+  1. The `Future` you want to work with. In this case,
+     the future returned from the `updateAlbum()` function.
+  2. A `builder` function that tells Flutter what to render,
+     depending on the state of the `Future`: loading,
+     success, or error.
 
-Observe que `snapshot.hasData` apenas retorna `true` quando
-o snapshot contém um valor de dados não nulo.
-É por isso que a função `updateAlbum` deve lançar uma exceção
-mesmo no caso de uma resposta do servidor "404 Not Found".
-Se `updateAlbum` retornar `null` então
-`CircularProgressIndicator` será exibido indefinidamente.
+Note that `snapshot.hasData` only returns `true` when
+the snapshot contains a non-null data value.
+This is why the `updateAlbum` function should throw an exception
+even in the case of a "404 Not Found" server response.
+If `updateAlbum` returns `null` then
+`CircularProgressIndicator` will display indefinitely.
 
 <?code-excerpt "lib/main_step5.dart (FutureBuilder)"?>
 ```dart
@@ -246,7 +247,7 @@ FutureBuilder<Album>(
 );
 ```
 
-## Exemplo completo {:#complete-example}
+## Complete example
 
 <?code-excerpt "lib/main.dart"?>
 ```dart

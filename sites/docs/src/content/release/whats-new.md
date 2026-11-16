@@ -1,64 +1,159 @@
 ---
-title: O que há de novo na documentação
+title: What's new in the docs
 description: >-
-  Uma lista do que há de novo em docs.flutterbrasil.dev e sites de documentação relacionados.
-ia-translate: true
+  A list of what's new on docs.flutter.dev and related documentation sites.
 ---
 
-Esta página contém anúncios atuais e recentes
-do que há de novo no site e blog do Flutter.
-Encontre informações antigas sobre novidades na
-página [arquivo de novidades][what's new archive].
-Você também pode conferir as
-[notas de lançamento][release notes] do Flutter SDK.
+This page contains current and recent announcements
+of what's new on the Flutter website and blog.
+Find past what's new information on the
+[what's new archive][] page.
+You might also check out the
+Flutter SDK [release notes][].
 
-Para se manter atualizado sobre anúncios do Flutter incluindo mudanças breaking,
-junte-se ao grupo Google [flutter-announce][].
+To stay on top of Flutter announcements including breaking changes,
+join the [flutter-announce][] Google group.
 
-Para Dart, você pode se juntar ao grupo Google [Dart Announce][],
-e revisar o [changelog do Dart][Dart changelog].
+For Dart, you can join the [Dart Announce][] Google group,
+and review the [Dart changelog][].
 
 [Dart Announce]: {{site.groups.dart-announce}}
 [Dart changelog]: {{site.repo.dart-sdk}}/blob/main/CHANGELOG.md
 [flutter-announce]: {{site.groups.flutter-announce}}
 [release notes]: /release/release-notes
 
-## 12 de agosto de 2026: Lançamento 3.47 {:#12-august-2026-release-3-47}
+## 11 November 2026: Release 3.50
 
-Flutter 3.47 está no ar! Para mais detalhes,
-confira o [post do blog do Flutter 3.47][3.47-blog-post].
+Flutter 3.50 is live! For details,
+check out the [Flutter 3.50 blog post][3.50-blog-post].
 
-**Documentação atualizada ou adicionada desde o lançamento 3.44**
+**Docs updated or added since the 3.47 release**
 
-* A ferramenta [Widget Previews][widget-previewer] do Flutter se tornou estável,
-  introduzindo cache de build local para tempos de inicialização mais rápidos
-  e busca e filtragem de prévias em tempo real.
+* A new [Native interop][native-interop] section brings together
+  guides for calling native code across Android, iOS, macOS, Windows, and Linux.
+  It includes updated guides for [Pigeon][pigeon],
+  [C and Objective-C interop][c-interop] with `package:ffigen`,
+  [Java and Kotlin interop][java-interop] with `package:jnigen`,
+  and bundling native code with [build hooks][bind-native-code].
 
-* A documentação de AI foi reorganizada para melhorar a navegação
-  e ajudar você a começar rapidamente com agent-plugins
-  (anteriormente conhecidos como skills) usando a [Antigravity CLI][antigravity-cli],
-  integrações com IDEs e outros assistentes de programação.
-  Uma página experimental sobre [AI Evaluations][ai-evals] também foi adicionada.
+* With the bundled Material and Cupertino libraries formally deprecated
+  in Flutter 3.50, a new [migration guide][design-pkg-migration] walks you
+  through migrating to the standalone `material_ui` and `cupertino_ui` packages
+  using `dart fix` and `MaterialUiCompatibilityBridge`.
 
-* Um novo guia sobre [gerenciamento de dependências][dependency-mgmt] explica
-  como configurar, gerenciar e atualizar dependências de pacotes.
+* The [Flutter installation][install] documentation has been updated with
+  consolidated quick-install and manual-setup flows.
+  New instructions also walk you through
+  [running Flutter apps on iOS devices][ios-setup],
+  contributed by community member [poyito777][].
 
-* Os guias do [Swift Package Manager][swiftpm] para iOS e macOS foram expandidos,
-  e a documentação de [Add-to-app][add-to-app] agora inclui
-  instruções de integração com SwiftPM.
+* The web documentation covers the new `--web-content-hash` build flag for
+  [cache-busting hashed web assets][web-deploy],
+  updated browser compatibility guidance for [WebAssembly][wasm-350],
+  the `--no-deprecated-js-interop` build flag,
+  and refreshed [web accessibility][web-a11y] guidance.
 
-* A documentação web agora inclui orientações de solução de problemas para
-  [erros de compilação Wasm][wasm] e instruções para usar a
-  flag `--source-maps` durante builds web.
+* The web and [WebAssembly (Wasm)][wasm] documentation includes expanded
+  production guidance for [deploying Wasm builds][web-deploy-wasm]
+  (server headers, pre-compression, cold-start latency, and CDN asset
+  loading), [optimizing embedded views on host pages][web-embed-optimize]
+  (lazy-loading, preventing layout shifts, and coexisting with third-party
+  scripts), communicating with host pages and measuring startup milestones
+  with [package:web][wasm-host-interop], and
+  [profiling Core Web Vitals and Wasm memory][web-perf] in Chrome DevTools.
 
-* O guia de assets agora explica como empacotar
-  [assets específicos de plataforma][platform-assets] no `pubspec.yaml`.
+* The AI documentation has been reorganized around a unified
+  [get started guide][ai-get-started], an [AI tools overview][ai-tools]
+  covering agentic rules, custom agents (including the built-in Flutter
+  accessibility agent), and `package:skills_lint`, and a new guide on
+  [package skills][package-skills].
 
-* Um novo guia de migração ajuda você a migrar plugins e apps para
-  os plugins Gradle de [Kotlin integrado][kotlin-migration].
+* The data and backend section features a new guide to help you
+  [choose a database for your Flutter app][choose-database] and expanded
+  [Firebase][firebase-docs] integration documentation.
 
-Como sempre, confira a página de [mudanças breaking][bc-3-47] deste lançamento,
-que inclui links para guias de migração e outras informações vitais.
+* New guides cover setting up desktop app flavors for
+  [Windows][flavors-windows] and [Linux][flavors-linux].
+
+* The platform integration documentation includes readiness updates for
+  [iOS 27, macOS 27, and Xcode 27][supported-platforms] alongside expanded
+  [Swift Package Manager][swiftpm-350] migration guidance for apps and plugins.
+
+* The contributing and compatibility documentation now details the public
+  [Flutter RFC process][rfc-process] for proposing significant framework and
+  ecosystem changes.
+
+As always, check out the [breaking changes][bc-3-50] page for this release,
+which includes links to migration guides and other vital information.
+
+[bc-3-50]: /release/breaking-changes#released-in-flutter-3-50
+[ai-get-started]: /ai/get-started
+[ai-tools]: /ai/tools
+[bind-native-code]: /interop/bind-native-code
+[3.50-blog-post]: {{site.main-url}}/blog/whats-new-in-flutter-3-50
+[c-interop]: /interop/ffigen
+[choose-database]: /data-and-backend/persistence/choose-a-database
+[design-pkg-migration]: /release/breaking-changes/material-ui-and-cupertino-ui
+[firebase-docs]: /data-and-backend/firebase
+[flavors-windows]: /deployment/flavors-windows
+[flavors-linux]: /deployment/flavors-linux
+[install]: /install
+[ios-setup]: /platform-integration/ios/setup
+[java-interop]: /interop/jnigen
+[native-interop]: /interop
+[package-skills]: /ai/package-skills
+[pigeon]: /interop/pigeon
+[poyito777]: https://github.com/poyito777
+[rfc-process]: /release/compatibility-policy
+[supported-platforms]: /reference/supported-platforms
+[swiftpm-350]: /packages-and-plugins/swift-package-manager/for-app-developers
+[wasm]: /platform-integration/web/wasm
+[wasm-350]: /platform-integration/web/wasm
+[wasm-host-interop]: /platform-integration/web/wasm#host-scripts-and-measurement-apis
+[web-a11y]: /ui/accessibility/web-accessibility
+[web-deploy]: /deployment/web
+[web-deploy-wasm]: /deployment/web#deploy-webassembly-in-production
+[web-embed-optimize]: /platform-integration/web/embedding-flutter-web#landing-pages-and-third-party-scripts
+[web-perf]: /perf/web-performance
+
+---
+
+## 12 August 2026: Release 3.47
+
+Flutter 3.47 is live! For details,
+check out the [Flutter 3.47 blog post][3.47-blog-post].
+
+**Docs updated or added since the 3.44 release**
+
+* The Flutter [Widget Previews][widget-previewer] tool has graduated to stable,
+  introducing local build caching for faster startup times
+  and real-time preview search and filtering.
+
+* The AI documentation has been reorganized to improve navigation
+  and help you get started quickly with agent-plugins
+  (formerly known as skills) using the [Antigravity CLI][antigravity-cli],
+  IDE integrations, and other coding assistants.
+  An experimental [AI Evaluations][ai-evals] topic page has also been added.
+
+* A new guide on [Dependency management][dependency-mgmt] explains
+  how to configure, manage, and upgrade package dependencies.
+
+* The [Swift Package Manager][swiftpm] guides for iOS and macOS have expanded,
+  and the [Add-to-app][add-to-app] documentation now includes
+  SwiftPM integration instructions.
+
+* The web documentation now includes troubleshooting guidance for
+  [Wasm compilation errors][wasm] and instructions for using the
+  `--source-maps` flag during web builds.
+
+* The assets guide now explains how to bundle
+  [platform-specific assets][platform-assets] in `pubspec.yaml`.
+
+* A new migration guide helps you migrate plugins and apps to
+  [built-in Kotlin][kotlin-migration] Gradle plugins.
+
+As always, check out the [breaking changes][bc-3-47] page for this release,
+which includes links to migration guides and other vital information.
 
 [3.47-blog-post]: /blog/whats-new-in-flutter-3-47
 [widget-previewer]: /tools/widget-previewer
@@ -74,51 +169,51 @@ que inclui links para guias de migração e outras informações vitais.
 
 ---
 
-## 18 de maio de 2026: Lançamento Google I/O 3.44 {:#18-may-2026-google-io-release-3-44}
+## 18 May 2026: Google I/O Release 3.44
 
-Flutter 3.44 está no ar! Este lançamento está repleto de novidades.
-Para mais detalhes, confira o [post do blog do Flutter 3.44][3.44-blog-post]
-e [assista ao vídeo][3.44-whats-new]:
+Flutter 3.44 is live! This release is jam packed.
+For details, check out the [Flutter 3.44 blog post][3.44-blog-post]
+and [watch the video][3.44-whats-new]:
 
 <div class="video-wrapper">
-<span class="video-intro">Confira as novidades do Dart e do Flutter</span>
+<span class="video-intro">Check out the latest in Dart and Flutter</span>
 <YouTubeEmbed id="I1uIbGh1dGE" title="What's New in Dart and Flutter 3.44" fullWidth></YouTubeEmbed>
 </div>
 
 [3.44-blog-post]: {{site.flutter-blog}}/whats-new-in-flutter-3-44-b0cc1ad3c527
 [3.44-whats-new]: https://www.youtube.com/watch?v=I1uIbGh1dGE&t=451s
 
-Mais atualizações do site em breve.
+More on the site updates to come.
 
-## 11 de fevereiro de 2026: Lançamento "Year of the Fire Horse" 3.41 {:#11-february-2026-year-of-the-fire-horse-release-3-41}
+## 11 February 2026: "Year of the Fire Horse" Release 3.41
 
-Flutter 3.41 está no ar! Para mais detalhes,
-confira o [post do blog do Flutter 3.41][3.41-blog-post].
+Flutter 3.41 is live! For details,
+check out the [Flutter 3.41 blog post][3.41-blog-post].
 
 [3.41-blog-post]: {{site.flutter-blog}}/whats-new-in-flutter-3-41-302ec140e632
 
 
-**Documentação atualizada ou adicionada desde o lançamento 3.38**
+**Docs updated or added since the 3.38 release**
 
-Além de muitas atualizações menores, aqui estão algumas das mudanças
-mais significativas:
+In addition to many smaller updates, here are some of the more
+significant changes:
 
-* Introduzimos uma nova experiência de introdução para
-  Flutter e Dart, conforme anunciado em um [post do blog][few] recente.
-  Você pode encontrar o [caminho de aprendizado][learning pathway] do Flutter na aba **Learn**
-  no topo de [docs.flutter.dev][]. Para voltar ao restante do site,
-  selecione a aba **Guides**. Como sempre, a aba **Reference**
-  leva você à [documentação da API do Flutter][Flutter API docs].
+* We have introduced a new getting started experience for
+  both Flutter and Dart, as announced in a recent [blog post][few].
+  You can find the Flutter [learning pathway][] under the **Learn**
+  tab at the top of [docs.flutter.dev][]. To return to the rest of the site,
+  select the **Guides** tab. As always, the **Reference**
+  tab takes you to the [Flutter API docs][].
 
-* Flutter e Dart agora têm um [glossário oficial][official glossary].
-  Como parte da recente migração dos sites para o Jaspr,
-  um glossário foi adicionado ao site do Flutter.
-  Espere vê-lo crescer com o tempo.
+* Flutter and Dart now have an [official glossary][].
+  As part of the recent migration of the websites to Jaspr,
+  a glossary has been added to the Flutter website.
+  Expect to see it grow in the fullness of time.
 
-* Como sempre, confira a página de [mudanças breaking][bc-3-41] deste lançamento,
-  que inclui links para guias de migração e outras informações vitais.
-  Um agradecimento especial a [navaronbracke][], que escreveu um guia
-  de migração para a [descontinuação do callback `onReorder`][onReorder].
+* As always, check out the [breaking changes][bc-3-41] page for this release,
+  which includes links to migration guides and other vital information.
+  A special thank you to [navaronbracke][], who wrote a migration
+  guide for the [deprecation of the `onReorder` callback][onReorder].
 
 [bc-3-41]: /release/breaking-changes#released-in-flutter-3-41
 [docs.flutter.dev]: /
@@ -131,89 +226,7 @@ mais significativas:
 
 ---
 
-## 12 de novembro de 2025: Lançamento 3.38 {:#12-november-2025-release-3-38}
-
-Flutter 3.38 está no ar! Para mais detalhes,
-confira o [post técnico do blog do Flutter 3.38][3.38-tech].
-
-[3.38-tech]: {{site.flutter-blog}}/whats-new-in-flutter-3-38-3f7b258f7228
-
-**Atualização do site**
-
-Uma atualização significativa do site acabou de ser lançada!
-Assim como a atualização do site dart.dev lançada
-no início deste ano, o site docs.flutter.dev foi
-reimplementado para usar o [Jaspr][], um framework web em Dart.
-
-Conte-nos o que você achou!
-
-[Jaspr]: https://jaspr.site/
-
-**Documentação atualizada ou adicionada desde o lançamento 3.35**
-
-* A linguagem Dart agora suporta a sintaxe de _dot shorthands_
-  (também conhecida como _shorthands_), que permite escrever código
-  mais conciso. Para mais informações, visite a
-  página [Dart dot shorthands][] no dart.dev. Com o tempo,
-  os exemplos deste site serão atualizados
-  para aproveitar esse novo recurso.
-
-* O comando `flutter run` agora suporta um arquivo de configuração
-  que permite especificar configurações web como host, porta,
-  certificação e cabeçalho.
-  O arquivo de configuração de desenvolvimento web também suporta configurações de proxy,
-  tornando possível encaminhar requisições de caminhos específicos
-  para outro servidor. Isso facilita o desenvolvimento de um
-  cliente web que se conecta a endpoints dinâmicos no mesmo host.
-  Para mais informações, visite
-  [configurando um arquivo de configuração de desenvolvimento web][web-config-file].
-
-* O desenvolvimento continua na ferramenta Flutter Widget Previewer,
-  introduzida como recurso experimental no lançamento 3.35.
-  Neste lançamento, o previewer se integra melhor com as IDEs VS Code
-  e IntelliJ (incluindo o Android Studio).
-  Ainda é um recurso experimental.
-  Para mais informações sobre a versão mais recente,
-  confira a [página da ferramenta Widget Previewer][Widget Previewer tool page].
-
-* O lançamento Flutter 3.38 suporta totalmente as versões de plataforma
-  iOS 26, Xcode 26 e macOS 26, todas lançadas em setembro.
-  Para as informações mais recentes sobre o suporte do Flutter ao iOS,
-  visite [Flutter no iOS mais recente][Flutter on latest iOS].
-
-* O Flutter 3.38 suporta o novo [ciclo de vida UIScene][UIScene lifecycle] exigido pela Apple.
-  Para suportá-lo, é necessária uma migração de código.
-  Para mais informações, visite o [guia de migração para UIScene][UIScene migration guide].
-
-* Com foco em melhorar a acessibilidade do Flutter,
-  a [documentação de acessibilidade][accessibility docs] também foi completamente reformulada.
-
-* Além disso, não se esqueça de conferir a página de [mudanças breaking][bc-3.38]
-  deste lançamento. É lá que você encontrará informações
-  sobre mudanças breaking, descontinuações de código e guias de migração.
-
-Outros recursos relevantes:
-
-* [Notas de lançamento e changelog do 3.38][3.38 release notes and changelog]
-* [Notas de lançamento do DevTools 2.51.1][DevTools 2.51.1 release notes]
-* Post do blog do [lançamento do Dart 3.10][Dart 3.10 release]
-
-[3.38 release notes and changelog]: /release/release-notes/release-notes-3.38.0
-[accessibility docs]: /ui/accessibility
-[bc-3.38]: /release/breaking-changes#released-in-flutter-3-38
-[Dart 3.10 release]: {{site.dart-blog}}/announcing-dart-3-10
-[Dart dot shorthands]: {{site.dart-site}}/language/dot-shorthands
-[DevTools 2.51.1 release notes]: /tools/devtools/release-notes/release-notes-2.51.1
-[Flutter on latest iOS]: /platform-integration/ios/ios-latest
-[UIScene lifecycle]: {{site.apple-dev}}/documentation/technotes/tn3187-migrating-to-the-uikit-scene-based-life-cycle
-[UIScene migration guide]: /release/breaking-changes/uiscenedelegate
-[Widget Previewer tool page]: /tools/widget-previewer
-[web-config-file]: /platform-integration/web/web-dev-config-file
-
-
----
-
-Para lançamentos passados, confira a
-página [arquivo de novidades][What's new archive].
+For past releases, check out the
+[What's new archive][] page.
 
 [What's new archive]: /release/archive-whats-new

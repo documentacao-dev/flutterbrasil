@@ -1,68 +1,71 @@
 ---
-ia-translate: true
-title: Exportar fonts de um package
-description: Como exportar fonts de um package.
+title: Export fonts from a package
+description: How to export fonts from a package.
 ---
 
 <?code-excerpt path-base="cookbook/design/package_fonts"?>
 
-Em vez de declarar uma font como parte de um app,
-você pode declarar uma font como parte de um package separado.
-Esta é uma maneira conveniente de compartilhar a mesma font entre
-vários projetos diferentes,
-ou para programadores que publicam seus packages no [pub.dev][].
-Esta receita usa os seguintes passos:
+Rather than declaring a font as part of an app,
+you can declare a font as part of a separate package.
+This is a convenient way to share the same font across
+several different projects,
+or for coders publishing their packages to [pub.dev][].
+This recipe uses the following steps:
 
-  1. Adicionar uma font a um package.
-  2. Adicionar o package e a font ao app.
-  3. Usar a font.
+  1. Add a font to a package.
+  2. Add the package and font to the app.
+  3. Use the font.
 
 :::note
-Confira o package [google_fonts][] para acesso direto
-a quase 1000 famílias de fonts open-source.
+Check out the [google_fonts][] package for direct access
+to almost 1000 open-sourced font families.
 :::
 
-## 1. Adicionar uma font a um package {:#1-add-a-font-to-a-package}
+## 1. Add a font to a package
 
-Para exportar uma font de um package, você precisa importar os arquivos de font para a
-pasta `lib` do projeto do package. Você pode colocar arquivos de font diretamente na
-pasta `lib` ou em um subdiretório, como `lib/fonts`.
+To export fonts, place the files in your package's `lib` directory
+or one of its subdirectories.
+This example uses `lib/fonts` in a Flutter package named `awesome_package`.
+Place the package directory next to your app directory.
 
-Neste exemplo, assuma que você tem uma biblioteca Flutter chamada
-`awesome_package` com fonts localizadas em uma pasta `lib/fonts`.
+<FileTree>
 
-```plaintext
-awesome_package/
-  lib/
-    awesome_package.dart
-    fonts/
-      Raleway-Regular.ttf
-      Raleway-Italic.ttf
-```
+- awesome_package/
+  - lib/
+    - awesome_package.dart
+    - fonts/
+      - Raleway-Regular.ttf
+      - Raleway-Italic.ttf
+  - pubspec.yaml
 
-## 2. Adicionar o package e fonts ao app {:#2-add-the-package-and-fonts-to-the-app}
+</FileTree>
 
-Agora você pode usar as fonts no package
-atualizando o `pubspec.yaml` no diretório raiz do *app*.
+## 2. Add the package and fonts to the app
 
-### Adicionar o package ao app {:#add-the-package-to-the-app}
+Now you can use the fonts in the package by
+updating the `pubspec.yaml` in the *app's* root directory.
 
-Para adicionar o package `awesome_package` como uma dependência,
-execute `flutter pub add`:
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
+### Add the package to the app
+
+From your app's directory, add `awesome_package`
+using a [path package descriptor][].
 
 ```console
-$ flutter pub add awesome_package
+$ flutter pub add "awesome_package:{path: ../awesome_package}"
 ```
 
-### Declarar os assets de font {:#declare-the-font-assets}
+[path package descriptor]: {{site.dart-site}}/tools/pub/dependencies#path-package-descriptor
 
-Agora que você importou o package, diga ao Flutter onde
-encontrar as fonts do `awesome_package`.
+### Declare the font assets
 
-Para declarar fonts de package, prefixe o caminho para a font com
+In your app's `pubspec.yaml`, declare the font files from `awesome_package`.
+
+To declare package fonts, prefix the path to the font with
 `packages/awesome_package`.
-Isso diz ao Flutter para procurar na pasta `lib`
-do package pela font.
+This tells Flutter to look in the `lib` folder
+of the package for the font.
 
 ```yaml
 flutter:
@@ -76,11 +79,11 @@ flutter:
 
 <a id="use" aria-hidden="true"></a>
 
-## 3. Usar a font {:#3-use-the-font}
+## 3. Use the font
 
-Use um [`TextStyle`][] para mudar a aparência do texto.
-Para usar fonts de package, declare qual font você gostaria de usar e
-a qual package a font pertence.
+Use a [`TextStyle`][] to change the appearance of text.
+To use package fonts, declare which font you'd like to use and
+which package the font belongs to.
 
 <?code-excerpt "lib/main.dart (TextStyle)"?>
 ```dart
@@ -90,11 +93,11 @@ child: Text(
 ),
 ```
 
-## Exemplo completo {:#complete-example}
+## Complete example
 
 ### Fonts
 
-As fonts Raleway e RobotoMono foram baixadas do
+The Raleway and RobotoMono fonts were downloaded from
 [Google Fonts][].
 
 ### `pubspec.yaml`
@@ -103,10 +106,15 @@ As fonts Raleway e RobotoMono foram baixadas do
 name: package_fonts
 description: An example of how to use package fonts with Flutter
 
+environment:
+  sdk: ^3.13.0
+
 dependencies:
   awesome_package:
+    path: ../awesome_package
   flutter:
     sdk: flutter
+  material_ui: ^1.11.0
 
 dev_dependencies:
   flutter_test:

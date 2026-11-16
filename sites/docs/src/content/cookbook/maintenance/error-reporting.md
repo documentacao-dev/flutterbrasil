@@ -1,67 +1,74 @@
 ---
-ia-translate: true
-title: Reportar erros a um serviço
-description: Como acompanhar erros que usuários encontram.
+title: Report errors to a service
+description: How to keep track of errors that users encounter.
 ---
 
 <?code-excerpt path-base="cookbook/maintenance/error_reporting/"?>
 
-Embora sempre se tente criar apps que sejam livres de bugs,
-eles certamente aparecerão de tempos em tempos.
-Como apps com bugs levam a usuários e clientes insatisfeitos,
-é importante entender com que frequência seus usuários
-experimentam bugs e onde esses bugs ocorrem.
-Dessa forma, você pode priorizar os bugs com o
-maior impacto e trabalhar para corrigi-los.
+While one always tries to create apps that are free of bugs,
+they're sure to crop up from time to time.
+Since buggy apps lead to unhappy users and customers,
+it's important to understand how often your users
+experience bugs and where those bugs occur.
+That way, you can prioritize the bugs with the
+highest impact and work to fix them.
 
-Como você pode determinar com que frequência seus usuários experimentam bugs?
-Sempre que um erro ocorrer, crie um relatório contendo o
-erro que ocorreu e o stacktrace associado.
-Você pode então enviar o relatório para um serviço de rastreamento
-de erros, como [Bugsnag][Bugsnag], [Datadog][Datadog],
-[Firebase Crashlytics][Firebase Crashlytics], [Rollbar][Rollbar], ou Sentry.
+How can you determine how often your users experiences bugs?
+Whenever an error occurs, create a report containing the
+error that occurred and the associated stacktrace.
+You can then send the report to an error tracking
+service, such as [Bugsnag][], [Datadog][],
+[Firebase Crashlytics][], [Rollbar][], or Sentry.
 
-O serviço de rastreamento de erros agrega todos os crashes que seus usuários
-experimentam e os agrupa. Isso permite que você saiba com que frequência seu
-app falha e onde os usuários encontram problemas.
+The error tracking service aggregates all of the crashes your users
+experience and groups them together. This allows you to know how often your
+app fails and where the users run into trouble.
 
-Nesta receita, aprenda como reportar erros ao serviço de relatório
-de crashes [Sentry][Sentry] usando
-os seguintes passos:
+In this recipe, learn how to report errors to the
+[Sentry][] crash reporting service using
+the following steps:
 
-  1. Obtenha um DSN do Sentry.
-  2. Importe o pacote Flutter Sentry
-  3. Inicialize o SDK do Sentry
-  4. Capture erros programaticamente
+  1. Get a DSN from Sentry.
+  2. Import the Flutter Sentry package
+  3. Initialize the Sentry SDK
+  4. Capture errors programmatically
 
-## 1. Obtenha um DSN do Sentry {:#1-get-a-dsn-from-sentry}
+## 1. Get a DSN from Sentry
 
-Antes de reportar erros ao Sentry, você precisa de um "DSN" para identificar exclusivamente
-seu app com o serviço Sentry.io.
+Before reporting errors to Sentry, you need a "DSN" to uniquely identify
+your app with the Sentry.io service.
 
-Para obter um DSN, use os seguintes passos:
+To get a DSN, use the following steps:
 
-  1. [Crie uma conta no Sentry][Create an account with Sentry].
-  2. Faça login na conta.
-  3. Crie um novo projeto Flutter.
-  4. Copie o trecho de código que inclui o DSN.
+  1. [Create an account with Sentry][].
+  2. Log in to the account.
+  3. Create a new Flutter project.
+  4. Copy the project's DSN.
 
-## 2. Importe o pacote Sentry {:#2-import-the-sentry-package}
+## 2. Import the Sentry package
 
-Importe o pacote [`sentry_flutter`][`sentry_flutter`] para o app.
-O pacote sentry torna mais fácil enviar
-relatórios de erro para o serviço de rastreamento de erros Sentry.
+This recipe uses the [`sentry_flutter`][] package.
+Before you add it, check the requirements for the platforms you target:
 
-Para adicionar o pacote `sentry_flutter` como uma dependência,
-execute `flutter pub add`:
+- On Android, ensure your app's [`minSdk`][android-sdk] meets
+  the plugin's minimum Android SDK version.
+- On iOS and macOS, use [Swift Package Manager][swiftpm].
+  On macOS, [allow outgoing network connections][macos-network]
+  so the app can send error reports.
+
+From your Flutter project directory, add the package:
 
 ```console
 $ flutter pub add sentry_flutter
 ```
 
-## 3. Inicialize o SDK do Sentry {:#3-initialize-the-sentry-sdk}
+[android-sdk]: /deployment/android#android-sdk-versions
+[swiftpm]: /packages-and-plugins/swift-package-manager/for-app-developers
+[macos-network]: /data-and-backend/networking#macos
 
-Inicialize o SDK para capturar diferentes erros não tratados automaticamente:
+## 3. Initialize the Sentry SDK
+
+Initialize the SDK to capture different unhandled errors automatically:
 
 <?code-excerpt "lib/main.dart (InitializeSDK)"?>
 ```dart
@@ -70,55 +77,60 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
   await SentryFlutter.init(
-    (options) => options.dsn = 'https://example@sentry.io/example',
+    (options) => options.dsn = const String.fromEnvironment('SENTRY_DSN'),
     appRunner: () => runApp(const MyApp()),
   );
 }
 ```
 
-Alternativamente, você pode passar o DSN para o Flutter usando a tag `dart-define`:
+Pass the DSN you copied from Sentry to `flutter run` during development
+and to `flutter build` when you build the app for distribution.
+In the following command, replace `<PROJECT_DSN>` with your DSN.
 
-```sh
---dart-define SENTRY_DSN=https://example@sentry.io/example
+```console
+$ flutter run --dart-define=SENTRY_DSN=<PROJECT_DSN>
 ```
 
-### O que isso me dá? {:#what-does-that-give-me}
+If you don't provide a DSN,
+the Sentry SDK stays disabled and doesn't report errors.
 
-Isso é tudo que você precisa para o Sentry
-capturar erros não tratados nas camadas Dart e nativas.
-Isso inclui Swift, Objective-C, C e C++ no iOS, e
-Java, Kotlin, C e C++ no Android.
+### What does that give me?
 
-## 4. Capture erros programaticamente {:#4-capture-errors-programmatically}
+This is all you need for Sentry to
+capture unhandled errors in Dart and native layers.
+This includes Swift, Objective-C, C, and C++ on iOS, and
+Java, Kotlin, C, and C++ on Android.
 
-Além do relatório automático de erros que o Sentry gera ao
-importar e inicializar o SDK,
-você pode usar a API para reportar erros ao Sentry:
+## 4. Capture errors programmatically
+
+Besides the automatic error reporting that Sentry generates by
+importing and initializing the SDK,
+you can use the API to report errors to Sentry:
 
 <?code-excerpt "lib/main.dart (CaptureException)"?>
 ```dart
 await Sentry.captureException(exception, stackTrace: stackTrace);
 ```
 
-Para mais informações, consulte a documentação da [API do Sentry][Sentry API] em pub.dev.
+For more information, see the [Sentry API][] docs on pub.dev.
 
-## Saiba mais {:#learn-more}
+## Learn more
 
-Documentação extensiva sobre o uso do SDK do Sentry pode ser encontrada no [site do Sentry][Sentry's site].
+Extensive documentation about using the Sentry SDK can be found on [Sentry's site][].
 
-## Exemplo completo {:#complete-example}
+## Complete example
 
-Para ver um exemplo funcionando,
-consulte o [app de exemplo do Sentry flutter][Sentry flutter example].
+To view a working example,
+see the [Sentry flutter example][] app.
 
 
-[Sentry flutter example]: https://github.com/getsentry/sentry-dart/tree/main/flutter/example
+[Sentry flutter example]: https://github.com/getsentry/sentry-dart/tree/main/packages/flutter/example
 [Create an account with Sentry]: https://sentry.io/signup/
 [Bugsnag]: https://www.bugsnag.com/platforms/flutter
 [Datadog]: https://docs.datadoghq.com/real_user_monitoring/flutter/
 [Rollbar]: https://rollbar.com/
 [Sentry]: https://sentry.io/welcome/
 [`sentry_flutter`]: {{site.pub-pkg}}/sentry_flutter
-[Sentry API]: {{site.pub-api}}/sentry_flutter/latest/sentry_flutter/sentry_flutter-library.html
-[Sentry's site]: https://docs.sentry.io/platforms/flutter/
+[Sentry API]: {{site.pub-api}}/sentry_flutter/latest/sentry_flutter/
+[Sentry's site]: https://docs.sentry.io/platforms/dart/guides/flutter/
 [Firebase Crashlytics]: {{site.firebase}}/docs/crashlytics

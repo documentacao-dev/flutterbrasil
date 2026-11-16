@@ -19,6 +19,8 @@ Esta receita usa os seguintes passos:
   2. Adicionar um widget `Hero` à primeira tela.
   3. Adicionar um widget `Hero` à segunda tela.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Criar duas telas mostrando a mesma imagem {:#1-create-two-screens-showing-the-same-image}
 
 Neste exemplo, exiba a mesma imagem em ambas as telas.
@@ -34,7 +36,7 @@ e [Lidar com toques][Handle taps].
 
 <?code-excerpt "lib/main_original.dart"?>
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -135,6 +137,10 @@ os widgets, por simplicidade.
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Flutter Hero animation hands-on example in DartPad" run="true"
+// DartPad doesn't support `material_ui` yet,
+// so this example imports Material from the Flutter SDK.
+// To run locally, depend on `material_ui` and use this import instead:
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const HeroApp());

@@ -54,13 +54,14 @@ O [código-fonte desta demo][src-code] está disponível no repositório no GitH
 <ol>
 <li><b>Instalação</b>
 
-Adicione as seguintes dependências ao seu arquivo `pubspec.yaml`:
+O Flutter AI Toolkit 1.0.0 usa `firebase_ai` 3.x, que exige `firebase_core` 4.x.
+Adicione estas versões compatíveis ao seu arquivo `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_ai_toolkit: ^latest_version
-  firebase_ai: ^latest_version
-  firebase_core: ^latest_version
+  flutter_ai_toolkit: ^1.0.0
+  firebase_ai: ^3.15.0
+  firebase_core: ^4.15.2
 ```
 </li>
 
@@ -90,7 +91,7 @@ import 'package:flutter_ai_toolkit/flutter_ai_toolkit.dart';
 
 // ... outros imports
 
-import 'firebase_options.dart'; // de `flutterfire config`
+import 'firebase_options.dart'; // Gerado por `flutterfire configure`.
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -147,7 +148,7 @@ class ChatPage extends StatelessWidget {
         body: LlmChatView(
           provider: FirebaseProvider(
             // Usa o endpoint de produção
-            model: FirebaseAI.vertexAI().generativeModel(
+            model: FirebaseAI.agentPlatform().generativeModel(
               model: 'gemini-2.5-flash',
             ),
           ),

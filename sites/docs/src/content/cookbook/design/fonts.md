@@ -258,6 +258,8 @@ O estilo `regular` de uma fonte itálica _é_ itálico.
 
 ## Definir uma fonte como padrão {:#set-a-font-as-the-default}
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 Para aplicar uma fonte a texto, você pode definir a fonte como a fonte padrão do app
 no seu `theme`.
 
@@ -328,9 +330,13 @@ Baixe os arquivos de fonte Raleway e RobotoMono do [Google Fonts][].
    name: custom_fonts
    description: An example of how to use custom fonts with Flutter
 
+   environment:
+     sdk: ^3.13.0
+
    dependencies:
      flutter:
        sdk: flutter
+     material_ui: ^1.11.0
 
    dev_dependencies:
      flutter_test:

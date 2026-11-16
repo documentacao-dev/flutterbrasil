@@ -23,6 +23,8 @@ um único campo de texto usando as seguintes etapas:
 1.  Adicionar um `TextFormField` com lógica de validação.
 1.  Criar um botão para validar e enviar o formulário.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Criar um `Form` com uma `GlobalKey` {:#1-create-a-form-with-a-globalkey}
 
 Crie um [`Form`][`Form`].
@@ -43,7 +45,7 @@ Como é um recurso caro, você não gostaria de gerar uma nova
 
 <?code-excerpt "lib/form.dart"?>
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Define a custom Form widget.
 class MyCustomForm extends StatefulWidget {
@@ -167,6 +169,10 @@ reconstrói o formulário para exibir quaisquer mensagens de erro e retorna `fal
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Flutter form validation hands-on example in DartPad" run="true"
+// DartPad doesn't support `material_ui` yet,
+// so this example imports Material from the Flutter SDK.
+// To run locally, depend on `material_ui` and use this import instead:
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());

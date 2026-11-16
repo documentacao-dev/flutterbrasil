@@ -97,34 +97,27 @@ confira o vídeo a seguir:
 
 <YouTubeEmbed id="v_hR4K4auoQ" title="O que é um banco de dados NoSQL? Saiba mais sobre o Cloud Firestore"></YouTubeEmbed>
 
-Para adicionar o Firestore ao seu projeto Flutter,
-siga os dois primeiros passos do guia
-[Comece com o Cloud Firestore][Get started with Cloud Firestore]:
+Para adicionar o Firestore ao seu projeto de jogo, siga estas etapas:
 
-* [Crie um banco de dados do Cloud Firestore][Create a Cloud Firestore database]
-* [Configure o seu ambiente de desenvolvimento][Set up your development environment]
+1.  [Crie um banco de dados do Cloud Firestore][Create a Cloud Firestore database] em **modo de teste** para este exemplo.
+1.  Siga o [guia de configuração do Flutter Firebase][Flutter Firebase setup guide] para verificar os requisitos da sua plataforma, instalar as CLIs do Firebase e do FlutterFire, e fazer login.
+    Se você compilar o template `card` para macOS,
+    defina o deployment target dele no Xcode para uma [versão do macOS suportada][supported macOS version].
+1.  Na raiz do seu projeto de jogo, adicione os plugins e configure o app.
 
-Os resultados desejados incluem:
+    ```console
+    $ flutter pub add cloud_firestore firebase_core
+    $ flutterfire configure
+    ```
 
-* Um banco de dados Firestore pronto na nuvem, em **modo de teste**
-* Um arquivo `firebase_options.dart` gerado
-* Os plugins apropriados adicionados ao seu `pubspec.yaml`
-
-Você *não* precisa escrever nenhum código Dart nesta etapa.
-Assim que entender a etapa de escrita de
-código Dart nesse guia, volte para esta receita.
-
-{% comment %}
-  Revisite para ver se conseguimos incluir as etapas aqui:
-  <https://firebase.google.com/docs/flutter/setup>
-  ... seguidas pelos dois primeiros passos aqui:
-  <https://firebase.google.com/docs/firestore/quickstart>
-{% endcomment %}
+    Selecione o projeto Firebase que contém o seu banco de dados Firestore.
+    A CLI gera o arquivo `lib/firebase_options.dart`
+    para as plataformas que você selecionar.
 
 [Cloud Firestore]: https://cloud.google.com/firestore/
 [Create a Cloud Firestore database]: {{site.firebase}}/docs/firestore/quickstart#create
-[Get started with Cloud Firestore]: {{site.firebase}}/docs/firestore/quickstart
-[Set up your development environment]: {{site.firebase}}/docs/firestore/quickstart#set_up_your_development_environment
+[Flutter Firebase setup guide]: /data-and-backend/firebase#connect-a-flutter-app-to-firebase
+[supported macOS version]: /reference/supported-platforms#desktop-platforms
 
 ## 3. Inicialize o Firestore {:#3-initialize-firestore}
 

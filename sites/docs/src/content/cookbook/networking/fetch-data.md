@@ -24,6 +24,8 @@ Esta receita usa as seguintes etapas:
   3. Converter a resposta em um objeto Dart customizado.
   4. Buscar e exibir os dados com Flutter.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicionar o pacote `http` {:#1-add-the-http-package}
 
 O pacote [`http`][] fornece a

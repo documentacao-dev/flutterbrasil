@@ -36,6 +36,8 @@ Esta receita usa os seguintes passos:
   4. Executar o teste.
   5. Revisar os resultados.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Escrever um teste que rola através de uma lista de itens {:#1-write-a-test-that-scrolls-through-a-list-of-items}
 
 Nesta receita, grave a performance de um app enquanto ele rola através de uma

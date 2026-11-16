@@ -23,7 +23,9 @@ descritos na seção [Canal beta][Beta channel] da página [Arquivo do SDK][SDK 
 
 ## Versões stable {:#stable-releases}
 
-* 3.50.0 _(Tentative)_
+* 3.50.0
+  * [3.50.0 announcement][]
+  * [3.50.0 release notes & change log][]
   * [3.50.0 breaking changes & migrations][]
 * 3.47.0
   * [3.47.0 announcement][]
@@ -130,6 +132,8 @@ descritos na seção [Canal beta][Beta channel] da página [Arquivo do SDK][SDK 
 * Earlier
   * [Archived release notes][Archived release notes]
 
+[3.50.0 announcement]: {{site.main-url}}/blog/whats-new-in-flutter-3-50
+[3.50.0 release notes & change log]: /release/release-notes/release-notes-3.50.0
 [3.50.0 breaking changes & migrations]: /release/breaking-changes#released-in-flutter-3-50
 [3.47.0 announcement]: {{site.main-url}}/blog/whats-new-in-flutter-3-47
 [3.47.0 release notes & change log]: /release/release-notes/release-notes-3.47.0

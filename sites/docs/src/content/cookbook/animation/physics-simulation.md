@@ -21,13 +21,15 @@ Esta receita usa estes passos:
 1.  Calcular a velocidade para simular um movimento de mola.
 
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## Passo 1: Configurar um animation controller {:#step-1-set-up-an-animation-controller}
 
 Comece com um widget stateful chamado `DraggableCard`:
 
 <?code-excerpt "lib/starter.dart"?>
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(const MaterialApp(home: PhysicsCardDragDemo()));
@@ -291,6 +293,10 @@ não é mais necessário.
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Exemplo prático de simulação de física Flutter no DartPad" run="true"
+// DartPad doesn't support `material_ui` yet,
+// so this example imports Material from the Flutter SDK.
+// To run locally, depend on `material_ui` and use this import instead:
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 

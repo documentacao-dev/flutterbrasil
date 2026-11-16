@@ -15,12 +15,15 @@ do seu app e cobre os seguintes tópicos:
 
 * [Compilando o app para release](#building-the-app-for-release)
 * [Hashing de conteúdo web e cache HTTP](#web-content-hashing)
+* [Deploy de WebAssembly em produção](#deploy-webassembly-in-production)
 * [Deploy para a web](#deploying-to-the-web)
 * [Deploy para Firebase Hosting](#deploying-to-firebase-hosting)
 * [Manipulando imagens na web](#handling-images-on-the-web)
-* [Optando pelo WebAssembly](#opting-in-to-webassembly)
 * [Minificação](#minification)
 * [Viewport de navegadores móveis e SafeArea](#mobile-browser-viewport-and-safearea)
+* [Incorporando um app Flutter em uma página HTML][embed-html]
+
+[embed-html]: #embedding-a-flutter-app-into-an-html-page
 
 ## Compilando o app para release {:#building-the-app-for-release}
 
@@ -50,12 +53,24 @@ e abra o diretório /build/web. Navegue até
 para visualizar a versão release do seu app.
 
 ## Flags de build adicionais {:#additional-build-flags}
-Você pode precisar fazer deploy de um build profile ou debug para testes.
-Para fazer isso, passe a flag `--profile` ou `--debug`
-para o comando `flutter build web`.
-Builds profile são especializados para profiling de performance usando Chrome DevTools,
-e builds debug podem ser usados para configurar dart2js
-para respeitar assertions e mudar o nível de otimização (usando a flag `-O`.)
+
+Passe `--release` (padrão), `--profile` ou `--debug` para `flutter build web`
+dependendo de você estar fazendo deploy para produção, fazendo profiling no Chrome
+DevTools ou testando com assertions:
+
+| Modo de build | WebAssembly (`--wasm`) | JavaScript (padrão) | Finalidade |
+| :--- | :--- | :--- | :--- |
+| `--release` (padrão) | `-O2` (minificado, símbolos removidos) | `-O4` (minificado) | Deploy em produção |
+| `--profile` | `-O2 --no-strip-wasm` (nomes legíveis de funções e tipos) | `-O4` (símbolos não minificados) | Profiling de performance e memória |
+| `--debug` | `-O0` (assertions habilitadas) | `-O1` (assertions habilitadas) | Testes de desenvolvimento |
+
+{:.table .table-striped}
+
+Para sobrescrever o nível de otimização padrão do compilador, passe
+`--optimization-level=LEVEL` (`-O0` a `-O4` para `dart2wasm`; `-O1`
+a `-O4` para `dart2js`).
+Para detalhes de otimização do `dart2wasm`,
+consulte [Compilação Dart WebAssembly][dart-wasm].
 
 ### Source maps
 
@@ -100,20 +115,12 @@ SHA-256 truncado em 8 caracteres nos entrypoints compilados e em todos os arquiv
 `build/web/assets/**`, e registra os caminhos com hash em `flutter_bootstrap.js`
 (`_flutter.buildConfig`):
 
-* **Arquivos imutáveis com hash (`Cache-Control: public, max-age=31536000, immutable`)**:
-  * Entrypoints compilados: `main.dart.<hash>.js`, `main.dart.<hash>.wasm` e
-    `main.dart.<hash>.mjs` (além de `main.dart.<hash>.js.map` e
-    `main.dart.<hash>.mjs.map` se `--source-maps` estiver habilitado).
-  * Todos os arquivos sob `assets/**`: incluindo `AssetManifest.<hash>.bin`,
-    `AssetManifest.bin.<hash>.json`, `FontManifest.<hash>.json`,
-    `NOTICES.<hash>`, fontes, imagens e `shaders/**`.
-* **Arquivos de bootstrap e raiz sem hash (`Cache-Control: max-age=0, must-revalidate` ou `no-cache`)**:
-  * `index.html`, `flutter_bootstrap.js`, `flutter.js`, `manifest.json`,
-    `version.json`, `404.html` e `icons/**`.
-  * Arquivos `canvaskit/**` empacotados ao compilar com `--no-web-resources-cdn`.
-  * `main.dart.wasm.map` ao compilar com `--source-maps` (a seção personalizada
-    `sourceMappingURL` do binário `.wasm` referencia o nome de arquivo
-    `.wasm.map` sem hash).
+| Grupo de artefatos | Arquivos em `build/web` | `Cache-Control` recomendado |
+| :--- | :--- | :--- |
+| **Arquivos imutáveis com hash** | `main.dart.<hash>.js`, `main.dart.<hash>.wasm`, `main.dart.<hash>.mjs` (além de `.js.map` e `.mjs.map`), e todos os arquivos em `assets/**` (`AssetManifest.<hash>.bin`, `FontManifest.<hash>.json`, `NOTICES.<hash>`, fontes, imagens e `shaders/**`) | `public, max-age=31536000, immutable` |
+| **Arquivos de bootstrap e raiz sem hash** | `index.html`, `flutter_bootstrap.js`, `flutter.js`, `manifest.json`, `version.json`, `404.html`, `icons/**`, `canvaskit/**` empacotados (com `--no-web-resources-cdn`) e `main.dart.wasm.map` (com `--source-maps`) | `no-cache` (ou `max-age=0, must-revalidate`) |
+
+{:.table .table-striped}
 
 Para um exemplo completo de `firebase.json`, consulte o [FAQ da Web][web-faq-caching].
 
@@ -169,20 +176,95 @@ Service workers de PWA personalizados ou pipelines do [Workbox][] podem consumir
 `precache_manifest.json` diretamente (passando `revision: entry.urlHashed ? null : entry.hash`
 para que arquivos com hash na URL não sejam armazenados em cache duas vezes com parâmetros de query).
 
-## Optando pelo WebAssembly {:#opting-in-to-webassembly}
+<a id="opting-in-to-webassembly" aria-hidden="true"></a>
 
-Para compilar e otimizar seu app para WebAssembly,
-use a flag `--wasm` ao executar ou compilar.
+## Deploy de WebAssembly em produção {:#deploy-webassembly-in-production}
 
-Para mais informações, veja [Suporte para WebAssembly (Wasm)][Wasm support].
+Executar `flutter build web --wasm` gera um bundle de release com dois alvos
+em `build/web`:
 
-:::important Servindo builds WebAssembly
-Builds WebAssembly usam múltiplas threads para melhorar a performance de renderização
-e exigem que seu servidor web retorne cabeçalhos de resposta HTTP COEP/COOP específicos
-(`Cross-Origin-Embedder-Policy: credentialless` e
-`Cross-Origin-Opener-Policy: same-origin`).
-Para todos os detalhes, veja [Suporte para WebAssembly (Wasm)][Wasm support].
-:::
+* **Alvo WebAssembly (`dart2wasm`)**:
+  gera `main.dart.wasm` e seu módulo de runtime JS `main.dart.mjs`,
+  usado junto com o motor de renderização WebAssembly do Flutter.
+* **Fallback em JavaScript (`dart2js`)**:
+  gera `main.dart.js` para navegadores sem os recursos Wasm necessários.
+
+Na inicialização, o `flutter_bootstrap.js` verifica os recursos WebAssembly do navegador
+e recorre automaticamente ao `main.dart.js` quando o navegador não suporta
+os recursos Wasm necessários ou não está em `wasmAllowList`.
+Para detalhes de compatibilidade dos navegadores,
+consulte [Suporte para WebAssembly (Wasm)][Wasm support].
+Para as flags do compilador `dart2wasm` e a configuração genérica de servidor Wasm,
+consulte [Compilação Dart WebAssembly][dart-wasm] e
+[Servir WebAssembly em produção][dart-wasm-serving].
+
+### Configurar cabeçalhos do servidor e compressão {:#server-headers-and-compression}
+
+Configure o servidor web de produção ou o CDN com os seguintes cabeçalhos e
+configurações de compressão:
+
+* **Isolamento de origem cruzada para renderização multithread**:
+  retorne `Cross-Origin-Opener-Policy: same-origin` e
+  `Cross-Origin-Embedder-Policy: credentialless` (ou `require-corp`) na
+  resposta do documento para habilitar `SharedArrayBuffer` e a renderização WebAssembly
+  multithread (consulte o [guia de COOP e COEP no web.dev][coep]).
+* **Tipo MIME de Wasm e pré-compressão estática**:
+  sirva todos os arquivos `.wasm` (tanto `main.dart.wasm` quanto os binários do motor
+  hospedados por você) com `Content-Type: application/wasm`, e pré-comprima arquivos `.wasm`,
+  `.mjs`, `.js`, fontes e manifestos em `assets/**` com Brotli (`br`) e Gzip
+  (`gzip`).
+  Para detalhes de compilação em streaming e compressão,
+  consulte [Servir WebAssembly em produção][dart-wasm-serving].
+
+### Reduzir a latência de inicialização a frio {:#reduce-cold-start-latency}
+
+Para diminuir o tempo até o primeiro frame em carregamentos com cache frio:
+
+* **Embutir o script de bootstrap**:
+  substitua a tag externa `<script src="flutter_bootstrap.js" async></script>` em
+  `web/index.html` por um `<script>` inline contendo
+  `{% raw %}{{flutter_bootstrap_js}}{% endraw %}`.
+  Embutir elimina uma viagem de ida e volta extra na rede antes de o navegador começar
+  a baixar `main.dart.wasm` e o motor de renderização.
+  Para detalhes da sintaxe de template,
+  consulte [Inicializar o app][web-init-bootstrapping].
+* **Reduzir o peso inicial do bundle**:
+  builds de release habilitam tree shaking de ícones de fonte automaticamente
+  (passe `--no-tree-shake-icons` apenas ao depurar code points de ícones dinâmicos).
+  Para dividir recursos grandes em chunks `.wasm` carregados sob demanda,
+  compile com a flag `--enable-wasm-deferred-loading`.
+  Lembre que `--enable-wasm-deferred-loading` é incompatível com
+  `--web-content-hash`.
+* **Renderizar uma tela de carregamento em HTML**:
+  inclua HTML e CSS leves dentro de `web/index.html`
+  (ou atualize o estado do DOM pelo callback `onEntrypointLoaded` em
+  `flutter_bootstrap.js`) para que os usuários recebam feedback visual enquanto o
+  motor é inicializado.
+
+### Servir assets de um CDN ou origem própria {:#multi-asset-and-cdn-loading}
+
+Personalize de onde o motor, os módulos compilados e os assets são carregados para
+combinar com a arquitetura de hospedagem e os requisitos de privacidade:
+
+* **Hospedar os binários do motor e as fontes de fallback**:
+  passe `--no-web-resources-cdn` para empacotar os arquivos do motor de renderização do Flutter
+  diretamente em `build/web/canvaskit/`, em vez de buscá-los em
+  `gstatic.com` em tempo de execução.
+  Ao compilar com a flag `--web-content-hash`, os arquivos empacotados em
+  `canvaskit/**` continuam sem hash e exigem cabeçalhos de cache com revalidação.
+* **Servir assets estáticos de um CDN dedicado**:
+  configure as opções `assetBase` e `entrypointBaseUrl` em
+  `_flutter.loader.load({ config: ... })` (e `canvasKitBaseUrl` ao hospedar os
+  binários do motor em um CDN).
+  Para injetar um prefixo de CDN em `web/index.html` no momento do build, referencie o
+  placeholder `$FLUTTER_STATIC_ASSETS_URL` em `web/index.html` e passe
+  `--static-assets-url=https://cdn.example.com/` (incluindo a `/` final)
+  para `flutter build web`.
+  Ao compilar com a flag `--enable-wasm-deferred-loading` e roteamento de assets
+  personalizado, forneça um callback `wasmDeferredModulesLoader` para buscar os
+  módulos `.wasm` adiados no CDN.
+  Para detalhes de configuração,
+  consulte [Personalizar o loader do Flutter][web-init-loader].
 
 ## Deploy para a web {:#deploying-to-the-web}
 
@@ -253,7 +335,7 @@ A web suporta o widget `Image` padrão para exibir imagens.
 Por design, navegadores web executam código não confiável sem prejudicar o computador host.
 Isso limita o que você pode fazer com imagens comparado a plataformas mobile e desktop.
 
-Para mais informações, veja [Displaying images on the web][].
+Para saber mais, consulte [Exibindo imagens na web][Displaying images on the web].
 
 ## Minificação {:#minification}
 
@@ -267,6 +349,8 @@ strings mais curtas (por exemplo, renomeando `AlignmentGeometryTween` para algo 
 | debug                 | Não             | Não                      |
 | profile               | Não             | Sim                     |
 | release               | Sim            | Sim                     |
+
+{:.table .table-striped}
 
 ## Viewport de navegadores móveis e SafeArea {:#mobile-browser-viewport-and-safearea}
 
@@ -306,10 +390,14 @@ e no histórico, em vez de decodificá-las usando `Uri.decodeComponent`.
 
 ## Incorporando um app Flutter em uma página HTML {:#embedding-a-flutter-app-into-an-html-page}
 
-Veja [Embedding Flutter web][].
+Para incorporar o Flutter em uma página web existente,
+consulte [Adicione Flutter a qualquer aplicação web][Embedding Flutter web].
 
 [Embedding Flutter web]: /platform-integration/web/embedding-flutter-web
 
+[coep]: https://web.dev/articles/coop-coep
+[dart-wasm]: {{site.dart-site}}/web/wasm
+[dart-wasm-serving]: {{site.dart-site}}/web/deployment#serving-wasm-in-production
 [dhttpd]: {{site.pub}}/packages/dhttpd
 [Displaying images on the web]: /platform-integration/web/web-images
 [Firebase Hosting]: {{site.firebase}}/docs/hosting/frameworks/flutter
@@ -323,4 +411,6 @@ Veja [Embedding Flutter web][].
 [viewport-fit-breaking]: /release/breaking-changes/viewport-fit-cover-safe-area
 [Wasm support]: /platform-integration/web/wasm
 [web-faq-caching]: /platform-integration/web/faq#how-do-i-configure-my-cache-headers
+[web-init-bootstrapping]: /platform-integration/web/initialization#bootstrapping
+[web-init-loader]: /platform-integration/web/initialization#customize-the-flutter-loader
 [Workbox]: https://github.com/GoogleChrome/workbox

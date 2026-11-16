@@ -34,6 +34,8 @@ demonstrando como usar rotas nomeadas usando os seguintes passos:
   3. Navegar para a segunda tela usando `Navigator.pushNamed()`.
   4. Retornar à primeira tela usando `Navigator.pop()`.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Criar duas telas {:#1-create-two-screens}
 
 Primeiro, crie duas telas para trabalhar. A primeira tela contém um
@@ -42,7 +44,7 @@ botão que navega de volta para a primeira.
 
 <?code-excerpt "lib/main_original.dart"?>
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({super.key});
@@ -159,6 +161,10 @@ onPressed: () {
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Flutter Named Routes hands-on example in DartPad" run="true"
+// DartPad doesn't support `material_ui` yet,
+// so this example imports Material from the Flutter SDK.
+// To run locally, depend on `material_ui` and use this import instead:
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() {

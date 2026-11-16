@@ -461,6 +461,12 @@ Execute o app:
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Exemplo prático do botão de download Flutter no DartPad" run="true"
+// DartPad doesn't support `cupertino_ui` or `material_ui` yet,
+// so this example imports both libraries from the Flutter SDK.
+// To run locally, depend on `cupertino_ui` and `material_ui`
+// and use these imports instead:
+// import 'package:cupertino_ui/cupertino_ui.dart';
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

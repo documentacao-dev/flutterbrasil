@@ -20,6 +20,8 @@ Esta receita usa os seguintes passos:
   3. Enviar dados para o servidor.
   4. Fechar a conexão WebSocket.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Conectar a um servidor WebSocket {:#1-connect-to-a-websocket-server}
 
 O pacote [`web_socket_channel`][`web_socket_channel`] fornece as

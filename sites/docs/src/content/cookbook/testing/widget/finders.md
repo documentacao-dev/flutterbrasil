@@ -31,6 +31,8 @@ Esta receita usa os seguintes passos:
   2. Encontrar um widget com uma `Key` específica.
   3. Encontrar uma instância específica de widget.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Encontrar um widget `Text` {:#1-find-a-text-widget}
 
 Em testes, você frequentemente precisa encontrar widgets que contenham texto específico.

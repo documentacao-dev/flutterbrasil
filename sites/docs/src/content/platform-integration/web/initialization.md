@@ -7,7 +7,7 @@ description: Personalize como apps Flutter são inicializados na web.
 Esta página detalha o processo de inicialização para apps web Flutter e
 como ele pode ser personalizado.
 
-## Bootstrapping
+## Bootstrap the app {:#bootstrapping}
 
 O comando `flutter build web` produz
 um script chamado `flutter_bootstrap.js` no
@@ -44,6 +44,12 @@ O token `{% raw %}{{flutter_bootstrap_js}}{% endraw %}` é
 substituído pelo conteúdo do arquivo `flutter_bootstrap.js` quando
 o arquivo `index.html` é copiado para o
 diretório de saída (`build/web`) durante a etapa de build.
+Incorporar o script de bootstrap elimina uma ida e volta extra à rede durante a
+inicialização.
+Para orientações de otimização em produção, consulte
+[Reduzir a latência de cold start][cold-start].
+
+[cold-start]: /deployment/web#reduce-cold-start-latency
 
 <a id="customizing-initialization" aria-hidden="true"></a>
 
@@ -72,12 +78,12 @@ substituir nos arquivos `flutter_bootstrap.js` ou `index.html`:
 
 | Token | Substituído por |
 |---|---|
-| `{% raw %}{{flutter_js}}{% endraw %}` | O código JavaScript que torna o objeto `FlutterLoader` disponível na variável global `_flutter.loader`. (Consulte a seção `_flutter.loader.load() API` abaixo para mais detalhes.) |
+| `{% raw %}{{flutter_js}}{% endraw %}` | O código JavaScript que torna o objeto `FlutterLoader` disponível na variável global `_flutter.loader` (consulte [Personalizar o Flutter loader](#customize-the-flutter-loader)). |
 | `{% raw %}{{flutter_build_config}}{% endraw %}` | Uma instrução JavaScript que define metadados produzidos pelo processo de build que dá ao `FlutterLoader` informações necessárias para fazer bootstrap adequadamente da sua aplicação. |
 | `{% raw %}{{flutter_service_worker_version}}{% endraw %}` | **Descontinuado.** Anteriormente substituído por um número de versão de build para o carregador do service worker legado do Flutter. O Flutter não gera nem registra mais um service worker de cache; consulte [Descontinuação do service worker](#service-worker-version-deprecation) e o [FAQ da Web](/platform-integration/web/faq#how-do-i-configure-a-service-worker). |
 | `{% raw %}{{flutter_bootstrap_js}}{% endraw %}` | Como mencionado acima, isso incorpora o conteúdo do arquivo `flutter_bootstrap.js` diretamente no arquivo `index.html`. Observe que este token só pode ser usado no `index.html` e não no próprio arquivo `flutter_bootstrap.js`. |
 
-{:.table}
+{:.table .table-striped}
 
 <a id="write-a-custom-flutter_bootstrap-js" aria-hidden="true"></a>
 
@@ -126,47 +132,54 @@ argumentos opcionais para personalizar o comportamento de inicialização:
 | `config`                | A configuração Flutter do seu app.                                                                                          | `Object`     |
 | `onEntrypointLoaded`    | A função chamada quando o engine está pronto para ser inicializado. Recebe um objeto `engineInitializer` como seu único parâmetro. | `Function`   |
 
-{:.table}
+{:.table .table-striped}
 
-O argumento `config` é um objeto que pode ter os seguintes campos opcionais:
+O argumento `config` é um objeto que aceita os seguintes campos opcionais:
 
-| Nome | Descrição | Tipo&nbsp;Dart |
+### Incorporação do app, URLs e depuração {:#app-embedding-urls-and-debugging}
+
+| Nome | Descrição | Tipo&nbsp;JS |
 |---|---|---|
-|`assetBase`| A URL base do diretório `assets` do app. Adicione isso quando o Flutter carrega de um domínio ou subdiretório diferente do app web real. Você pode precisar disso quando incorpora o Flutter web em outro app, ou quando faz deploy de seus assets em um CDN. |`String`|
-|`canvasKitBaseUrl`| A URL base de onde `canvaskit.wasm` é baixado. |`String`|
-|`canvasKitVariant`| A variante CanvasKit para baixar. Suas opções cobrem:<br><br>1. `auto`: Baixa a variante ideal para o navegador. A opção usa este valor como padrão.<br>2. `full`: Baixa a variante completa do CanvasKit que funciona em todos os navegadores.<br>3. `chromium`: Baixa uma variante menor do CanvasKit que usa APIs compatíveis com Chromium. **_Aviso_**: Não use a opção `chromium` a menos que você planeje usar apenas navegadores baseados em Chromium. |`String`|
-|`canvasKitForceCpuOnly`| Quando `true`, força renderização apenas por CPU no CanvasKit (o engine não usará WebGL). |`bool`|
-|`canvasKitMaximumSurfaces`| O número máximo de superfícies overlay que o renderizador CanvasKit pode usar. |`double`|
-|`debugShowSemanticsNodes`| Se `true`, Flutter renderiza visivelmente a árvore de semântica na tela (para depuração). |`bool`|
-|`entrypointBaseUrl`| A URL base do entrypoint do seu app Flutter. O padrão é "/". |`String`|
-|`fontFallbackBaseUrl`| URL base para baixar fontes de fallback quando as fontes incluídas não têm os glifos necessários. O padrão é `"https://fonts.gstatic.com/s/"`. |`String`|
-|`forceSingleThreadedSkwasm`| Força o modo SkWasm de thread única para compatibilidade (afeta apenas apps compilados com `--wasm` quando [WebAssembly][wasm-support] é selecionado em tempo de execução). |`bool`|
-|`hostElement`| Elemento HTML no qual o Flutter renderiza o app (consulte [incorporando views Flutter][embedding-flutter-web]). Quando não definido, o Flutter web assume a página inteira. |`HtmlElement`|
-|`multiViewEnabled`| Habilita o modo multi-view para [incorporar views Flutter][embedding-flutter-web] em elementos DOM host dinamicamente. |`bool`|
-|`nonce`| Uma string [nonce de Content Security Policy (CSP)][nonce-mdn] aplicada a scripts e estilos inline criados pelo engine. |`String`|
-|`renderer`| Força explicitamente o renderizador para `'canvaskit'` ou `'skwasm'`. |`String`|
-|`suppressMultithreadingWarning`| Quando `true`, suprime o aviso do console registrado quando o `skwasm` executa em thread única porque os headers `Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` estão ausentes. |`bool`|
-|`verboseBuildSelection`| Quando `true`, registra diagnósticos detalhados com `console.warn` explicando por que cada build candidato em `_flutter.buildConfig.builds` foi selecionado ou ignorado. |`bool`|
-|`wasmAllowList`| Lista de permissão de engines de navegador (`{ blink?: boolean, webkit?: boolean, gecko?: boolean, unknown?: boolean }`) que controla quais engines de navegador podem executar o build `skwasm` + `dart2wasm` quando as verificações de recursos WebAssembly em tempo de execução passam (consulte [Suporte a WebAssembly][wasm-support]). O padrão é `{ blink: true, gecko: false, webkit: false, unknown: false }`. |`Object`|
-|`wasmDeferredModulesLoader`| Hook personalizado `(moduleNames: string[], onModuleLoaded: (moduleName: string, bytes: Uint8Array) => Promise<void>) => Promise<void>` usado para buscar módulos `.wasm` adiados quando `--enable-wasm-deferred-loading` está habilitado. |`Function`|
+| `assetBase` | URL base do diretório `assets` do app quando ele é carregado de outro domínio, subdiretório ou CDN (consulte [Servir assets de um CDN ou origem própria][multi-asset-cdn]). | `string` |
+| `debugShowSemanticsNodes` | Renderiza visivelmente a árvore de semântica na tela, para depuração de acessibilidade. | `boolean` |
+| `entrypointBaseUrl` | URL base do entrypoint compilado do app Flutter. O padrão é `"/"`. | `string` |
+| `fontFallbackBaseUrl` | URL base para fontes de fallback quando as fontes incluídas não têm os glifos necessários. O padrão é `"https://fonts.gstatic.com/s/"`. | `string` |
+| `hostElement` | Elemento HTML no qual o Flutter renderiza um app de view única (consulte [Adicionar Flutter a qualquer aplicação web][embedding-flutter-web]). Quando omitido, o Flutter ocupa a página inteira. | `HTMLElement` |
+| `multiViewEnabled` | Habilita o modo multi-view para adicionar e remover views incorporadas dinamicamente (consulte [Modo embedded][embedded-mode]). | `boolean` |
+| `nonce` | [Nonce de Content Security Policy (CSP)][nonce-mdn] aplicado aos scripts e estilos inline criados pelo engine. | `string` |
 
-{:.table}
+{:.table .table-striped}
+
+<a id="forcesinglethreadedskwasm" aria-hidden="true"></a>
+
+### WebAssembly e seleção de build {:#webassembly-and-build-selection}
+
+| Nome | Descrição | Tipo&nbsp;JS |
+|---|---|---|
+| `forceSingleThreadedSkwasm` | Força a renderização WebAssembly de thread única quando [WebAssembly][wasm-support] é selecionado em tempo de execução (por exemplo, quando `SharedArrayBuffer` ou os headers `COOP` e `COEP` não estão disponíveis). O padrão é `false`. | `boolean` |
+| `renderer` | Força o renderizador para `'canvaskit'` ou `'skwasm'`. | `string` |
+| `suppressMultithreadingWarning` | Suprime o aviso do console registrado quando o WebAssembly executa em thread única porque os headers `COOP` e `COEP` estão ausentes. | `boolean` |
+| `verboseBuildSelection` | Registra diagnósticos `console.warn` explicando por que cada build candidato em `_flutter.buildConfig.builds` foi selecionado ou ignorado. | `boolean` |
+| `wasmAllowList` | Lista de permissão de engines de navegador (`{ blink, webkit, gecko, unknown }`) que controla quais engines executam o build WebAssembly (consulte [Suporte a WebAssembly][wasm-support]). O padrão é `{ blink: true, gecko: false, webkit: false, unknown: false }`. | `Object` |
+| `wasmDeferredModulesLoader` | Callback de carregamento personalizado `(moduleNames, onModuleLoaded) => Promise<void>` para buscar módulos `.wasm` adiados quando `--enable-wasm-deferred-loading` está habilitado (consulte [Servir assets de um CDN ou origem própria][multi-asset-cdn]). `onModuleLoaded` aceita `(moduleName: string, module: Response \| Promise<Response> \| ArrayBuffer) => Promise<void>`. | `Function` |
+
+{:.table .table-striped}
+
+### Opções do CanvasKit {:#canvaskit-options}
+
+| Nome | Descrição | Tipo&nbsp;JS |
+|---|---|---|
+| `canvasKitBaseUrl` | URL base da qual `canvaskit.wasm` e os arquivos do engine de renderização são baixados. | `string` |
+| `canvasKitForceCpuOnly` | Força renderização somente por CPU no CanvasKit, sem WebGL. | `boolean` |
+| `canvasKitMaximumSurfaces` | Número máximo de superfícies overlay que o renderizador CanvasKit pode alocar. | `number` |
+| `canvasKitVariant` | Build do CanvasKit a baixar: `'auto'` (padrão, seleciona o build ideal), `'full'` (todos os navegadores) ou `'chromium'` (build menor, apenas para navegadores baseados em Chromium). | `string` |
+
+{:.table .table-striped}
 
 [embedding-flutter-web]: /platform-integration/web/embedding-flutter-web
+[multi-asset-cdn]: /deployment/web#multi-asset-and-cdn-loading
 [nonce-mdn]: https://developer.mozilla.org/docs/Web/HTML/Global_attributes/nonce
 [wasm-support]: /platform-integration/web/wasm
-
-## forceSingleThreadedSkwasm
-
-Uma flag booleana para forçar o renderizador Skia WebAssembly (skwasm)
-a executar em **modo de thread única**. Isso é útil se:
-
-* Seu ambiente não suporta WASM multi-thread. Por exemplo,
-  `SharedArrayBuffer` não está disponível ou os headers de
-  segurança necessários estão ausentes.  
-* Você deseja máxima compatibilidade com navegadores.
-* Use `false` (padrão) para permitir renderização multi-thread quando
-  suportada, o que melhora o desempenho.
 
 ## Exemplo de uso {:#example-usage}
 
@@ -183,7 +196,7 @@ _flutter.loader.load({
 });
 ```
 
-## Exemplo: Personalizando a configuração Flutter com base em parâmetros de query da URL {:#example-customizing-flutter-configuration-based-on-url-query-parameters}
+## Exemplo: Personalizar a configuração Flutter com base em parâmetros de query da URL {:#example-customizing-flutter-configuration-based-on-url-query-parameters}
 
 O exemplo a seguir mostra um `flutter_bootstrap.js` personalizado que habilita
 o modo de thread única quando um parâmetro de query `force_st` está presente na URL:
@@ -237,21 +250,28 @@ O processo de inicialização é dividido nos seguintes estágios:
 [js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 :::warning
-Quando você fornece seu próprio callback `onEntrypointLoaded`, a `config`
-que você passa para `_flutter.loader.load()` **não** é encaminhada ao
-engine automaticamente. O Flutter só aplica essa `config` para você quando
-você omite `onEntrypointLoaded` e deixa o loader iniciar o app.
+Quando você fornece um callback `onEntrypointLoaded` personalizado,
+`_flutter.loader.load()` consome as opções do estágio do loader (como
+`wasmAllowList`, `renderer`, `entrypointBaseUrl`,
+`forceSingleThreadedSkwasm`, `suppressMultithreadingWarning`,
+`verboseBuildSelection` e `wasmDeferredModulesLoader`), mas não encaminha
+automaticamente o objeto `config` para `engineInitializer.initializeEngine()`.
 
-Em um callback personalizado, passe a configuração para `initializeEngine()`
-você mesmo, caso contrário ela é ignorada silenciosamente:
+Passe o objeto de configuração tanto para `_flutter.loader.load()` quanto para
+`initializeEngine()`, para que as configurações dos estágios do loader e do
+engine (como `multiViewEnabled`, `hostElement`, `assetBase` e `nonce`) façam
+efeito:
 
 ```js
+const flutterConfig = {
+  renderer: 'canvaskit',
+  assetBase: 'https://cdn.example.com/app/',
+};
+
 _flutter.loader.load({
+  config: flutterConfig,
   onEntrypointLoaded: async function(engineInitializer) {
-    const appRunner = await engineInitializer.initializeEngine({
-      // Set your run-time configuration here.
-      renderer: 'canvaskit',
-    });
+    const appRunner = await engineInitializer.initializeEngine(flutterConfig);
     await appRunner.runApp();
   },
 });

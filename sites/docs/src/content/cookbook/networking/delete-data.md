@@ -15,6 +15,8 @@ Esta receita usa os seguintes passos:
   2. Delete dados no servidor.
   3. Atualize a tela.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicione o pacote `http` {:#1-add-the-http-package}
 
 Para adicionar o pacote `http` como uma dependência,

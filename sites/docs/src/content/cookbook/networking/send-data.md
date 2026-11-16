@@ -17,6 +17,8 @@ Esta receita usa as seguintes etapas:
   4. Obter um `title` da entrada do usuário.
   5. Exibir a resposta na tela.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicionar o pacote `http` {:#1-add-the-http-package}
 
 Para adicionar o pacote `http` como uma dependência,

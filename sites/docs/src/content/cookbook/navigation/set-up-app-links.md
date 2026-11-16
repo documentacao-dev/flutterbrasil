@@ -31,16 +31,14 @@ Ele fornece uma API simples para lidar com cenários de roteamento complexos.
 
     ```console
     $ flutter create deeplink_cookbook
+    $ cd deeplink_cookbook
     ```
 
- 2. Para incluir o pacote `go_router` no seu app,
-    adicione uma dependência para `go_router` ao projeto:
-
-    Para adicionar o pacote `go_router` como dependência,
+ 2. Para adicionar os pacotes `go_router` e `material_ui` como dependências,
     execute `flutter pub add`:
 
     ```console
-    $ flutter pub add go_router
+    $ flutter pub add go_router material_ui
     ```
 
  3. Para lidar com o roteamento,

@@ -15,6 +15,86 @@ confira a página [novidades atuais][current what's new].
 
 ---
 
+## 12 de novembro de 2025: lançamento 3.38 {:#12-november-2025-release-3-38}
+
+Flutter 3.38 está disponível! Para mais informações,
+confira o [post técnico do blog sobre Flutter 3.38][3.38-tech].
+
+[3.38-tech]: {{site.flutter-blog}}/whats-new-in-flutter-3-38-3f7b258f7228
+
+**Atualização do site**
+
+Uma atualização significativa do site acabou de ser lançada!
+Assim como a atualização do site dart.dev feita no início deste ano,
+o docs.flutter.dev foi reimplementado para usar [Jaspr][], um framework
+web para Dart.
+
+Conte para nós o que você achou!
+
+[Jaspr]: https://jaspr.site/
+
+**Documentos atualizados ou adicionados desde o lançamento 3.35**
+
+* A linguagem Dart agora suporta a sintaxe _dot shorthands_
+  (também chamada de _shorthands_), que permite escrever código
+  mais conciso. Para mais informações, visite a página
+  [Dart dot shorthands][] no dart.dev. Com o tempo, os exemplos
+  deste site serão atualizados para aproveitar esse novo recurso.
+
+* O comando `flutter run` agora aceita um arquivo de configuração
+  que permite especificar configurações da web, como host, porta,
+  certificado e cabeçalhos.
+  O arquivo de configuração de desenvolvimento web também oferece
+  configurações de proxy, o que possibilita encaminhar requisições de
+  caminhos específicos para outro servidor. Isso facilita o desenvolvimento
+  de um cliente web que se conecta a endpoints dinâmicos no mesmo host.
+  Para mais informações, visite
+  [configurando um arquivo de configuração de desenvolvimento web][web-config-file].
+
+* O desenvolvimento da ferramenta Flutter Widget Previewer continua.
+  Ela foi introduzida como recurso experimental na versão 3.35. Nesta versão,
+  o previewer se integra melhor às IDEs VS Code e IntelliJ
+  (incluindo o Android Studio).
+  Ele continua sendo um recurso experimental.
+  Para mais informações sobre a versão mais recente, confira a
+  [página da ferramenta Widget Previewer][Widget Previewer tool page].
+
+* O Flutter 3.38 oferece suporte completo às versões de plataforma
+  para iOS 26, Xcode 26 e macOS 26, todas lançadas em setembro.
+  Para as informações mais recentes sobre o suporte do Flutter ao iOS,
+  visite [Flutter no iOS mais recente][Flutter on latest iOS].
+
+* O Flutter 3.38 oferece suporte ao novo [ciclo de vida UIScene][UIScene lifecycle],
+  exigido pela Apple. Para isso, é necessária uma migração de código.
+  Para mais informações, visite o [guia de migração do UIScene][UIScene migration guide].
+
+* Com foco em melhorar a acessibilidade do Flutter, a
+  [documentação de acessibilidade][accessibility docs] também foi totalmente reescrita.
+
+* Além disso, não deixe de conferir a página de [breaking changes][bc-3.38]
+  deste lançamento. É lá que você encontra informações sobre mudanças
+  incompatíveis, depreciações de código e guias de migração.
+
+Outros recursos relevantes:
+
+* [Notas de lançamento e changelog do 3.38][3.38 release notes and changelog]
+* [Notas de lançamento do DevTools 2.51.1][DevTools 2.51.1 release notes]
+* Post do blog [sobre o lançamento do Dart 3.10][Dart 3.10 release]
+
+[3.38 release notes and changelog]: /release/release-notes/release-notes-3.38.0
+[accessibility docs]: /ui/accessibility
+[bc-3.38]: /release/breaking-changes#released-in-flutter-3-38
+[Dart 3.10 release]: {{site.dart-blog}}/announcing-dart-3-10
+[Dart dot shorthands]: {{site.dart-site}}/language/dot-shorthands
+[DevTools 2.51.1 release notes]: /tools/devtools/release-notes/release-notes-2.51.1
+[Flutter on latest iOS]: /platform-integration/ios/ios-latest
+[UIScene lifecycle]: {{site.apple-dev}}/documentation/technotes/tn3187-migrating-to-the-uikit-scene-based-life-cycle
+[UIScene migration guide]: /release/breaking-changes/uiscenedelegate
+[Widget Previewer tool page]: /tools/widget-previewer
+[web-config-file]: /platform-integration/web/web-dev-config-file
+
+---
+
 ## 13 de agosto de 2025: lançamento 3.35 {:#13-august-2025-release-3-35}
 
 Flutter 3.35 está disponível! Para mais informações,

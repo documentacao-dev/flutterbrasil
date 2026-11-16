@@ -40,6 +40,8 @@ tirar uma foto e exibi-la usando as seguintes etapas:
   5. Tirar uma foto com o `CameraController`.
   6. Exibir a foto com um widget `Image`.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicionar as dependências necessárias {:#1-add-the-required-dependencies}
 
 Para completar esta receita, você precisa adicionar três dependências ao seu aplicativo:

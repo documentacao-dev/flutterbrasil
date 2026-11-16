@@ -17,6 +17,8 @@ widget [`FadeInImage`][`FadeInImage`] exatamente para esse propósito.
 `FadeInImage` funciona com imagens de qualquer tipo: in-memory, assets locais,
 ou imagens da internet.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## In-memory
 
 Para usar um PNG transparente de um único pixel como imagem de placeholder,

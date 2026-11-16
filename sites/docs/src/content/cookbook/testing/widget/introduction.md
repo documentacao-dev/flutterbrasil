@@ -36,6 +36,8 @@ ao longo desta receita, que usa os seguintes passos:
   5. Busque o widget usando um `Finder`.
   6. Verifique o widget usando um `Matcher`.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicione a dependência `flutter_test` {:#1-add-the-flutter-test-dependency}
 
 Antes de escrever testes, inclua a dependência `flutter_test`

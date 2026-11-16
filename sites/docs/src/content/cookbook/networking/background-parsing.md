@@ -25,6 +25,8 @@ Esta receita usa os seguintes passos:
   3. Converta a resposta em uma lista de fotos.
   4. Mova este trabalho para um isolate separado.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicione o pacote `http` {:#1-add-the-http-package}
 
 Primeiro, adicione o pacote [`http`][] ao seu projeto.

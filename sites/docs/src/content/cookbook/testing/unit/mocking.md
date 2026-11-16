@@ -37,6 +37,8 @@ pacote Mockito usando os seguintes passos:
 
 Para mais informações, consulte a documentação do [pacote Mockito][Mockito package].
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicione as dependências do pacote {:#1-add-the-package-dependencies}
 
 Para usar o pacote `mockito`, adicione-o ao

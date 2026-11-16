@@ -44,20 +44,28 @@ Para obter um DSN, use os seguintes passos:
   1. [Crie uma conta no Sentry][Create an account with Sentry].
   2. Faça login na conta.
   3. Crie um novo projeto Flutter.
-  4. Copie o trecho de código que inclui o DSN.
+  4. Copie o DSN do projeto.
 
 ## 2. Importe o pacote Sentry {:#2-import-the-sentry-package}
 
-Importe o pacote [`sentry_flutter`][`sentry_flutter`] para o app.
-O pacote sentry torna mais fácil enviar
-relatórios de erro para o serviço de rastreamento de erros Sentry.
+Esta receita usa o pacote [`sentry_flutter`][`sentry_flutter`].
+Antes de adicioná-lo, verifique os requisitos das plataformas em que o app vai rodar:
 
-Para adicionar o pacote `sentry_flutter` como uma dependência,
-execute `flutter pub add`:
+- No Android, garanta que o [`minSdk`][android-sdk] do app atenda
+  à versão mínima do SDK Android do plugin.
+- No iOS e no macOS, use o [Swift Package Manager][swiftpm].
+  No macOS, [permita conexões de rede de saída][macos-network]
+  para que o app possa enviar relatórios de erro.
+
+A partir do diretório do seu projeto Flutter, adicione o pacote:
 
 ```console
 $ flutter pub add sentry_flutter
 ```
+
+[android-sdk]: /deployment/android#android-sdk-versions
+[swiftpm]: /packages-and-plugins/swift-package-manager/for-app-developers
+[macos-network]: /data-and-backend/networking#macos
 
 ## 3. Inicialize o SDK do Sentry {:#3-initialize-the-sentry-sdk}
 
@@ -70,17 +78,22 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
   await SentryFlutter.init(
-    (options) => options.dsn = 'https://example@sentry.io/example',
+    (options) => options.dsn = const String.fromEnvironment('SENTRY_DSN'),
     appRunner: () => runApp(const MyApp()),
   );
 }
 ```
 
-Alternativamente, você pode passar o DSN para o Flutter usando a tag `dart-define`:
+Passe o DSN que você copiou do Sentry para `flutter run` durante o desenvolvimento
+e para `flutter build` ao gerar o app para distribuição.
+No comando a seguir, substitua `<PROJECT_DSN>` pelo seu DSN.
 
-```sh
---dart-define SENTRY_DSN=https://example@sentry.io/example
+```console
+$ flutter run --dart-define=SENTRY_DSN=<PROJECT_DSN>
 ```
+
+Se você não fornecer um DSN,
+o SDK do Sentry permanece desabilitado e não reporta erros.
 
 ### O que isso me dá? {:#what-does-that-give-me}
 
@@ -112,13 +125,13 @@ Para ver um exemplo funcionando,
 consulte o [app de exemplo do Sentry flutter][Sentry flutter example].
 
 
-[Sentry flutter example]: https://github.com/getsentry/sentry-dart/tree/main/flutter/example
+[Sentry flutter example]: https://github.com/getsentry/sentry-dart/tree/main/packages/flutter/example
 [Create an account with Sentry]: https://sentry.io/signup/
 [Bugsnag]: https://www.bugsnag.com/platforms/flutter
 [Datadog]: https://docs.datadoghq.com/real_user_monitoring/flutter/
 [Rollbar]: https://rollbar.com/
 [Sentry]: https://sentry.io/welcome/
 [`sentry_flutter`]: {{site.pub-pkg}}/sentry_flutter
-[Sentry API]: {{site.pub-api}}/sentry_flutter/latest/sentry_flutter/sentry_flutter-library.html
-[Sentry's site]: https://docs.sentry.io/platforms/flutter/
+[Sentry API]: {{site.pub-api}}/sentry_flutter/latest/sentry_flutter/
+[Sentry's site]: https://docs.sentry.io/platforms/dart/guides/flutter/
 [Firebase Crashlytics]: {{site.firebase}}/docs/crashlytics

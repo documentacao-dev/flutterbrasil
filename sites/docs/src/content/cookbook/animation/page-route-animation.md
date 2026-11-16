@@ -24,6 +24,8 @@ Para criar uma transição de rota de página customizada, esta receita usa os s
 1.  Usar um `CurveTween`.
 1.  Combinar os dois `Tween`s.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Configurar um `PageRouteBuilder` {:#1-set-up-a-pageroutebuilder}
 
 Para começar, use um [`PageRouteBuilder`][] para criar uma [`Route`][].
@@ -42,7 +44,7 @@ uma segunda rota intitulada "Page 2".
 
 <?code-excerpt "lib/starter.dart (Starter)"?>
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(const MaterialApp(home: Page1()));
@@ -215,6 +217,10 @@ transitionsBuilder: (context, animation, secondaryAnimation, child) {
 
 <?code-excerpt "lib/main.dart"?>
 ```dartpad title="Exemplo prático de roteamento de página Flutter no DartPad" run="true"
+// DartPad doesn't support `material_ui` yet,
+// so this example imports Material from the Flutter SDK.
+// To run locally, depend on `material_ui` and use this import instead:
+// import 'package:material_ui/material_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() {

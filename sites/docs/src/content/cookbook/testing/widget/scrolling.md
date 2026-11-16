@@ -26,6 +26,8 @@ Esta receita usa os seguintes passos:
 2. Escreva um teste que rola pela lista.
 3. Execute o teste.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Crie um app com uma lista de itens {:#1-create-an-app-with-a-list-of-items}
 
 Esta receita constrói um app que mostra uma longa lista de itens.

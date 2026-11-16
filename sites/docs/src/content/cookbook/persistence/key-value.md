@@ -33,6 +33,8 @@ sobre o pacote `shared_preferences`:
 <YouTubeEmbed id="sa_U0jffQII" title="shared_preferences | Flutter package of the week"></YouTubeEmbed>
 :::
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Adicione a dependência {:#1-add-the-dependency}
 
 Antes de começar, adicione o pacote [`shared_preferences`][`shared_preferences`] como uma dependência.

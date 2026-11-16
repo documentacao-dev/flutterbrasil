@@ -23,6 +23,8 @@ Esta receita usa os seguintes passos:
   1.  Crie um teste de orientação paisagem.
   1.  Execute os testes.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Crie um app que atualiza baseado na orientação {:#1-create-an-app-that-updates-based-on-orientation}
 
 Crie um app Flutter que muda quantas colunas são exibidas quando um

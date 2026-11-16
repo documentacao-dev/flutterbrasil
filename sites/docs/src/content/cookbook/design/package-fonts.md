@@ -24,40 +24,43 @@ a quase 1000 famílias de fonts open-source.
 
 ## 1. Adicionar uma font a um package {:#1-add-a-font-to-a-package}
 
-Para exportar uma font de um package, você precisa importar os arquivos de font para a
-pasta `lib` do projeto do package. Você pode colocar arquivos de font diretamente na
-pasta `lib` ou em um subdiretório, como `lib/fonts`.
+Para exportar fonts, coloque os arquivos no diretório `lib` do seu package ou em um de seus subdiretórios.
+Este exemplo usa `lib/fonts` em um package Flutter chamado `awesome_package`.
+Coloque o diretório do package ao lado do diretório do seu app.
 
-Neste exemplo, assuma que você tem uma biblioteca Flutter chamada
-`awesome_package` com fonts localizadas em uma pasta `lib/fonts`.
+<FileTree>
 
-```plaintext
-awesome_package/
-  lib/
-    awesome_package.dart
-    fonts/
-      Raleway-Regular.ttf
-      Raleway-Italic.ttf
-```
+- awesome_package/
+  - lib/
+    - awesome_package.dart
+    - fonts/
+      - Raleway-Regular.ttf
+      - Raleway-Italic.ttf
+  - pubspec.yaml
+
+</FileTree>
 
 ## 2. Adicionar o package e fonts ao app {:#2-add-the-package-and-fonts-to-the-app}
 
 Agora você pode usar as fonts no package
 atualizando o `pubspec.yaml` no diretório raiz do *app*.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ### Adicionar o package ao app {:#add-the-package-to-the-app}
 
-Para adicionar o package `awesome_package` como uma dependência,
-execute `flutter pub add`:
+No diretório do seu app, adicione `awesome_package`
+usando um [descritor de package de caminho][path package descriptor].
 
 ```console
-$ flutter pub add awesome_package
+$ flutter pub add "awesome_package:{path: ../awesome_package}"
 ```
+
+[path package descriptor]: {{site.dart-site}}/tools/pub/dependencies#path-package-descriptor
 
 ### Declarar os assets de font {:#declare-the-font-assets}
 
-Agora que você importou o package, diga ao Flutter onde
-encontrar as fonts do `awesome_package`.
+No `pubspec.yaml` do seu app, declare os arquivos de font do `awesome_package`.
 
 Para declarar fonts de package, prefixe o caminho para a font com
 `packages/awesome_package`.
@@ -103,10 +106,15 @@ As fonts Raleway e RobotoMono foram baixadas do
 name: package_fonts
 description: An example of how to use package fonts with Flutter
 
+environment:
+  sdk: ^3.13.0
+
 dependencies:
   awesome_package:
+    path: ../awesome_package
   flutter:
     sdk: flutter
+  material_ui: ^1.11.0
 
 dev_dependencies:
   flutter_test:

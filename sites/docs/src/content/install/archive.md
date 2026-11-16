@@ -66,7 +66,9 @@ Ao destacar explicitamente as datas de corte de branch e as metas de lançamento
 permitimos que todos alinhem seus ciclos de desenvolvimento e
 coordenem a integração de recursos de forma eficaz.
 
-### O que é uma data de corte de branch? {:#what-is-a-branch-cutoff-date}
+<a id="what-is-a-branch-cutoff-date" aria-hidden="true"></a>
+
+### O que é uma data de corte de branch? {:#branch-cutoff}
 
 Esta data é o prazo final para que pull requests sejam
 integrados nos branches padrão (`main` para Dart e `master` para Flutter) para
@@ -75,14 +77,20 @@ garantir a inclusão no próximo lançamento estável.
 * **Antes do corte:** Seu PR será lançado na próxima versão estável.
 * **Depois do corte:** Seu PR aguardará o ciclo seguinte.
 
-### Cronograma de 2026 {:#2026-schedule}
+<a id="2026-schedule" aria-hidden="true"></a>
 
-| Versão do Flutter | Meta de lançamento | Data de corte de branch |
-|-------------------|--------------------|-------------------------|
-| Flutter 3.41      | Fevereiro de 2026  | 2026-01-06              |
-| Flutter 3.44      | Maio de 2026       | 2026-04-07              |
-| Flutter 3.47      | Agosto de 2026     | 2026-07-07              |
-| Flutter 3.50      | Novembro de 2026   | 2026-10-06              |
+### Cronograma de lançamentos de 2027 {:#release-schedule}
+
+A tabela a seguir lista o mês de lançamento previsto de cada versão estável
+do Dart e do Flutter em 2027 e a [data de corte de branch](#branch-cutoff)
+de cada uma:
+
+| Meta de lançamento estável | Data de corte de branch |
+|----------------------------|-------------------------|
+| Fevereiro de 2027          | 5 de janeiro de 2027    |
+| Maio de 2027               | 6 de abril de 2027      |
+| Agosto de 2027             | 6 de julho de 2027      |
+| Novembro de 2027           | 5 de outubro de 2027    |
 
 {:.table}
 

@@ -33,6 +33,8 @@ Esta receita usa os seguintes passos:
   3. Garanta que tocar em um botão adiciona o todo.
   4. Garanta que deslizar para dispensar remove o todo.
 
+{% render "docs/cookbook/material-ui-dependency.md", site: site %}
+
 ## 1. Crie um widget para testar {:#1-create-a-widget-to-test}
 
 Para este exemplo,

@@ -38,8 +38,6 @@ Para evitar ser quebrado por versões futuras do Flutter,
 considere submeter seus testes ao nosso [registro de testes][test registry].
 
 
-<a id="switching-flutter-channels" aria-hidden="true"></a>
-
 ## Mudando canais do Flutter {:#switching-flutter-channels}
 
 O Flutter tem dois canais de lançamento:
@@ -59,7 +57,6 @@ inclui testes contra o lançamento **stable** mais recente.
 A documentação mais recente para o branch **stable**
 está em: <https://api.flutter.dev>
 
-<a id="the-beta-channel" aria-hidden="true"></a>
 
 ### O canal **beta** {:#the-beta-channel}
 

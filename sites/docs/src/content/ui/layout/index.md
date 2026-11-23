@@ -840,8 +840,6 @@ apenas apps Material podem usar a biblioteca Material Components.
 [`ListView`]: {{site.api}}/flutter/widgets/ListView-class.html
 [Material library]: {{site.material_ui}}
 [widgets library]: {{site.api}}/flutter/widgets/widgets-library.html
-[Widget catalog]: /ui/widgets
-[API reference docs]: {{site.api}}/flutter
 
 ### Container
 

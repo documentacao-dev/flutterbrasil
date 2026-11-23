@@ -36,7 +36,7 @@ Para usar [`ChangeNotifier`][], estenda-a em sua classe de gerenciamento de esta
 obter acesso ao método `notifyListeners()`,
 que dispara reconstruções da UI quando chamado.
 
-[`ChangeNotifier`]: {{site.api}}/flutter/foundation/ChangeNotifier-class.html
+[`ChangeNotifier`]: {{site.api}}/flutter/package-listen_listen/ChangeNotifier-class.html
 
 ### Crie a estrutura básica do view model {:#create-the-basic-view-model-structure}
 

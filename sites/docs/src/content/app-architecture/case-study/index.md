@@ -180,8 +180,8 @@ E se você olhar de longe, não são todas as arquiteturas MVVM de qualquer form
 [data layer]: /app-architecture/case-study/data-layer
 [UI layer]: /app-architecture/case-study/ui-layer
 [Command pattern]: /app-architecture/case-study/ui-layer#command-objects
-[`ChangeNotifier`]: {{site.api}}/flutter/foundation/ChangeNotifier-class.html
-[`Listenable`]: {{site.api}}/flutter/foundation/Listenable-class.html
+[`ChangeNotifier`]: {{site.api}}/flutter/package-listen_listen/ChangeNotifier-class.html
+[`Listenable`]: {{site.api}}/flutter/package-listen_listen/Listenable-class.html
 [Dependency Injection]: /app-architecture/case-study/dependency-injection
 [set up tests]: /app-architecture/case-study/testing
 [view it on GitHub]: https://github.com/flutter/samples/tree/main/compass_app

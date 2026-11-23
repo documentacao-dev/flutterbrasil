@@ -97,9 +97,9 @@ para aprender como estruturar código de animação hero,
 e [por trás das cenas](#behind-the-scenes) para entender
 como o Flutter executa uma animação hero.
 
-<a id="basic-structure"></a>
+<FragmentTarget id="basic-structure" />
 
-## Basic structure of a hero animation
+## Estrutura básica de uma animação hero {:#basic-structure-of-a-hero-animation}
 
 :::secondary Qual é o ponto?
 * Use dois widgets hero em rotas diferentes mas com tags correspondentes para
@@ -152,7 +152,7 @@ e executa a animação em um overlay.
 
 A próxima seção descreve o processo do Flutter em maior detalhe.
 
-## Behind the scenes
+## Por trás das cenas {:#behind-the-scenes}
 
 O seguinte descreve como o Flutter executa a
 transição de uma rota para outra.
@@ -213,7 +213,7 @@ Remover a rota executa o mesmo processo,
 animando o hero de volta para seu tamanho
 e localização na rota de origem.
 
-### Essential classes
+### Classes essenciais {:#essential-classes}
 
 Os exemplos neste guia usam as seguintes classes para
 implementar animações hero:
@@ -238,7 +238,7 @@ implementar animações hero:
 : Especifica uma tela ou página. A maioria dos apps,
   além dos mais básicos, tem múltiplas rotas.
 
-## Standard hero animations
+## Animações hero padrão {:#standard-hero-animations}
 
 :::secondary Qual é o ponto?
 * Especifique uma rota usando [`MaterialPageRoute`][], [`CupertinoPageRoute`][],
@@ -250,9 +250,9 @@ implementar animações hero:
   em um widget de layout. Estes exemplos usam `Container`.
 :::
 
-<a id="standard-hero-animation-code"></a>
+<FragmentTarget id="standard-hero-animation-code" />
 
-### What's going on?
+### O que está acontecendo? {:#whats-going-on}
 
 Voar uma imagem de uma rota para outra é simples de implementar
 usando o widget `Hero` do Flutter. Ao usar `MaterialPageRoute`
@@ -271,7 +271,7 @@ e então experimente o seguinte:
   gesto voltar-para-rota-anterior do dispositivo.
 * Desacelere ainda mais a transição aumentando o valor de [`timeDilation`][].
 
-### PhotoHero class
+### Classe PhotoHero {:#photohero-class}
 
 A classe customizada `PhotoHero` mantém o hero,
 e seu tamanho, imagem e comportamento quando tocado.
@@ -332,7 +332,7 @@ Informações-chave:
   garante que a imagem seja tão grande quanto possível durante a
   transição sem mudar sua proporção de aspecto.
 
-### HeroAnimation class
+### Classe HeroAnimation {:#heroanimation-class}
 
 A classe `HeroAnimation` cria os widgets `PhotoHero` de origem e destino,
 e configura a transição.
@@ -404,7 +404,7 @@ Informações-chave:
 
 ---
 
-## Radial hero animations
+## Animações hero radiais {:#radial-hero-animations}
 
 :::secondary Qual é o ponto?
 * Uma _transformação radial_ anima uma forma circular em uma forma
@@ -427,7 +427,8 @@ a imagem voa de sua posição na rota de origem para sua
 posição na rota de destino. Para exemplos visuais
 desta transição, consulte [Transformação radial][Radial transformation]
 na especificação de motion do Material.
-<a id="radial-hero-animation-code"></a>
+
+<FragmentTarget id="radial-hero-animation-code" />
 
 :::tip Dica profissional
 A animação hero radial envolve interseccionar uma forma redonda com
@@ -436,7 +437,7 @@ a animação com `timeDilation`, então você pode considerar habilitar
 a flag [`debugPaintSizeEnabled`][`debugPaintSizeEnabled`] durante o desenvolvimento.
 :::
 
-### What's going on?
+### O que está acontecendo? {:#whats-going-on}
 
 O diagrama a seguir mostra a imagem recortada no início
 (`t = 0.0`), e no fim (`t = 1.0`) da animação.
@@ -467,7 +468,7 @@ e então experimente o seguinte:
   gesto voltar-para-rota-anterior do dispositivo.
 * Desacelere ainda mais a transição aumentando o valor de [`timeDilation`][].
 
-### Photo class
+### Classe Photo {:#photo-class}
 
 A classe `Photo` constrói a árvore de widgets que mantém a imagem:
 
@@ -508,7 +509,7 @@ Informações-chave:
   Para a animação funcionar, o hero
   envolve o widget `RadialExpansion`.
 
-### RadialExpansion class
+### Classe RadialExpansion {:#radialexpansion-class}
 
 O widget `RadialExpansion`, o núcleo da demo, constrói a
 árvore de widgets que recorta a imagem durante a transição.

@@ -11,7 +11,7 @@ ia-translate: true
 
 {% render "docs/install/quick.md" site: site %}
 
-<a id="test-drive" aria-hidden="true"></a>
+<FragmentTarget id="test-drive" />
 
 ## Continue sua jornada com Flutter {: #next-steps}
 

@@ -187,7 +187,7 @@ sobre plugins endossados, veja os seguintes recursos:
 [How to write a Flutter web plugin, part 2]: {{site.flutter-blog}}/how-to-write-a-flutter-web-plugin-part-2-afdddb69ece6
 [Modern Flutter Plugin Development]: {{site.flutter-blog}}/modern-flutter-plugin-development-4c3ee015cf5a
 
-<a id="samples-and-codelabs" aria-hidden="true"></a>
+<FragmentTarget id="samples-and-codelabs" />
 
 ## Exemplos {:#samples}
 

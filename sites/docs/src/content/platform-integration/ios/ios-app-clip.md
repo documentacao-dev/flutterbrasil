@@ -25,12 +25,12 @@ Para ver um exemplo funcional, consulte o [exemplo App Clip][App Clip sample] no
 
 [App Clip sample]: {{site.repo.samples}}/tree/main/ios_app_clip
 
-## Step 1 - Open project
+## Passo 1 - Abrir projeto {:#step-1-open-project}
 
 Abra seu projeto iOS Xcode, como
 `ios/Runner.xcworkspace` para apps Flutter completos.
 
-## Step 2 - Add an App Clip target
+## Passo 2 - Adicionar um target App Clip {:#step-2-add-an-app-clip-target}
 
 **2.1**
 
@@ -75,8 +75,9 @@ Arraste **Embedded App Clips** para acima de **Thin Binary**.
 
 <DashImage figure image="development/platform-integration/ios-app-clip/embedded-app-clips.png" />
 
-<a id="step-3"></a>
-## Step 3 - Remove unneeded files
+<FragmentTarget id="step-3" />
+
+## Passo 3 - Remover arquivos desnecessários {:#step-3-remove-unneeded-files}
 
 **3.1**
 
@@ -106,7 +107,7 @@ Delete toda a entrada do dicionário para
 
 <DashImage figure image="development/platform-integration/ios-app-clip/scene-manifest.png" />
 
-## Step 4 - Share build configurations
+## Passo 4 - Compartilhar configurações de build {:#step-4-share-build-configurations}
 
 Este passo não é necessário para projetos add-to-app,
 pois projetos add-to-app têm suas configurações de compilação
@@ -140,9 +141,9 @@ No arquivo `Info.plist` do grupo App Clip, defina:
 * `Build version string (short)` para `$(FLUTTER_BUILD_NAME)`
 * `Bundle version` para `$(FLUTTER_BUILD_NUMBER)`
 
-## Step 5 - Share code and assets
+## Passo 5 - Compartilhar código e assets {:#step-5-share-code-and-assets}
 
-### Option 1 - Share everything
+### Opção 1 - Compartilhar tudo {:#option-1-share-everything}
 
 Assumindo que a intenção é mostrar a mesma UI Flutter
 no app padrão como no App Clip,
@@ -157,10 +158,10 @@ também inclua o target App Clip no grupo de checkboxes
 
 <DashImage figure image="development/platform-integration/ios-app-clip/add-target-membership.png" />
 
-### Option 2 - Customize Flutter launch for App Clip
+### Opção 2 - Personalizar a inicialização do Flutter para o App Clip {:#option-2-customize-flutter-launch-for-app-clip}
 
 Neste caso,
-não delete tudo listado no [Step 3](#step-3).
+não delete tudo listado no [Passo 3](#step-3).
 Em vez disso, use o scaffolding e as [APIs iOS add-to-app][iOS add-to-app APIs]
 para realizar uma inicialização personalizada do Flutter.
 Por exemplo, para mostrar uma [rota Flutter personalizada][custom Flutter route].
@@ -168,7 +169,7 @@ Por exemplo, para mostrar uma [rota Flutter personalizada][custom Flutter route]
 [custom Flutter route]: /add-to-app/ios/add-flutter-screen#route
 [iOS add-to-app APIs]: /add-to-app/ios/add-flutter-screen
 
-## Step 6 - Add App Clip associated domains
+## Passo 6 - Adicionar domínios associados do App Clip {:#step-6-add-app-clip-associated-domains}
 
 Este é um passo padrão para o desenvolvimento de App Clip.
 Consulte a [documentação oficial da Apple][official Apple documentation].
@@ -210,7 +211,7 @@ criado para o app principal.
 
 <DashImage figure image="development/platform-integration/ios-app-clip/main-app-entitlements-setting.png" />
 
-## Step 7 - Integrate Flutter
+## Passo 7 - Integrar o Flutter {:#step-7-integrate-flutter}
 
 Estes passos não são necessários para add-to-app.
 
@@ -271,7 +272,7 @@ o mesmo que as fases de compilação do target do app principal.
 Isso garante que seu app Flutter e engine sejam incorporados
 ao bundle App Clip.
 
-## Step 8 - Integrate plugins
+## Passo 8 - Integrar plugins {:#step-8-integrate-plugins}
 
 Se o seu projeto usa plugins Flutter, integre-os ao seu target App Clip.
 
@@ -376,7 +377,7 @@ consulte [Swift Package Manager para desenvolvedores de apps][Swift Package Mana
 </Tab>
 </Tabs>
 
-## Run
+## Executar {:#run}
 
 Agora você pode executar seu target App Clip do Xcode
 selecionando seu target App Clip do menu suspenso de esquema,
@@ -391,7 +392,7 @@ também consulte a documentação da Apple sobre
 [testing]: {{site.apple-dev}}/documentation/app_clips/testing_your_app_clip_s_launch_experience
 [Swift Package Manager for app developers]: /packages-and-plugins/swift-package-manager/for-app-developers
 
-## Debugging, hot reload
+## Depuração e hot reload {:#debugging-hot-reload}
 
 Infelizmente, `flutter attach` não pode descobrir automaticamente
 a sessão Flutter em um App Clip devido a

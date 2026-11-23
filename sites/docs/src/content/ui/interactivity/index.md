@@ -120,7 +120,7 @@ ou tenha iniciado o [simulador iOS][iOS simulator]
 [emulador Android][Android emulator] (parte da instalação do Android Studio),
 você está pronto para começar!
 
-<a id="step-1"></a>
+<FragmentTarget id="step-1" />
 
 ### Step 1: Decida qual objeto gerencia o estado do widget {:#step-1-decide-which-object-manages-the-widgets-state}
 
@@ -134,7 +134,7 @@ UI, então o widget pode lidar com seu estado internamente.
 Aprenda mais sobre a separação de widget e estado,
 e como o estado pode ser gerenciado, em [Gerenciando estado][Managing state].
 
-<a id="step-2"></a>
+<FragmentTarget id="step-2" />
 
 ### Step 2: Crie uma subclasse de StatefulWidget {:#step-2-subclass-statefulwidget}
 
@@ -165,7 +165,7 @@ veja [Libraries and imports][Libraries and imports], uma seção na
 [documentação da linguagem Dart][Dart language documentation].
 :::
 
-<a id="step-3"></a>
+<FragmentTarget id="step-3" />
 
 ### Step 3: Crie uma subclasse de State {:#step-3-subclass-state}
 
@@ -253,7 +253,7 @@ void _toggleFavorite() {
 }
 ```
 
-<a id="step-4"></a>
+<FragmentTarget id="step-4" />
 
 ### Step 4: Conecte o stateful widget na árvore de widgets {:#step-4-plug-the-stateful-widget-into-the-widget-tree}
 
@@ -354,7 +354,7 @@ cor: verde para ativo ou cinza para inativo.
 Esses exemplos usam [`GestureDetector`][`GestureDetector`] para capturar atividade
 no `Container`.
 
-<a id="self-managed" aria-hidden="true"></a>
+<FragmentTarget id="self-managed" />
 
 ### O widget gerencia seu próprio estado {:#the-widget-manages-its-own-state}
 
@@ -442,7 +442,7 @@ class MyApp extends StatelessWidget {
 
 <hr>
 
-<a id="parent-managed"></a>
+<FragmentTarget id="parent-managed" />
 
 ### O widget pai gerencia o estado do widget {:#the-parent-widget-manages-the-widgets-state}
 
@@ -539,7 +539,7 @@ class TapboxB extends StatelessWidget {
 
 <hr>
 
-<a id="mix-and-match"></a>
+<FragmentTarget id="mix-and-match" />
 
 ### Uma abordagem mista {:#a-mix-and-match-approach}
 

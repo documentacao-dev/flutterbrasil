@@ -39,8 +39,8 @@ Aqui estão algumas das coisas que você pode fazer com DevTools:
 Esperamos que você use DevTools em conjunto com
 seu fluxo de trabalho de desenvolvimento existente baseado em IDE ou linha de comando.
 
-<a id="how-do-i-install-devtools"></a>
-<a id="install-devtools"></a>
+<FragmentTarget id="how-do-i-install-devtools" />
+<FragmentTarget id="install-devtools" />
 
 ## Como iniciar DevTools {:#start}
 

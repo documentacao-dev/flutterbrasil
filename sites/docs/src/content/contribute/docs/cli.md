@@ -25,6 +25,11 @@ A ferramenta CLI do site pode ser acessada executando
 
 ### `check-all`
 
+### `check-duplicate-ids`
+
+Depois de compilar o site, execute este comando para encontrar IDs de
+elementos que aparecem em mais de um elemento na mesma página HTML.
+
 ### `check-link-references`
 
 ### `check-links`

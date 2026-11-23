@@ -108,7 +108,8 @@ baseadas em geração de código. Esta
 abordagem é coberta em mais detalhes na
 seção [bibliotecas de geração de código][code generation libraries].
 
-<a id="manual-encoding"></a>
+<FragmentTarget id="manual-encoding" />
+
 ## Serializando JSON manualmente usando dart:convert {:#serializing-json-manually-using-dart-convert}
 
 Serialização JSON básica no Flutter é muito simples. Flutter tem uma
@@ -227,7 +228,8 @@ modelo.
 Seria bom se houvesse algo que lidasse com encoding
 e decoding JSON para você. Felizmente, existe!
 
-<a id="code-generation"></a>
+<FragmentTarget id="code-generation" />
+
 ## Serializando JSON usando bibliotecas de geração de código {:#serializing-json-using-code-generation-libraries}
 
 Embora existam outras bibliotecas disponíveis, este guia usa

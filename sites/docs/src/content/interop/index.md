@@ -11,7 +11,8 @@ com o sistema operacional hospedeiro ou executar código de uma biblioteca nativ
 Para isso, o Flutter oferece várias ferramentas de interop,
 desde geradores de código até bindings FFI diretos.
 
-<a id="choose-your-interop-solution" aria-hidden="true"></a>
+<FragmentTarget id="choose-your-interop-solution" />
+
 ## Visão geral das ferramentas de interop {:#overview-of-interop-tools}
 
 As ferramentas de interop do Flutter adotam uma de duas abordagens arquiteturais

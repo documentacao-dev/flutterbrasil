@@ -7,15 +7,15 @@ ia-translate: true
 
 {% render "docs/breaking-changes.md" %}
 
-## Summary
+## Resumo {:#summary}
 
 A API para a classe [`Color`][] em `dart:ui` está mudando para
-suportar [wide gamut color spaces][].
+suportar [espaços de cores de gama ampla][wide gamut color spaces].
 
-## Context
+## Contexto {:#context}
 
-O engine do Flutter [already supports wide gamut color][] com [Impeller][], e
-o suporte agora está sendo adicionado [to the framework][].
+O engine do Flutter [já oferece suporte a cor de gama ampla][already supports wide gamut color] com [Impeller][], e
+o suporte agora está sendo adicionado [ao framework][to the framework].
 
 Os dispositivos iOS que o Flutter suporta renderizam em uma gama maior de cores,
 especificamente no espaço de cores [DisplayP3][].
@@ -24,7 +24,7 @@ renderizar todas essas cores no iOS Impeller, e
 a classe `Color` está melhor preparada para futuros espaços de cores ou
 alterações na profundidade de bits dos componentes de cor.
 
-## Description of change
+## Descrição da alteração {:#description-of-change}
 
 Alterações em [`Color`][]:
 
@@ -37,9 +37,9 @@ Alterações em [`ColorSpace`][]:
 
  1. Adiciona uma propriedade `displayP3`.
 
-## Migration guide
+## Guia de migração {:#migration-guide}
 
-### 8-bit unsigned integer constructors
+### Construtores de inteiros sem sinal de 8 bits {:#8-bit-unsigned-integer-constructors}
 
 Construtores como `Color.fromARGB` permanecem inalterados e têm suporte contínuo.
 Para aproveitar as cores Display P3, você deve usar o novo
@@ -53,7 +53,7 @@ final magenta = Color.fromARGB(0xff, 0xff, 0x0, 0xff);
 final magenta = Color.from(alpha: 1.0, red: 1.0, green: 0.0, blue: 1.0);
 ```
 
-### Implementors of `Color`
+### Implementadores de `Color` {:#implementors-of-color}
 
 Há novos métodos sendo adicionados a `Color`, então
 qualquer classe que `implements Color` vai quebrar e terá que
@@ -75,13 +75,13 @@ class Foo implements Color {
 ```
 
 :::note
-O Flutter planeja eventualmente bloquear a classe `Color` e torná-la `sealed`.
+O Flutter planeja, com o tempo, bloquear a classe `Color` e torná-la `sealed`.
 
-Agora pode ser uma boa oportunidade para mudar de [inheritance to composition][]
+Agora pode ser uma boa oportunidade para mudar de [herança para composição][inheritance to composition]
 e parar de reimplementar `Color`.
 :::
 
-### Color space support
+### Suporte a espaços de cores {:#color-space-support}
 
 Clientes que usam `Color` e realizam qualquer tipo de cálculo nos
 componentes de cor agora devem primeiro verificar o
@@ -108,7 +108,7 @@ alinhar espaços de cores pode levar a resultados sutis inesperados.
 No exemplo anterior, o `redRatio` teria a diferença de `0.09`
 quando calculado com espaços de cores diferentes versus espaços de cores alinhados.
 
-### Access color components
+### Acessar componentes de cor {:#access-color-components}
 
 Se seu app acessa um componente `Color`, considere
 aproveitar os componentes de ponto flutuante.
@@ -127,9 +127,9 @@ extension IntColorComponents on Color {
 }
 ```
 
-### Opacity
+### Opacidade {:#opacity}
 
-Antes do Flutter 3.27, Color tinha o conceito de "opacity" que aparecia nos
+Antes do Flutter 3.27, `Color` tinha o conceito de "opacity" que aparecia nos
 métodos `opacity` e `withOpacity()`. Opacity foi introduzida como uma forma de
 comunicar com `Color` sobre seu canal alpha com valores de ponto flutuante
 ([0.0, 1.0]). Os métodos de opacity eram métodos de conveniência para definir o valor
@@ -159,8 +159,9 @@ caso raro onde não se beneficia, pode-se tomar cuidado para quantizar a opacity
 255] usando `.alpha` e `.withAlpha()` para corresponder ao comportamento antes do Flutter
 3.27.
 
-<a id="opacity-migration" aria-hidden="true"></a>
-#### Migrate `opacity`
+<FragmentTarget id="opacity-migration" />
+
+#### Migrar `opacity` {:#migrate-opacity}
 
 ```dart
 // Before: Access the alpha channel as a (converted) floating-point value.
@@ -170,8 +171,9 @@ final x = color.opacity;
 final x = color.a;
 ```
 
-<a id="withopacity-migration" aria-hidden="true"></a>
-#### Migrate `withOpacity`
+<FragmentTarget id="withopacity-migration" />
+
+#### Migrar `withOpacity` {:#migrate-withopacity}
 
 ```dart
 // Before: Create a new color with the specified opacity.
@@ -182,7 +184,7 @@ final x = color.withOpacity(0.0);
 final x = color.withValues(alpha: 0.0);
 ```
 
-### Equality
+### Igualdade {:#equality}
 
 Uma vez que `Color` armazena seus componentes de cor como números de ponto flutuante,
 a igualdade funciona de forma um pouco diferente.
@@ -198,27 +200,27 @@ expect(calculateColor(), const Color(0xffff00ff));
 expect(calculateColor(), isSameColorAs(const Color(0xffff00ff)));
 ```
 
-## Timeline
+## Cronograma {:#timeline}
 
-### Phase 1 - New API introduction, old API deprecation
+### Fase 1 - Introdução da nova API e descontinuação da API antiga {:#phase-1-new-api-introduction-old-api-deprecation}
 
-Landed in version: 3.26.0-0.1.pre<br>
-In stable release: 3.27.0
+Incluído na versão: 3.26.0-0.1.pre<br>
+Na versão estável: 3.27.0
 
-### Phase 2 - Old API removal
+### Fase 2 - Remoção da API antiga {:#phase-2-old-api-removal}
 
-Landed in version: Not yet<br>
-In stable release: Not yet
+Incluído na versão: Ainda não<br>
+Na versão estável: Ainda não
 
-## References
+## Referências {:#references}
 
-Relevant issue:
+Issue relevante:
 
-* [issue 127855][]: Implement wide gamut color support in the Framework
+* [issue 127855][issue 127855]: Implementar suporte a cor de gama ampla no framework
 
-Relevant PRs:
+PRs relevantes:
 
-* [PR 54737][]: Framework wide color
+* [PR 54737][PR 54737]: Cor de gama ampla no framework
 
 [`Color`]: {{site.api}}/flutter/dart-ui/Color-class.html
 [already supports wide gamut color]: {{site.repo.flutter}}/issues/55092

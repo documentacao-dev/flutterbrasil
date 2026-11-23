@@ -384,7 +384,7 @@ As quantidades plotadas no eixo y são as seguintes:
 [frog]: https://dartfrog.vgv.dev/
 [heroku]: {{site.yt.watch}}?v=nkTUMVNelXA
 
-<a id="profile-tab" aria-hidden="true"></a>
+<FragmentTarget id="profile-tab" />
 
 ### Aba Profile Memory {:#profile-memory-tab}
 
@@ -413,7 +413,7 @@ para restringir os dados:
 Para uma análise mais profunda no Google Sheets
 ou outras ferramentas, baixe os dados no formato CSV.
 
-<a id="trace-tab" aria-hidden="true"></a>
+<FragmentTarget id="trace-tab" />
 
 ### Aba Trace Instances {:#trace-instances-tab}
 

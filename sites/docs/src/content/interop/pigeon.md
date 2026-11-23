@@ -39,6 +39,11 @@ Experimente essa opção de prévia se o seu caso de uso exigir qualquer um dos 
   (por exemplo, áudio ou frames de câmera).
 - Você chama código nativo a partir de isolates Dart em segundo plano.
 
+Para um passo a passo de como criar um plugin usando o Pigeon com interop nativo,
+confira [Flutter interop com Pigeon FFI][pigeon-video]:
+
+<YouTubeEmbed id="GHH5DHmg_gE" title="Flutter interop with Pigeon FFI" />
+
 ### Pigeon com canais de plataforma {:#pigeon-with-platform-channels}
 
 O Pigeon com canais de plataforma gera canais de plataforma padrão que oferecem suporte a
@@ -148,3 +153,4 @@ consulte os recursos a seguir:
 [shared-preferences-source]: {{site.repo.packages}}/tree/main/packages/shared_preferences
 [native-interop-demos]: {{site.repo.demos}}/tree/main/native_interop_demos
 [issue-195877]: {{site.repo.flutter}}/issues/195877
+[pigeon-video]: {{site.yt.watch}}?v=GHH5DHmg_gE

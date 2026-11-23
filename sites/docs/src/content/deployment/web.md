@@ -110,17 +110,60 @@ Para habilitar o cache busting automático baseado em conteúdo entre deploys, p
 flutter build web --wasm --web-content-hash
 ```
 
-Quando `--web-content-hash` está habilitado, o Flutter incorpora um hash de conteúdo
-SHA-256 truncado em 8 caracteres nos entrypoints compilados e em todos os arquivos sob
-`build/web/assets/**`, e registra os caminhos com hash em `flutter_bootstrap.js`
-(`_flutter.buildConfig`):
+Quando você passa `--web-content-hash`, o Flutter insere um hash de conteúdo
+SHA-256 truncado com oito caracteres (`HASH`) antes da extensão do arquivo nos
+entrypoints compilados e em todos os arquivos sob `build/web/assets/**`.
+Por exemplo, `main.dart.js` vira `main.dart.HASH.js`, `logo.png` vira
+`logo.HASH.png`, e o arquivo `NOTICES`, sem extensão, vira `NOTICES.HASH`.
+A flag funciona com builds de release, profile e debug,
+e tanto com builds somente JavaScript quanto com `--wasm`.
+
+O Flutter registra os nomes de arquivo com hash dos entrypoints e dos manifestos
+de assets no objeto `_flutter.buildConfig`.
+O Flutter grava esse objeto em `flutter_bootstrap.js` e também em `index.html`
+quando o `index.html` incorpora
+`{% raw %}{{flutter_bootstrap_js}}{% endraw %}` ou
+`{% raw %}{{flutter_build_config}}{% endraw %}`.
+Os manifestos de assets com hash mapeiam cada chave de asset para o nome de
+arquivo com hash, então `rootBundle`, `Image.asset` e fontes resolvem os assets
+com hash automaticamente.
 
 | Grupo de artefatos | Arquivos em `build/web` | `Cache-Control` recomendado |
 | :--- | :--- | :--- |
-| **Arquivos imutáveis com hash** | `main.dart.<hash>.js`, `main.dart.<hash>.wasm`, `main.dart.<hash>.mjs` (além de `.js.map` e `.mjs.map`), e todos os arquivos em `assets/**` (`AssetManifest.<hash>.bin`, `FontManifest.<hash>.json`, `NOTICES.<hash>`, fontes, imagens e `shaders/**`) | `public, max-age=31536000, immutable` |
-| **Arquivos de bootstrap e raiz sem hash** | `index.html`, `flutter_bootstrap.js`, `flutter.js`, `manifest.json`, `version.json`, `404.html`, `icons/**`, `canvaskit/**` empacotados (com `--no-web-resources-cdn`) e `main.dart.wasm.map` (com `--source-maps`) | `no-cache` (ou `max-age=0, must-revalidate`) |
+| **Arquivos imutáveis com hash** | `main.dart.HASH.js`, `main.dart.HASH.wasm`, `main.dart.HASH.mjs`, seus `.js.map` e `.mjs.map` (se você hospedá-los) e todos os arquivos em `assets/**` (incluindo `AssetManifest.HASH.bin`, `AssetManifest.bin.HASH.json`, `FontManifest.HASH.json`, `NOTICES.HASH`, fontes, imagens, `shaders/**` e `packages/**`) | `public, max-age=31536000, immutable` |
+| **Arquivos de bootstrap e raiz sem hash** | `index.html`, `flutter_bootstrap.js`, `flutter.js`, `flutter.js.map`, `manifest.json`, `version.json`, `favicon.png`, `icons/**`, outros arquivos copiados de `web/` (como `404.html`), `flutter_service_worker.js`, `precache_manifest.json`, `canvaskit/**` e `main.dart.wasm.map` (com `--source-maps`) | `no-cache` (ou `max-age=0, must-revalidate`) |
 
 {:.table .table-striped}
+
+Por padrão, o app carrega o CanvasKit e o Skwasm (`canvaskit.wasm`, `skwasm.wasm`
+e arquivos relacionados) do CDN `www.gstatic.com`, em uma URL versionada pela
+revisão do engine do Flutter.
+O Flutter ainda copia um diretório `canvaskit/` sem hash para `build/web`,
+que o app usa somente quando você compila com `--no-web-resources-cdn`.
+Como esses arquivos mantêm os mesmos nomes entre atualizações do Flutter,
+não sirva sua própria cópia de `canvaskit/**` com cache `immutable`.
+
+:::important
+Quando você compila com `--web-content-hash`, o Flutter renomeia arquivos em
+`build/web/assets/` no disco.
+Código que os referencia por uma URL fixa, como caminhos `assets/...` em
+`index.html`, CSS ou uma chamada `fetch()` em JavaScript, recebe o código de
+status `404 Not Found`.
+Carregue os assets pelo `rootBundle` ou pelas APIs de assets.
+:::
+
+Executar `flutter build web --web-content-hash` falha com erro em qualquer um
+dos casos a seguir:
+
+* O arquivo `web/index.html` ou um arquivo `web/flutter_bootstrap.js`
+  personalizado referencia `main.dart.js` ou chama o método descontinuado
+  `loadEntrypoint()`.
+* O arquivo `web/index.html` não carrega nem incorpora `flutter_bootstrap.js`.
+* Um arquivo `web/flutter_bootstrap.js` personalizado omite o token
+  `{% raw %}{{flutter_build_config}}{% endraw %}`.
+
+Para migrar um projeto antigo, execute `flutter create . --platforms web`
+ou siga [Inicialização de app web Flutter][web-init-bootstrapping].
 
 Para um exemplo completo de `firebase.json`, consulte o [FAQ da Web][web-faq-caching].
 
@@ -176,7 +219,14 @@ Service workers de PWA personalizados ou pipelines do [Workbox][] podem consumir
 `precache_manifest.json` diretamente (passando `revision: entry.urlHashed ? null : entry.hash`
 para que arquivos com hash na URL não sejam armazenados em cache duas vezes com parâmetros de query).
 
-<a id="opting-in-to-webassembly" aria-hidden="true"></a>
+Cada valor de `url` é um caminho relativo a `build/web`, sem `/` inicial nem
+prefixo de `--base-href`, e o manifesto ordena as entradas por `url`.
+O manifesto omite arquivos dot, `flutter_service_worker.js`, source maps
+(`*.map`), arquivos `*.symbols` e arquivos `*.info.json`.
+Quando você compila com `--no-web-resources-cdn`, o manifesto inclui os
+arquivos `canvaskit/**` com `"urlHashed": false`; caso contrário, ele os omite.
+
+<FragmentTarget id="opting-in-to-webassembly" />
 
 ## Deploy de WebAssembly em produção {:#deploy-webassembly-in-production}
 
@@ -280,8 +330,7 @@ muitas outras:
 
 ## Deploy para Firebase Hosting {:#deploying-to-firebase-hosting}
 
-Você pode usar o Firebase CLI para compilar e lançar seu app Flutter com Firebase
-Hosting.
+Você pode usar o Firebase CLI para fazer deploy do seu app Flutter web no Firebase Hosting.
 
 ### Antes de começar {:#before-you-begin}
 
@@ -291,43 +340,50 @@ Para começar, [instale ou atualize][install-firebase-cli] o Firebase CLI:
 npm install -g firebase-tools
 ```
 
-### Inicializar Firebase {:#initialize-firebase}
+<FragmentTarget id="initialize-firebase" />
 
-1. Habilite o preview de web frameworks para o [CLI framework-aware do Firebase][Firebase framework-aware CLI]:
+### Inicializar e fazer deploy {:#initialize-and-deploy}
 
-    ```console
-    firebase experiments:enable webframeworks
-    ```
-
-2. Em um diretório vazio ou um projeto Flutter existente, execute o comando de
-inicialização:
+1.  No diretório raiz do seu projeto Flutter,
+    execute o comando de inicialização:
 
     ```console
     firebase init hosting
     ```
 
-3. Responda `yes` quando perguntado se você quer usar um web framework.
+1.  Siga as perguntas do CLI:
 
-4. Se você está em um diretório vazio,
-    você será perguntado para escolher seu web framework. Escolha `Flutter Web`.
+    * Selecione um projeto Firebase existente ou crie um novo projeto.
+    * Quando for perguntado `What do you want to use as your public directory?`,
+      digite `build/web`.
+    * Escolha se deseja configurar o site como single-page application
+      (reescrevendo todas as URLs para `/index.html`).
+    * Escolha se deseja configurar builds e deploys automáticos com GitHub.
+    * Se `build/web/index.html` já existir,
+      responda `no` quando perguntado se deseja sobrescrevê-lo.
 
-5. Escolha seu diretório fonte de hospedagem; isso pode ser um app flutter existente.
+1.  Compile seu app web para release:
 
-6. Selecione uma região para hospedar seus arquivos.
+    ```console
+    flutter build web
+    ```
 
-7. Escolha se deseja configurar builds e deploys automáticos com GitHub.
+    :::tip
+    Para executar `flutter build web` automaticamente sempre que você fizer deploy,
+    adicione `"predeploy": ["flutter build web"]` à seção `"hosting"` do seu
+    arquivo `firebase.json`.
+    Para os headers `Cache-Control` recomendados e as regras de reescrita de
+    single-page application em `firebase.json`,
+    confira o [FAQ da Web][web-faq-caching].
+    :::
 
-8. Faça deploy do app para Firebase Hosting:
+1.  Faça o deploy do pacote de release no Firebase Hosting:
 
     ```console
     firebase deploy
     ```
 
-    Executar este comando automaticamente executa `flutter build web --release`,
-    então você não precisa compilar seu app em um passo separado.
-
-Para saber mais, visite a documentação oficial do [Firebase Hosting][] para
-Flutter na web.
+Para saber mais, visite a documentação oficial do [Firebase Hosting][].
 
 ## Manipulando imagens na web {:#handling-images-on-the-web}
 
@@ -400,8 +456,7 @@ consulte [Adicione Flutter a qualquer aplicação web][Embedding Flutter web].
 [dart-wasm-serving]: {{site.dart-site}}/web/deployment#serving-wasm-in-production
 [dhttpd]: {{site.pub}}/packages/dhttpd
 [Displaying images on the web]: /platform-integration/web/web-images
-[Firebase Hosting]: {{site.firebase}}/docs/hosting/frameworks/flutter
-[Firebase framework-aware CLI]: {{site.firebase}}/docs/hosting/frameworks/frameworks-overview
+[Firebase Hosting]: {{site.firebase}}/docs/hosting
 [install-firebase-cli]: {{site.firebase}}/docs/cli#install_the_firebase_cli
 [GitHub Pages]: https://pages.github.com/
 [give us feedback]: {{site.repo.flutter}}/issues/new?title=%5Bweb%5D:+%3Cdescribe+issue+here%3E&labels=%E2%98%B8+platform-web&body=Describe+your+issue+and+include+the+command+you%27re+running,+flutter_web%20version,+browser+version

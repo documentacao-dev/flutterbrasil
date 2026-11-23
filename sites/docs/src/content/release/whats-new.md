@@ -26,7 +26,8 @@ e revisar o [changelog do Dart][Dart changelog].
 ## 11 de novembro de 2026: Lançamento 3.50 {:#11-november-2026-release-3-50}
 
 Flutter 3.50 está no ar! Para mais detalhes,
-confira o [post do blog do Flutter 3.50][3.50-blog-post].
+confira o [post do blog do Flutter 3.50][3.50-blog-post]
+e assista ao vídeo [O que há de novo no Flutter 3.50 e no Dart 3.14][3.50-video].
 
 **Documentação atualizada ou adicionada desde o lançamento 3.47**
 
@@ -96,6 +97,7 @@ que inclui links para guias de migração e outras informações vitais.
 [ai-tools]: /ai/tools
 [bind-native-code]: /interop/bind-native-code
 [3.50-blog-post]: {{site.main-url}}/blog/whats-new-in-flutter-3-50
+[3.50-video]: {{site.yt.watch}}?v=K5Kk-C3IL94
 [c-interop]: /interop/ffigen
 [choose-database]: /data-and-backend/persistence/choose-a-database
 [design-pkg-migration]: /release/breaking-changes/material-ui-and-cupertino-ui

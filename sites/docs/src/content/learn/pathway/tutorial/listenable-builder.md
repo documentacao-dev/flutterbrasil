@@ -34,7 +34,7 @@ conectar sua UI para responder a mudanças de dados do ViewModel.
 `ChangeNotifier` fornecido chama `notifyListeners()`.
 
 [`ListenableBuilder`]: {{site.api}}/flutter/widgets/ListenableBuilder-class.html
-[`ChangeNotifier`]: {{site.api}}/flutter/foundation/ChangeNotifier-class.html
+[`ChangeNotifier`]: {{site.api}}/flutter/package-listen_listen/ChangeNotifier-class.html
 
 ### Crie o widget de visualização do artigo {:#create-the-article-view-widget}
 

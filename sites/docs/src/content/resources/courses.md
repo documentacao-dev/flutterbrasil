@@ -35,6 +35,8 @@ Para incluir seu curso, [envie um PR][submit a PR]:
 * [Sticky Grouped Headers in Flutter][] por Marco Napoli
 * [The Complete 2021 Flutter Development Bootcamp Using Dart][] por App Brewery
 * [The Complete Dart Developer Guide][] por Andrea Bizzotto
+* [The Complete Flutter Course: Build Android, iOS and Web Apps][]
+  por Sagnik Bhattacharya & Paulina Knop
 
 ## Alemão {:#german}
 
@@ -81,4 +83,5 @@ Para incluir seu curso, [envie um PR][submit a PR]:
 [Tech Idara - Flutter from Basic to Advanced]: https://www.youtube.com/playlist?list=PLX97VxArfzkmXeUqUxeKW7XS8oYraH7A5
 [FlutterCraft]: https://fluttercraft.app
 [Flutter Master Course From Zero To Hero]: https://usamaelgendy.com/courses/flutter-beginners/
+[The Complete Flutter Course: Build Android, iOS and Web Apps]: https://codingliquids.com/courses/flutter-course
 [submit a PR]: {{site.repo.this}}/pulls

@@ -339,7 +339,7 @@ no `pubspec.yaml`.
 :::
 
 <ol>
-<li><a id="step-3.1"></a>
+<li id="step-3.1">
 
 O comando `flutter build appbundle`
 executa o validador e tenta construir o app com
@@ -452,7 +452,7 @@ mudança em seu diretório `android/` automaticamente.
 
 </li>
 
-<li><a id="step-3.3"></a>
+<li id="step-3.3">
 
 Uma vez que as unidades de
 carregamento disponíveis sejam geradas e registradas em

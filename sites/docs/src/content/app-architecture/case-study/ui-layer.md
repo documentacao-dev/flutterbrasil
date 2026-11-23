@@ -639,12 +639,12 @@ o padrão Command. [Leia sobre isso no GitHub][Read about it on GitHub].
 [`View`]: /app-architecture/guide#views
 [`ViewModel`]: /app-architecture/guide#view-models
 [repositories]: /app-architecture/guide#repositories
-[commands]: /app-architecture/design-patterns/command
+[commands]: /app-architecture/guide#command-objects
 [`package:freezed`]: {{site.pub-pkg}}/freezed
-[`ChangeNotifier`]: {{site.api}}/flutter/foundation/ChangeNotifier-class.html
-[`Listenable`]: {{site.api}}/flutter/foundation/Listenable-class.html
+[`ChangeNotifier`]: {{site.api}}/flutter/package-listen_listen/ChangeNotifier-class.html
+[`Listenable`]: {{site.api}}/flutter/package-listen_listen/Listenable-class.html
 [`ListenableBuilder`]: {{site.api}}/flutter/widgets/ListenableBuilder-class.html
-[`notifyListeners`]: {{site.api}}/flutter/foundation/ChangeNotifier/notifyListeners.html
+[`notifyListeners`]: {{site.api}}/flutter/package-listen_listen/ChangeNotifier/notifyListeners.html
 [`Scaffold`]: {{site.material_ui}}/Scaffold-class.html
 [`Dismissible`]: {{site.api}}/flutter/widgets/Dismissible-class.html
 [`utils` directory]: https://github.com/flutter/samples/blob/main/compass_app/app/lib/utils/command.dart

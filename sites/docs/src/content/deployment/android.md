@@ -122,7 +122,8 @@ dependencies {
 [Getting Started guide for Android]: {{site.material}}/develop/android/mdc-android
 [maven-material]: https://maven.google.com/web/index.html#com.google.android.material:material
 
-<a id="signing-the-app"></a>
+<FragmentTarget id="signing-the-app" />
+
 ## Assinar o app {:#sign-the-app}
 
 Para publicar na Play Store, você deve

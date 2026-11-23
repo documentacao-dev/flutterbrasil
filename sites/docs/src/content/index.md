@@ -78,44 +78,36 @@ Vindo de outra plataforma? Confira Flutter para desenvolvedores:
 
 <div class="video-wrapper">
   <span class="video-intro">Confira as novidades do Dart e do Flutter</span>
-  <YouTubeEmbed id="I1uIbGh1dGE" title="What's New in Dart and Flutter 3.44" fullWidth></YouTubeEmbed>
+  <YouTubeEmbed id="K5Kk-C3IL94"
+      title="What's new in Flutter 3.50 and Dart 3.14"
+      fullWidth></YouTubeEmbed>
 </div>
 <br>
 
-Para mais novidades sobre Dart e Flutter, confira
-as sessões técnicas do [Google I/O][io-wrap-up],
-como estas!
+Para mais novidades sobre Dart, Flutter e IA, confira as sessões técnicas do
+[Flutter Create][flutter-create], incluindo estes destaques:
 
 <div class="card-grid">
   <div class="card wrapped-card outlined-card">
     <div class="card-content">
-      <YouTubeEmbed id="UNdQhnpm8GY" title="Vibe once, run anywhere with Google and Antigravity"></YouTubeEmbed>
+      <YouTubeEmbed id="zUpNT8HWoq4"
+          title="How to build on-device AI in Flutter with LiteRT-LM and Gemma"></YouTubeEmbed>
     </div>
   </div>
   <div class="card wrapped-card outlined-card">
     <div class="card-content">
-      <YouTubeEmbed id="O0UjId1VoRU" title="How to write really good Flutter code"></YouTubeEmbed>
+      <YouTubeEmbed id="b-u0t5QF3XY"
+          title="The new way to build custom design libraries with Flutter"></YouTubeEmbed>
     </div>
   </div>
 </div>
 
-Além disso, lançamos uma nova série de 4 vídeos no Google I/O chamada
-Full-stack developer guide:
-
-<div class="video-wrapper">
-  <YouTubeEmbed id="hNbY3Bmgojg" title="The Full-stack developer guide" fullWidth></YouTubeEmbed>
-</div>
-
-Você pode encontrar os 4 vídeos desta série, além de um vídeo de resumo,
-no post do blog [Google I/O wrap-up][io-wrap-up].
-
-[io-wrap-up]: {{site.flutter-blog}}/thats-a-wrap-everything-flutter-at-google-i-o-2026-f316e57186e3
-
 Para saber sobre todas as séries de vídeos do Flutter,
-visite nossa página de [videos][videos].
+visite nossa página de [vídeos][videos].
 
 Lançamos novos vídeos quase toda semana!
 
 <a class="filled-button" target="_blank" href="https://www.youtube.com/@flutterdev">Confira o canal do Flutter no YouTube</a>
 
+[flutter-create]: {{site.yt.playlist}}PLXGqqcxNBa1s
 [videos]: /resources/videos

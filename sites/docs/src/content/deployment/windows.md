@@ -123,10 +123,10 @@ Como o empacotamento do MSIX usa o
 deve conter um nó `msix_config` apropriado.
 
 Você deve criar um diretório Azure AD do Dev Center com
-[permissão de administrador global](https://azure.microsoft.com/documentation/articles/active-directory-assign-admin-roles/).
+[permissão de administrador global](https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#global-administrator).
 
 O GitHub Action requer secrets de ambiente do partner center.
-`AZURE_AD_TENANT_ID`, `AZURE_AD_ClIENT_ID`, e `AZURE_AD_CLIENT_SECRET`
+`AZURE_AD_TENANT_ID`, `AZURE_AD_CLIENT_ID`, e `AZURE_AD_CLIENT_SECRET`
 são visíveis no Dev Center seguindo as instruções para a
 [Windows Store Publish Action](https://github.com/marketplace/actions/windows-store-publish#obtaining-your-credentials).
 Você também precisa do secret `SELLER_ID`, que pode ser encontrado no Dev Center
@@ -147,7 +147,7 @@ Os passos necessários para publicação MSIX se assemelham ao seguinte
 - uses: microsoft/setup-msstore-cli@v1
 
 - name: Configure the Microsoft Store CLI
-  run: msstore reconfigure --tenantId ${{ secrets.AZURE_AD_TENANT_ID }} --clientId ${{ secrets.AZURE_AD_ClIENT_ID }} --clientSecret ${{ secrets.AZURE_AD_CLIENT_SECRET }} --sellerId ${{ secrets.SELLER_ID }}
+  run: msstore reconfigure --tenantId ${{ secrets.AZURE_AD_TENANT_ID }} --clientId ${{ secrets.AZURE_AD_CLIENT_ID }} --clientSecret ${{ secrets.AZURE_AD_CLIENT_SECRET }} --sellerId ${{ secrets.SELLER_ID }}
 
 - name: Install Dart dependencies
   run: flutter pub get

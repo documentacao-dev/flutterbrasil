@@ -7,7 +7,7 @@ description: Personalize como apps Flutter são inicializados na web.
 Esta página detalha o processo de inicialização para apps web Flutter e
 como ele pode ser personalizado.
 
-## Bootstrap the app {:#bootstrapping}
+## Inicializar o app {:#bootstrapping}
 
 O comando `flutter build web` produz
 um script chamado `flutter_bootstrap.js` no
@@ -51,7 +51,7 @@ Para orientações de otimização em produção, consulte
 
 [cold-start]: /deployment/web#reduce-cold-start-latency
 
-<a id="customizing-initialization" aria-hidden="true"></a>
+<FragmentTarget id="customizing-initialization" />
 
 ## Personalizar a inicialização {:#customize-initialization}
 
@@ -85,7 +85,7 @@ substituir nos arquivos `flutter_bootstrap.js` ou `index.html`:
 
 {:.table .table-striped}
 
-<a id="write-a-custom-flutter_bootstrap-js" aria-hidden="true"></a>
+<FragmentTarget id="write-a-custom-flutter_bootstrap-js" />
 
 ## Escrever um script de bootstrap personalizado {:#custom-bootstrap-js}
 
@@ -113,11 +113,16 @@ Quando você compila com [`flutter build web --web-content-hash`][web-content-ha
 o Flutter injeta os nomes de arquivo de entrypoint com hash de conteúdo (`mainJsPath`,
 `mainWasmPath`, `jsSupportRuntimePath`) e os mapeamentos do manifesto de assets com hash
 (`assetManifest`, `fontManifest`, `extraAssets`) em
-`{% raw %}{{flutter_build_config}}{% endraw %}`. Arquivos `web/index.html` ou
-`web/flutter_bootstrap.js` personalizados devem incluir
-`{% raw %}{{flutter_build_config}}{% endraw %}` e chamar `_flutter.loader.load()`
-em vez de fixar `"main.dart.js"` no código ou chamar a API descontinuada
-`FlutterLoader.loadEntrypoint()`.
+`{% raw %}{{flutter_build_config}}{% endraw %}`.
+Se um `web/index.html` ou `web/flutter_bootstrap.js` personalizado fixar
+`main.dart.js` ou chamar o método descontinuado `FlutterLoader.loadEntrypoint()`,
+o build falha.
+Um arquivo `web/index.html` personalizado precisa carregar `flutter_bootstrap.js`,
+ou incorporar `{% raw %}{{flutter_bootstrap_js}}{% endraw %}` ou
+`{% raw %}{{flutter_build_config}}{% endraw %}`.
+Um arquivo `web/flutter_bootstrap.js` personalizado precisa incluir
+`{% raw %}{{flutter_build_config}}{% endraw %}` e chamar
+`_flutter.loader.load()`.
 :::
 
 [web-content-hashing]: /deployment/web#web-content-hashing
@@ -150,7 +155,7 @@ O argumento `config` é um objeto que aceita os seguintes campos opcionais:
 
 {:.table .table-striped}
 
-<a id="forcesinglethreadedskwasm" aria-hidden="true"></a>
+<FragmentTarget id="forcesinglethreadedskwasm" />
 
 ### WebAssembly e seleção de build {:#webassembly-and-build-selection}
 

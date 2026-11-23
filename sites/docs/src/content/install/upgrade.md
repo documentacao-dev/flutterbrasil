@@ -9,7 +9,7 @@ Não importa qual dos canais de lançamento do Flutter
 você segue, você pode usar o comando `flutter` para atualizar seu
 Flutter SDK ou os packages dos quais seu app depende.
 
-<a id="upgrading-the-flutter-sdk" aria-hidden="true"></a>
+<FragmentTarget id="upgrading-the-flutter-sdk" />
 
 ## Atualizar o Flutter SDK {:#upgrade-the-flutter-sdk}
 
@@ -27,8 +27,6 @@ e quer uma versão ainda mais recente do Flutter SDK,
 mude para o canal **beta** usando `flutter channel beta`,
 e então execute `flutter upgrade`.
 
-<a id="keep-informed" aria-hidden="true"></a>
-
 ### Mantenha-se informado {:#keep-informed}
 
 Nós publicamos [guias de migração][migration guides] para mudanças breaking conhecidas.
@@ -39,8 +37,6 @@ Nós enviamos anúncios sobre essas mudanças para a
 Para evitar ser quebrado por versões futuras do Flutter,
 considere submeter seus testes ao nosso [registro de testes][test registry].
 
-
-<a id="switching-flutter-channels" aria-hidden="true"></a>
 
 ## Mudando canais do Flutter {:#switching-flutter-channels}
 
@@ -61,7 +57,6 @@ inclui testes contra o lançamento **stable** mais recente.
 A documentação mais recente para o branch **stable**
 está em: <https://api.flutter.dev>
 
-<a id="the-beta-channel" aria-hidden="true"></a>
 
 ### O canal **beta** {:#the-beta-channel}
 
@@ -92,8 +87,7 @@ Nós não recomendamos usar este canal já que
 A documentação mais recente para o branch **main**
 está em: <https://main-api.flutter.dev>
 
-<a id="changing-channels" aria-hidden="true"></a>
-<a id="change-channels" aria-hidden="true"></a>
+<FragmentTarget id="changing-channels" />
 
 ### Mudar canais {:#change-channels}
 
@@ -113,7 +107,7 @@ $ flutter channel beta
 $ flutter upgrade
 ```
 
-<a id="switching-to-a-specific-flutter-version" aria-hidden="true"></a>
+<FragmentTarget id="switching-to-a-specific-flutter-version" />
 
 ## Mudar para uma versão específica do Flutter {:#switch-to-a-specific-flutter-version}
 
@@ -137,7 +131,7 @@ Para mudar para uma versão específica do Flutter:
    $ git checkout <Flutter version>
    ```
 
-<a id="upgrading-packages" aria-hidden="true"></a>
+<FragmentTarget id="upgrading-packages" />
 
 ## Atualizar packages {:#upgrade-packages}
 
@@ -173,43 +167,43 @@ a [documentação `pub outdated` do Dart]({{site.dart-site}}/tools/pub/cmd/pub-o
 $ flutter pub outdated
 ```
 
-## Troubleshooting
+## Solução de problemas {:#troubleshooting}
 
-### Windows: "Filename too long" error
+### Windows: erro "Filename too long" {:#windows-filename-too-long-error}
 
-When running `flutter upgrade` on Windows,
-you might encounter an error like the following:
+Ao executar `flutter upgrade` no Windows,
+você pode encontrar um erro como o seguinte:
 
 ```text
 error: unable to create file ...: Filename too long
 ```
 
-This occurs because the path to a file in the Flutter SDK exceeds the default
-maximum path length limit on Windows.
+Isso acontece porque o caminho de um arquivo no Flutter SDK excede o
+limite máximo padrão de tamanho de caminho no Windows.
 
-To resolve this issue, consider installing the Flutter SDK
-at a shorter path. For example, install Flutter at
-`C:\Flutter` instead of something longer like
+Para resolver este problema, considere instalar o Flutter SDK
+em um caminho mais curto. Por exemplo, instale o Flutter em
+`C:\Flutter` em vez de algo mais longo como
 `C:\Users\<user name>\Documents\flutter`.
 
-Otherwise, do the following:
+Caso contrário, faça o seguinte:
 
-1. Enable long paths support in Git:
+1. Ative o suporte a caminhos longos no Git:
 
    ```console
    $ git config --system core.longpaths true
    ```
-   
-   If the command fails with a permission error,
-   try running your terminal as an administrator.
 
-1. Enable long paths in Windows:
-   
+   Se o comando falhar com um erro de permissão,
+   tente executar seu terminal como administrador.
+
+1. Ative os caminhos longos no Windows:
+
    ```console
    New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
    ```
-   
-   This command requires administrator privileges.
+
+   Este comando exige privilégios de administrador.
 
 [Flutter SDK archive]: /install/archive
 [flutter-announce]: {{site.groups.flutter-announce}}

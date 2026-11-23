@@ -172,10 +172,14 @@ No Flutter 3.50 e posteriores, passe `--web-content-hash` ao compilar seu app we
 $ flutter build web --web-content-hash
 ```
 
-A flag `--web-content-hash` incorpora um hash de conteúdo SHA-256 de 8 caracteres nos
-entrypoints compilados, nos source maps JavaScript e em todos os arquivos em
-`build/web/assets/**`, e atualiza suas referências em `flutter_bootstrap.js`
-automaticamente. Para a lista completa de arquivos com hash e orientações de implantação gradual,
+A flag `--web-content-hash` insere um hash de conteúdo SHA-256 de 8 caracteres
+(`HASH`) nos nomes de arquivo dos entrypoints compilados, como
+`main.dart.HASH.wasm`, e em todos os arquivos em `build/web/assets/**`.
+O Flutter também registra automaticamente os nomes de arquivo do entrypoint e do
+manifesto de assets com hash em `flutter_bootstrap.js`.
+Você ainda precisa servir `index.html` e `flutter_bootstrap.js` com revalidação
+para que os navegadores carreguem cada novo deploy.
+Para a lista completa de arquivos com hash e orientações de implantação gradual,
 consulte [Hash de conteúdo web](/deployment/web#web-content-hashing).
 
 Se você não está usando `--web-content-hash`, pode anexar manualmente um parâmetro de query

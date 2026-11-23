@@ -55,7 +55,7 @@ Elas também tornam simples e de baixo risco adicionar nova lógica e nova UI.
 
 <ArchitectureRecommendations category="testing" />
 
-<a id="recommended-resources" aria-hidden="true"></a>
+<FragmentTarget id="recommended-resources" />
 
 ## Recursos recomendados {:#resources}
 

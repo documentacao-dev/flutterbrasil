@@ -241,7 +241,7 @@ compile o site localmente e execute os seguintes comandos.
     dart run dash_site check-links
     ```
 
-Se algum dos comandos reportar erros ou avisos,
+Se alguma checagem reportar erros ou avisos,
 resolva-os, recompile o site e execute o comando novamente.
 
 [firebase-install]: https://firebase.google.com/docs/cli#setup_update_cli

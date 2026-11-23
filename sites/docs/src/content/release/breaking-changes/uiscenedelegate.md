@@ -66,7 +66,7 @@ métodos do `AppDelegate` relacionados ao estado da UI.
 [migration guide for add-to-app]: #migrate-an-add-to-app-integration
 [migration guide for Flutter plugins]: #migrate-a-flutter-plugin
 
-<a id="migration-guide-for-flutter-apps" aria-hidden="true"></a>
+<FragmentTarget id="migration-guide-for-flutter-apps" />
 
 ## Migrar um app Flutter {:#migrate-a-flutter-app}
 
@@ -373,7 +373,7 @@ você pode criar um criando uma subclasse de `FlutterSceneDelegate`:
     </Tab>
     </Tabs>
 
-<a id="migration-guide-for-adding-flutter-to-existing-app-add-to-app" aria-hidden="true"></a>
+<FragmentTarget id="migration-guide-for-adding-flutter-to-existing-app-add-to-app" />
 
 ## Migrar uma integração add-to-app {:#migrate-an-add-to-app-integration}
 
@@ -385,7 +385,7 @@ como [`openURL`][], para plugins como [`local_auth`][].
 [`openURL`]: {{site.apple-dev}}/documentation/uikit/uiapplicationdelegate/1623112-application
 [`local_auth`]: {{site.pub}}/packages/local_auth
 
-<a id="createupdate-a-scenedelegate" aria-hidden="true"></a>
+<FragmentTarget id="createupdate-a-scenedelegate" />
 
 ### Criar ou atualizar um SceneDelegate {:#create-or-update-a-scenedelegate}
 
@@ -455,7 +455,7 @@ faça as seguintes alterações:
 [flutter-app-delegate]: /add-to-app/ios/add-flutter-screen#using-the-flutterappdelegate
 [If your app supports multiple scenes]: #if-your-app-supports-multiple-scenes
 
-<a id="if-you-cant-directly-make-flutterscenedelegate-a-subclass" aria-hidden="true"></a>
+<FragmentTarget id="if-you-cant-directly-make-flutterscenedelegate-a-subclass" />
 
 ### Se você não pode criar uma subclasse de FlutterSceneDelegate {:#if-you-cant-subclass-flutterscenedelegate}
 
@@ -610,7 +610,7 @@ encaminhar eventos do ciclo de vida de cena para o Flutter.
 O Flutter ainda não suporta totalmente múltiplas cenas,
 mas o suporte está em andamento.
 
-<a id="migration-guide-for-flutter-plugins" aria-hidden="true"></a>
+<FragmentTarget id="migration-guide-for-flutter-plugins" />
 
 ## Migrar um plugin Flutter {:#migrate-a-flutter-plugin}
 

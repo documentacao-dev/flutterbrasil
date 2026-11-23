@@ -246,8 +246,5 @@ final class _TestDashLayout extends DashLayout {
   String get twitterDefaultImageUrl => '/social.png';
 
   @override
-  String get tagManagerId => 'GTM-TEST';
-
-  @override
   Component buildBody(Page page, Component child) => child;
 }

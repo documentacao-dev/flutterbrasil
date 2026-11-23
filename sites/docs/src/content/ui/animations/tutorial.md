@@ -15,17 +15,17 @@ Este tutorial mostra como construir animações explícitas no Flutter.
 Os exemplos constroem uns sobre os outros, introduzindo você a diferentes aspectos da
 biblioteca de animações. O tutorial é baseado em conceitos, classes
 e métodos essenciais na biblioteca de animações que você pode aprender em
-[Introduction to animations][Introduction to animations].
+[Introduction to animations][].
 
 O Flutter SDK também fornece animações explícitas integradas,
-como [`FadeTransition`][FadeTransition], [`SizeTransition`][SizeTransition] e [`SlideTransition`][SlideTransition].
+como [`FadeTransition`][], [`SizeTransition`][] e [`SlideTransition`][].
 Esses widgets recebem um objeto `Animation`,
 frequentemente conduzido por um `AnimationController`,
 e atualizam a UI conforme seu valor muda.
 Eles exigem menos código do que as animações explícitas personalizadas
 descritas neste tutorial.
 
-As seções a seguir guiam você através de vários exemplos de animação.
+As seções a seguir guiam você por vários exemplos de animação.
 Cada seção fornece um link para o código-fonte desse exemplo.
 
 ## Renderizando animações {:#rendering-animations}
@@ -76,7 +76,7 @@ class _LogoAppState extends State<LogoApp> {
 }
 ```
 
-**Código-fonte do app:** [animate0][animate0]
+**Código-fonte do app:** [animate0][]
 
 O código a seguir mostra o mesmo código modificado para animar o
 logo crescendo de nada até o tamanho completo.
@@ -130,7 +130,7 @@ As mudanças em relação ao exemplo não animado estão destacadas:
   }
 ```
 
-**Código-fonte do app:** [animate1][animate1]
+**Código-fonte do app:** [animate1][]
 
 O callback registrado com `addListener()` chama `setState()`,
 então toda vez que a `Animation` gera um novo número,
@@ -168,14 +168,14 @@ animation.addListener(() {
 ```
 
 Para aprender mais sobre cascades,
-confira [Cascade notation][Cascade notation]
+confira [Cascade notation][]
 na [documentação da linguagem Dart][Dart language documentation].
 :::
 
 ## Simplificando com AnimatedWidget {:#simplifying-with-animatedwidget}
 
 :::secondary Qual é o ponto?
-* Como usar a classe auxiliar [`AnimatedWidget`][AnimatedWidget]
+* Como usar a classe auxiliar [`AnimatedWidget`][]
   (em vez de `addListener()`
   e `setState()`) para criar um widget que anima.
 * Use `AnimatedWidget` para criar um widget que executa
@@ -286,7 +286,7 @@ e passa o objeto `Animation` para `AnimatedLogo`:
   }
 ```
 
-**Código-fonte do app:** [animate2][animate2]
+**Código-fonte do app:** [animate2][]
 
 <FragmentTarget id="monitoring" />
 
@@ -360,7 +360,7 @@ no início ou no fim. Isso cria um efeito de "respiração":
   }
 ```
 
-**Código-fonte do app:** [animate3][animate3]
+**Código-fonte do app:** [animate3][]
 
 :::tip Repetindo uma animação
 Embora `addStatusListener()` seja útil para reagir a mudanças de status,
@@ -374,7 +374,7 @@ então não notifica os status listeners.
 ## Refatorando com AnimatedBuilder {:#refactoring-with-animatedbuilder}
 
 :::secondary Qual é o ponto?
-* Um [`AnimatedBuilder`][AnimatedBuilder] separa a transição do widget sendo
+* Um [`AnimatedBuilder`][] separa a transição do widget sendo
   animado.
 * Um `AnimatedBuilder` não renderiza o widget em si,
   nem gerencia o objeto `Animation`.
@@ -389,7 +389,7 @@ então não notifica os status listeners.
   `TextField`.
 :::
 
-Um problema com o código no exemplo [animate3][animate3]
+Um problema com o código no exemplo [animate3][]
 é que mudar a animação exigia mudar o widget
 que renderiza o logo. Uma solução melhor
 é separar responsabilidades em classes diferentes:
@@ -406,7 +406,7 @@ widget separado na árvore de widgets. Como `AnimatedWidget`,
 do objeto `Animation` e marca a árvore de widgets
 como suja conforme necessário, então você não precisa chamar `addListener()`.
 
-A árvore de widgets para o exemplo [animate4][animate4]
+A árvore de widgets para o exemplo [animate4][]
 se parece com isto:
 
 <DashImage figure image="ui/AnimatedBuilder-WidgetTree.png" alt="AnimatedBuilder widget tree" />
@@ -481,7 +481,7 @@ class GrowTransition extends StatelessWidget {
 ```
 
 Finalmente, o código para inicializar a animação parece muito
-similar ao exemplo [animate2][animate2]. O método `initState()`
+similar ao exemplo [animate2][]. O método `initState()`
 cria um `AnimationController` e um `Tween`,
 e depois os vincula com `animate()`. Em seguida,
 o método `build()` retorna um objeto `GrowTransition`
@@ -550,19 +550,19 @@ nos bullet points acima.
   }
 ```
 
-**Código-fonte do app:** [animate4][animate4]
+**Código-fonte do app:** [animate4][]
 
 ## Animações simultâneas {:#simultaneous-animations}
 
 :::secondary Qual é o ponto?
-* A classe [`Curves`][Curves] define um array de
+* A classe [`Curves`][] define um array de
   curvas comumente usadas que você pode
-  usar com um [`CurvedAnimation`][CurvedAnimation].
+  usar com um [`CurvedAnimation`][].
 :::
 
 Nesta seção, você construirá sobre o exemplo de
 [monitorar o progresso da animação][Monitoring the progress of the animation]
-([animate3][animate3]), que usou `AnimatedWidget`
+([animate3][]), que usou `AnimatedWidget`
 para animar continuamente para dentro e para fora. Considere o caso
 onde você quer animar para dentro e para fora enquanto a
 opacidade anima de transparente para opaco.
@@ -572,8 +572,8 @@ Este exemplo mostra como usar múltiplos tweens no mesmo animation
 controller, onde cada tween gerencia um efeito diferente na
 animação. É apenas para fins ilustrativos.
 Para animações de opacidade em código de produção,
-prefira [`FadeTransition`][FadeTransition] para evitar reconstruir widgets a cada frame.
-Para mudanças de tamanho, considere [`SizeTransition`][SizeTransition]
+prefira [`FadeTransition`][] para evitar reconstruir widgets a cada frame.
+Para mudanças de tamanho, considere [`SizeTransition`][]
 quando você quiser animar o quanto de um filho é revelado.
 :::
 
@@ -667,7 +667,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
 }
 ```
 
-**Código-fonte do app:** [animate5][animate5]
+**Código-fonte do app:** [animate5][]
 
 ## Próximos passos {:#next-steps}
 
@@ -692,23 +692,17 @@ mas há muitas outras APIs de animação para explorar:
 [animate3]: {{site.repo.this}}/tree/main/examples/animation/animate3
 [animate4]: {{site.repo.this}}/tree/main/examples/animation/animate4
 [animate5]: {{site.repo.this}}/tree/main/examples/animation/animate5
-[AnimatedWidget]: {{site.api}}/flutter/widgets/AnimatedWidget-class.html
-[AnimatedBuilder]: {{site.api}}/flutter/widgets/AnimatedBuilder-class.html
 [`AnimatedWidget`]: {{site.api}}/flutter/widgets/AnimatedWidget-class.html
 [`AnimatedBuilder`]: {{site.api}}/flutter/widgets/AnimatedBuilder-class.html
 [Animations overview]: /ui/animations/overview
 [Introduction to animations]: /ui/animations
-[AnimationController]: {{site.api}}/flutter/animation/AnimationController-class.html
 [`AnimationController`]: {{site.api}}/flutter/animation/AnimationController-class.html
 [`AnimationController` section]: /ui/animations#animationcontroller
 [`ColorTween`]: {{site.api}}/flutter/animation/ColorTween-class.html
-[Curves]: {{site.api}}/flutter/animation/Curves-class.html
 [`Curves`]: {{site.api}}/flutter/animation/Curves-class.html
-[CurvedAnimation]: {{site.api}}/flutter/animation/CurvedAnimation-class.html
 [`CurvedAnimation`]: {{site.api}}/flutter/animation/CurvedAnimation-class.html
 [Cascade notation]: {{site.dart-site}}/language/operators#cascade-notation
 [Dart language documentation]: {{site.dart-site}}/language
-[FadeTransition]: {{site.api}}/flutter/widgets/FadeTransition-class.html
 [`FadeTransition`]: {{site.api}}/flutter/widgets/FadeTransition-class.html
 [`fling()`]: {{site.api}}/flutter/animation/AnimationController/fling.html
 [Hero animations]: /ui/animations/hero-animations
@@ -721,13 +715,9 @@ mas há muitas outras APIs de animação para explorar:
 [Refactoring with AnimatedBuilder]: #refactoring-with-animatedbuilder
 [repeat]: {{site.api}}/flutter/animation/AnimationController/repeat.html
 [`ReverseAnimation`]: {{site.api}}/flutter/animation/ReverseAnimation-class.html
-[SlideTransition]: {{site.api}}/flutter/widgets/SlideTransition-class.html
 [`SlideTransition`]: {{site.api}}/flutter/widgets/SlideTransition-class.html
 [Simplifying with AnimatedWidget]: #simplifying-with-animatedwidget
-[SizeTransition]: {{site.api}}/flutter/widgets/SizeTransition-class.html
 [`SizeTransition`]: {{site.api}}/flutter/widgets/SizeTransition-class.html
 [Staggered animations]: /ui/animations/staggered-animations
-[Tween]: {{site.api}}/flutter/animation/Tween-class.html
 [`Tween`]: {{site.api}}/flutter/animation/Tween-class.html
 [`TweenAnimationBuilder`]: {{site.api}}/flutter/widgets/TweenAnimationBuilder-class.html
-[Animation]: {{site.api}}/flutter/animation/Animation-class.html

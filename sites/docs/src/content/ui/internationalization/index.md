@@ -585,7 +585,7 @@ números com base no locale e no formato desejado.
 Os tipos `int`, `double` e `num` podem usar qualquer um dos
 seguintes construtores `NumberFormat`:
 
-| Message "format" value   | Output for 1200000 |
+| Valor "format" na mensagem | Saída para 1200000 |
 |--------------------------|--------------------|
 | `compact`                | "1.2M"             |
 | `compactCurrency`*       | "$1.2M"            |
@@ -926,8 +926,8 @@ static MaterialLocalizations of(BuildContext context) {
   return Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 }
 
-/// Referências aos valores localizados definidos por MaterialLocalizations
-/// são tipicamente escritas assim:
+/// References to the localized values defined by MaterialLocalizations
+/// are typically written like this:
 
 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
 ```

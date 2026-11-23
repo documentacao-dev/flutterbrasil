@@ -395,24 +395,24 @@ Você também pode pressionar
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>F5</kbd>
 ou <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F5</kbd> no macOS.
 
-### Customize closing labels {: #closing-labels}
+### Personalize os rótulos de fechamento {: #closing-labels}
 
-The Dart extension displays labels after
-the closing delimiters of multi-line constructs, such as
-constructor invocations, method calls, and list literals.
-Closing labels are editor annotations and don't change your source code,
-even though the default ` // ` prefix makes them look similar to comments.
+A extensão Dart exibe rótulos depois
+dos delimitadores de fechamento de construções de várias linhas, como
+invocações de construtores, chamadas de métodos e literais de lista.
+Os rótulos de fechamento são anotações do editor e não alteram o seu código-fonte,
+mesmo que o prefixo padrão ` // ` faça com que eles pareçam comentários.
 
-To change the prefix:
+Para mudar o prefixo:
 
-1.  Open the [Command Palette][].
-1.  Select **Preferences: Open Settings (UI)**.
-1.  Search for `dart.closingLabels`.
-1.  In **Dart: Closing Labels Prefix**, enter your preferred prefix.
+1.  Abra a [Command Palette][].
+1.  Selecione **Preferences: Open Settings (UI)**.
+1.  Pesquise por `dart.closingLabels`.
+1.  Em **Dart: Closing Labels Prefix**, digite o prefixo de sua preferência.
 
-For example, to remove the comment marker while
-keeping space between the code and label,
-set the prefix to a single space (` `):
+Por exemplo, para remover a marcação de comentário mantendo
+o espaço entre o código e o rótulo,
+defina o prefixo como um único espaço (` `):
 
 ```json
 {
@@ -420,9 +420,9 @@ set the prefix to a single space (` `):
 }
 ```
 
-To hide closing labels, turn off **Dart: Closing Labels**.
-For the complete list of closing label options,
-see the [extension's settings reference][closing-label-options].
+Para ocultar os rótulos de fechamento, desative **Dart: Closing Labels**.
+Para a lista completa de opções dos rótulos de fechamento,
+consulte a [referência de configurações da extensão][closing-label-options].
 
 [closing-label-options]: https://dartcode.org/docs/settings/#dartclosinglabels
 

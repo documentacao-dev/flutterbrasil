@@ -125,8 +125,8 @@ o performance overlay, como discutido na próxima seção.
 
 ## Executar DevTools {:#launch-devtools}
 
-DevTools fornece recursos como profiling, examinando o heap,
-exibindo cobertura de código, habilitando o performance overlay,
+DevTools fornece recursos como profiling, examinar o heap,
+exibir a cobertura de código, habilitar o performance overlay,
 e um debugger passo a passo.
 A [Timeline view][Timeline view] do DevTools permite que você investigue a
 performance de UI da sua aplicação em uma base frame a frame.
@@ -143,7 +143,7 @@ Você pode alternar a exibição do performance overlay da
 seguinte forma:
 
 * **DevTools Performance view**: A maneira mais fácil de habilitar o
-  widget PerformanceOverlay é a partir da [Performance view][Performance view] no [DevTools][DevTools].
+  widget PerformanceOverlay é a partir da [Performance view][Performance view] no [DevTools][].
   Simplesmente clique no botão **Performance Overlay** para alternar o overlay na sua
   aplicação em execução.
 
@@ -278,7 +278,7 @@ o gráfico de UI não tem vermelho, mas o gráfico de GPU mostra vermelho.
 Neste caso, você precisará descobrir o que seu código está fazendo
 que está fazendo o código de renderização ser lento. Tipos específicos de cargas de trabalho
 são mais difíceis para a GPU. Eles podem envolver chamadas desnecessárias
-a [`saveLayer`][saveLayer], opacidades que se intersectam com múltiplos objetos,
+a [`saveLayer`][`saveLayer`], opacidades que se intersectam com múltiplos objetos,
 e clips ou sombras em situações específicas.
 
 Se você suspeita que a fonte da lentidão está durante uma animação,
@@ -293,18 +293,18 @@ Talvez haja uma maneira alternativa de desenhar a cena que não
 use clipping. Por exemplo, sobreponha cantos opacos em um quadrado
 em vez de fazer clipping para um retângulo arredondado.
 Se é uma cena estática que está sendo esmaecida, rotacionada, ou de outra forma
-manipulada, um [`RepaintBoundary`][RepaintBoundary] pode ajudar.
+manipulada, um [`RepaintBoundary`][`RepaintBoundary`] pode ajudar.
 
 [programmatically]: /testing/code-debugging#debug-animation-issues
 
 #### Verificando offscreen layers {:#checking-for-offscreen-layers}
 
-O método [`saveLayer`][saveLayer] é um dos métodos mais caros no
+O método [`saveLayer`][`saveLayer`] é um dos métodos mais caros no
 framework Flutter. É útil ao aplicar pós-processamento
 à cena, mas pode tornar sua aplicação lenta e deve ser evitado se
 você não precisar dele. Mesmo que você não chame `saveLayer` explicitamente,
 chamadas implícitas podem acontecer em seu nome, por exemplo ao especificar
-[`Clip.antiAliasWithSaveLayer`][Clip.antiAliasWithSaveLayer] (tipicamente como um `clipBehavior`).
+[`Clip.antiAliasWithSaveLayer`][`Clip.antiAliasWithSaveLayer`] (tipicamente como um `clipBehavior`).
 
 Por exemplo,
 talvez você tenha um grupo de objetos com opacidades que são renderizados
@@ -327,11 +327,11 @@ faça a si mesmo estas perguntas:
 * Alguma dessas chamadas pode ser eliminada?
 * Posso aplicar o mesmo efeito a um elemento individual em vez de um grupo?
 
-[Clip.antiAliasWithSaveLayer]: {{site.api}}/flutter/dart-ui/Clip.html
+[`Clip.antiAliasWithSaveLayer`]: {{site.api}}/flutter/dart-ui/Clip.html
 
 #### Verificando imagens não cacheadas {:#checking-for-non-cached-images}
 
-Cachear uma imagem com [`RepaintBoundary`][RepaintBoundary] é bom,
+Cachear uma imagem com [`RepaintBoundary`][`RepaintBoundary`] é bom,
 _quando faz sentido_.
 
 Uma das operações mais caras,
@@ -347,7 +347,7 @@ O cache fornece snapshots de hierarquias complexas para
 que sejam mais fáceis de renderizar em frames subsequentes.
 _Como entradas de cache raster são caras para
 construir e ocupam muita memória GPU,
-cache imagens apenas onde absolutamente necessário._
+armazene imagens em cache apenas onde absolutamente necessário._
 
 ## Outros recursos {:#other-resources}
 
@@ -361,12 +361,12 @@ as ferramentas do Flutter e depuração no Flutter:
 * [Why Flutter Uses Dart][Why Flutter Uses Dart], um artigo no Hackernoon
 * [Why Flutter uses Dart][video], um vídeo no canal Flutter
 * [DevTools][devtools]: ferramentas de performance para aplicações Dart e Flutter
-* [Flutter API][Flutter API] docs, particularmente a classe [`PerformanceOverlay`][PerformanceOverlay],
+* [Flutter API][Flutter API] docs, particularmente a classe [`PerformanceOverlay`][`PerformanceOverlay`],
   e o package [`dart:developer`][`dart:developer`]
 
-[PerformanceOverlay]: {{site.api}}/flutter/widgets/PerformanceOverlay-class.html
-[RepaintBoundary]: {{site.api}}/flutter/widgets/RepaintBoundary-class.html
-[saveLayer]: {{site.api}}/flutter/dart-ui/Canvas/saveLayer.html
+[`PerformanceOverlay`]: {{site.api}}/flutter/widgets/PerformanceOverlay-class.html
+[`RepaintBoundary`]: {{site.api}}/flutter/widgets/RepaintBoundary-class.html
+[`saveLayer`]: {{site.api}}/flutter/dart-ui/Canvas/saveLayer.html
 [`dart:developer`]: {{site.api}}/flutter/dart-developer/dart-developer-library.html
 [Debugging]: /testing/debugging
 [devtools]: /tools/devtools
@@ -374,7 +374,6 @@ as ferramentas do Flutter e depuração no Flutter:
 [Flutter inspector talk]: {{site.yt.watch}}?v=JIcmJNT9DNI
 [Flutter inspector]: /tools/devtools/inspector
 [Performance view]: /tools/devtools/performance
-[DevTools]: /tools/devtools
 [profile mode]: /testing/build-modes#profile
 [video]: {{site.yt.watch}}?v=5F-6n_2XWR8
 [Why Flutter Uses Dart]: https://hackernoon.com/why-flutter-uses-dart-dd635a054ebf

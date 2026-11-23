@@ -308,7 +308,6 @@ ou você pode construir seu próprio conjunto de widgets customizados.
 [Material library]: {{site.material_ui}}
 [`Scaffold`]: {{site.material_ui}}/Scaffold-class.html
 [widgets library]: {{site.api}}/flutter/widgets/widgets-library.html
-[Material Design]: https://m3.material.io
 
 ### 5. Execute seu app {:#5-run-your-app}
 
@@ -476,7 +475,6 @@ uniformemente entre, acima e abaixo de cada imagem.
 [`CrossAxisAlignment`]: {{site.api}}/flutter/rendering/CrossAxisAlignment.html
 [`MainAxisAlignment`]: {{site.api}}/flutter/rendering/MainAxisAlignment.html
 [`pubspec.yaml` file]: {{site.repo.this}}/tree/main/examples/layout/row_column/pubspec.yaml
-[Adding assets and images]: /ui/assets/assets-and-images
 
 ### Dimensionando widgets {:#sizing-widgets}
 

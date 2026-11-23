@@ -137,31 +137,31 @@ flutter:
 ```
 
 ```yaml
-# estrutura path_to_file
+# path_to_file structure
 - path/to/directory/file
 ```
 
 ```yaml
-# estrutura path_to_directory
+# path_to_directory structure
 - path/to/directory/
 ```
 
 ```yaml
-# estrutura flavor_path_field
+# flavor_path_field structure
 - path: path/to/directory
   flavors:
     - flavor_name
 ```
 
 ```yaml
-# estrutura platform_path_field
+# platform_path_field structure
 - path: path/to/file
   platforms:
     - platform_name
 ```
 
 ```yaml
-# estrutura transformer_path_field
+# transformer_path_field structure
 - path: path/to/file
   transformers:
     - package: transformer_package_name
@@ -327,10 +327,10 @@ flutter:
 ```
 
 ```console title="console"
-# Use este comando para executar o flavor padrão (production).
+# Use this command to run the default flavor (production).
 $ flutter run
 
-# Use este comando para executar flavors não-padrão (staging).
+# Use this command to run non-default flavors (staging).
 $ flutter run --flavor staging
 ```
 
@@ -420,7 +420,7 @@ flutter:
 ```
 
 ```yaml
-# estrutura font_family_field
+# font_family_field structure
 - family: font_name
   fonts:
     - font_asset_field
@@ -428,10 +428,10 @@ flutter:
 ```
 
 ```yaml
-# estrutura font_asset_field
+# font_asset_field structure
 - asset: path/to/directory/font_name
-  weight: int_expression # Opcional
-  style: string_expression # Opcional
+  weight: int_expression # Optional
+  style: string_expression # Optional
 ```
 
 Subcampos de `fonts`:
@@ -451,8 +451,8 @@ Use uma fonte que não faz parte de uma família de fontes:
 flutter:
   fonts:
     - asset: fonts/Roboto-Regular.ttf
-      weight: 900 # Opcional
-      style: italic # Opcional
+      weight: 900 # Optional
+      style: italic # Optional
 ```
 
 Use uma família de fontes:
@@ -460,12 +460,12 @@ Use uma família de fontes:
 ```yaml title="pubspec.yaml"
 flutter:
   fonts:
-    - family: Roboto # Opcional
+    - family: Roboto # Optional
       fonts:
         - asset: fonts/Roboto-Regular.ttf
         - asset: fonts/Roboto-Bold.ttf
-          weight: 700 # Opcional
-          style: italic # Opcional
+          weight: 700 # Optional
+          style: italic # Optional
 ```
 
 Alternativamente, se você tiver uma fonte que não requer família,
@@ -545,44 +545,44 @@ O campo `plugin` tem a seguinte estrutura:
 flutter:
   plugin:
     platforms:
-      android: # Opcional
+      android: # Optional
         package: com.example.my_plugin
         pluginClass: MyPlugin
         dartPluginClass: MyPluginClassName
         ffiPlugin: true
         default_package: my_plugin_name
         fileName: my_file.dart
-      ios: # Opcional
+      ios: # Optional
         pluginClass: MyPlugin
         dartPluginClass: MyPluginClassName
         ffiPlugin: true
         default_package: my_plugin_name
         fileName: my_file.dart
         sharedDarwinSource: true
-      macos: # Opcional
+      macos: # Optional
         pluginClass: MyPlugin
         dartPluginClass: MyPluginClassName
         ffiPlugin: true
         default_package: my_plugin_name
         fileName: my_file.dart
         sharedDarwinSource: true
-      windows: # Opcional
+      windows: # Optional
         pluginClass: MyPlugin
         dartPluginClass: MyPluginClassName
         ffiPlugin: true
         default_package: my_plugin_name
         fileName: my_file.dart
-      linux: # Opcional
+      linux: # Optional
         pluginClass: MyPlugin
         dartPluginClass: MyPluginClassName
         ffiPlugin: true
         default_package: my_plugin_name
         fileName: my_file.dart
-      web: # Opcional
+      web: # Optional
         ffiPlugin: true
         default_package: my_plugin_name
         fileName: my_file.dart
-    implements: # Opcional
+    implements: # Optional
       - example_platform_interface
 ```
 

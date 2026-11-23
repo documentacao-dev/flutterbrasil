@@ -27,8 +27,8 @@ A ferramenta CLI do site pode ser acessada executando
 
 ### `check-duplicate-ids`
 
-After building the site, run this command to find element IDs
-that appear on multiple elements in the same HTML page.
+Depois de compilar o site, execute este comando para encontrar IDs de
+elementos que aparecem em mais de um elemento na mesma página HTML.
 
 ### `check-link-references`
 

@@ -1,61 +1,62 @@
 ---
-ia-translate: true
-title: Cursos online
-description: Um índice de cursos online ensinando desenvolvimento Flutter.
+title: Online courses
+description: An index of online courses teaching Flutter development.
 showBreadcrumbs: false
 ---
 
-Aprenda como construir apps Flutter com estes cursos em vídeo.
-Antes de se inscrever em um curso, verifique se ele inclui
-informações atualizadas, como código Dart null-safe.
+Learn how to build Flutter apps with these video courses.
+Before signing up for a course, verify that it includes
+up-to-date information, such as null-safe Dart code.
 
-Estes cursos estão agrupados por idioma e listados em ordem alfabética.
-Para incluir seu curso, [envie um PR][submit a PR]:
+These courses are grouped by language and listed alphabetically.
+To include your course, [submit a PR][]:
 
-## Árabe {:#arabic}
+## Arabic
 
-* [Flutter Master Course From Zero To Hero][] por Usama Elgendy
+* [Flutter Master Course From Zero To Hero][] by Usama Elgendy
 
-## Inglês {:#english}
+## English
 
-* [20 Hour Dart & Flutter YT Course For Beginners][] por Rivaan Ranawat
-* [Best Dart Course][] por Tadas Petra & Robert Brunhage
-* [Best Flutter Course][] por Tadas Petra & Robert Brunhage
-* [Dart & Flutter - Zero to Mastery 2023 + Clean Architecture][] por Max Berktold & Max Steffen
-* [Dart & Flutter - Zero to Mastery 2023 - Keiko Corp. Food Reviews App][] por Marco Napoli
+* [20 Hour Dart & Flutter YT Course For Beginners][] by Rivaan Ranawat
+* [Best Dart Course][] by Tadas Petra & Robert Brunhage
+* [Best Flutter Course][] by Tadas Petra & Robert Brunhage
+* [Dart & Flutter - Zero to Mastery 2023 + Clean Architecture][] by Max Berktold & Max Steffen
+* [Dart & Flutter - Zero to Mastery 2023 - Keiko Corp. Food Reviews App][] by Marco Napoli
 * [Flutter & Dart - The Complete Guide, 2023 Edition][]
-* [Flutter & Firebase Masterclass][] por Andrea Bizzotto
-* [Flutter and Dart Full Course][] por Mouaz M. Alshahmeh
-* [Flutter Animations Masterclass][] por Andrea Bizzotto
+* [Flutter & Firebase Masterclass][] by Andrea Bizzotto
+* [Flutter and Dart Full Course][] by Mouaz M. Alshahmeh
+* [Flutter Animations Masterclass][] by Andrea Bizzotto
 * [Flutter Crash Course][]
-* [Flutter Foundations][] por Andrea Bizzotto
-* [Flutter in Production][] por Andrea Bizzotto
-* [FlutterCraft][] por Muhammad Haris Shahzad
-* [Learn Flutter App Development][] por Coddy
-* [Sticky Grouped Headers in Flutter][] por Marco Napoli
-* [The Complete 2021 Flutter Development Bootcamp Using Dart][] por App Brewery
-* [The Complete Dart Developer Guide][] por Andrea Bizzotto
+* [Flutter Foundations][] by Andrea Bizzotto
+* [Flutter in Production][] by Andrea Bizzotto
+* [FlutterCraft][] by Muhammad Haris Shahzad
+* [Learn Flutter App Development][] by Coddy
+* [Sticky Grouped Headers in Flutter][] by Marco Napoli
+* [The Complete 2021 Flutter Development Bootcamp Using Dart][] by App Brewery
+* [The Complete Dart Developer Guide][] by Andrea Bizzotto
+* [The Complete Flutter Course: Build Android, iOS and Web Apps][]
+  by Sagnik Bhattacharya & Paulina Knop
 
-## Alemão {:#german}
+## German
 
-* [Flutter leicht gemacht 2022 - Zero to Mastery!][] por Max Berktold
+* [Flutter leicht gemacht 2022 - Zero to Mastery!][] by Max Berktold
 
-## Italiano {:#italian}
+## Italian
 
-* [Flutter University - From Zero to Mastery][] por Fudeo
+* [Flutter University - From Zero to Mastery][] by Fudeo
 
-## Português {:#portuguese}
+## Portuguese
 
-* [Flutter Bootcamp][] por Rubens de Melo
-* [Flutter para iniciantes][] por Rubens de Melo
+* [Flutter Bootcamp][] by Rubens de Melo
+* [Flutter para iniciantes][] by Rubens de Melo
 
-## Turco {:#turkish}
+## Turkish
 
-* [Flutter Zero to Hero][] por Veli Bacik
+* [Flutter Zero to Hero][] by Veli Bacik
 
 ## Urdu
 
-* [Tech Idara - Flutter from Basic to Advanced][] por Ishaq Hassan
+* [Tech Idara - Flutter from Basic to Advanced][] by Ishaq Hassan
 
 [20 Hour Dart & Flutter YT Course For Beginners]: https://youtu.be/CzRQ9mnmh44
 [Best Dart Course]: https://www.hungrimind.com/learn/dart
@@ -81,4 +82,5 @@ Para incluir seu curso, [envie um PR][submit a PR]:
 [Tech Idara - Flutter from Basic to Advanced]: https://www.youtube.com/playlist?list=PLX97VxArfzkmXeUqUxeKW7XS8oYraH7A5
 [FlutterCraft]: https://fluttercraft.app
 [Flutter Master Course From Zero To Hero]: https://usamaelgendy.com/courses/flutter-beginners/
+[The Complete Flutter Course: Build Android, iOS and Web Apps]: https://codingliquids.com/courses/flutter-course
 [submit a PR]: {{site.repo.this}}/pulls

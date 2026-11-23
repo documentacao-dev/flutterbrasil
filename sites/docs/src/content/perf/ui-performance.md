@@ -157,7 +157,7 @@ seguinte forma:
 [Performance overlay]: /testing/code-debugging#add-performance-overlay
 [Debugging Flutter apps programmatically]: /testing/code-debugging
 
-<a id="the-performance-overlay" aria-hidden="true"></a>
+<FragmentTarget id="the-performance-overlay" />
 
 ## Observar o performance overlay {:#performance-overlay}
 

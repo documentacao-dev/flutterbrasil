@@ -277,7 +277,7 @@ Use `flutter config --help` para uma descrição de cada flag.
 Flags são lidas apenas do package de _aplicação_ atual, e não têm efeito
 no contexto de um package ou dependência.
 
-<a id="disable-swift-package-manager-field" aria-hidden="true"></a>
+<FragmentTarget id="disable-swift-package-manager-field" />
 
 #### campo enable-swift-package-manager {: #enable-swift-package-manager }
 

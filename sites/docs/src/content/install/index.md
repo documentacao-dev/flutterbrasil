@@ -7,7 +7,7 @@ description: >-
 ia-translate: true
 ---
 
-<a id="get-started" aria-hidden="true"></a>
+<FragmentTarget id="get-started" />
 
 ## Escolha um método de instalação {: #install}
 
@@ -47,7 +47,7 @@ escolha como você quer instalar o Flutter SDK:
   </div>
 </div>
 
-<a id="editor" aria-hidden="true"></a>
+<FragmentTarget id="editor" />
 
 ## Configure as plataformas de destino e os editores {: #target-platform}
 
@@ -69,11 +69,10 @@ configure as ferramentas para suas plataformas de destino e o seu editor preferi
 [VS Code]: /tools/vs-code#setup
 [Android Studio and IntelliJ]: /tools/android-studio#setup
 
-<a id="try" aria-hidden="true"></a>
-<a id="update" aria-hidden="true"></a>
-<a id="previous-releases" aria-hidden="true"></a>
-
-<a id="uninstall" aria-hidden="true"></a>
+<FragmentTarget id="try" />
+<FragmentTarget id="update" />
+<FragmentTarget id="previous-releases" />
+<FragmentTarget id="uninstall" />
 
 ## Gerencie ou resolva problemas da sua instalação {: #manage}
 
@@ -100,7 +99,7 @@ resolver problemas ou remover sua instalação:
   </Card>
 </div>
 
-<a id="next-steps" aria-hidden="true"></a>
+<FragmentTarget id="next-steps" />
 
 :::tip Pronto para começar a criar?
 Depois de configurar seu ambiente,

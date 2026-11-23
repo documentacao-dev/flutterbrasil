@@ -47,7 +47,7 @@ A abordagem de baixo nível para usar em estado efêmero específico de widget.
 [Adding interactivity to your Flutter app]: /ui/interactivity
 [Basic state management in Google Flutter]: https://medium.com/@agungsurya/basic-state-management-in-google-flutter-6ee73608f96d
 
-<a id="valuenotifier-inheritednotifier" aria-hidden="true"></a>
+<FragmentTarget id="valuenotifier-inheritednotifier" />
 
 ### `ValueNotifier` e `InheritedNotifier` {:#valuenotifier-and-inheritednotifier}
 
@@ -58,7 +58,7 @@ atualizar o estado e notificar a UI sobre mudanças.
 
 [State Management using ValueNotifier and InheritedNotifier]: https://www.hungrimind.com/articles/flutter-state-management
 
-<a id="inheritedwidget-inheritedmodel" aria-hidden="true"></a>
+<FragmentTarget id="inheritedwidget-inheritedmodel" />
 
 ### `InheritedWidget` e `InheritedModel` {:#inheritedwidget-and-inheritedmodel}
 

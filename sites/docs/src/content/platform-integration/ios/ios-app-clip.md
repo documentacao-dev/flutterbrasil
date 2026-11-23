@@ -75,7 +75,8 @@ Arraste **Embedded App Clips** para acima de **Thin Binary**.
 
 <DashImage figure image="development/platform-integration/ios-app-clip/embedded-app-clips.png" />
 
-<a id="step-3"></a>
+<FragmentTarget id="step-3" />
+
 ## Step 3 - Remove unneeded files
 
 **3.1**

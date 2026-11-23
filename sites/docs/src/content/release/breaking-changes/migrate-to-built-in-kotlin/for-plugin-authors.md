@@ -239,7 +239,7 @@ environment:
 # ...
 ```
 
-<a id="update-the-plugins-changelog-md" aria-hidden="true"></a>
+<FragmentTarget id="update-the-plugins-changelog-md" />
 
 ## Atualize o CHANGELOG do plugin {:#update-the-plugins-changelog}
 

@@ -66,7 +66,7 @@ Ao destacar explicitamente as datas de corte de branch e as metas de lançamento
 permitimos que todos alinhem seus ciclos de desenvolvimento e
 coordenem a integração de recursos de forma eficaz.
 
-<a id="what-is-a-branch-cutoff-date" aria-hidden="true"></a>
+<FragmentTarget id="what-is-a-branch-cutoff-date" />
 
 ### O que é uma data de corte de branch? {:#branch-cutoff}
 
@@ -77,7 +77,7 @@ garantir a inclusão no próximo lançamento estável.
 * **Antes do corte:** Seu PR será lançado na próxima versão estável.
 * **Depois do corte:** Seu PR aguardará o ciclo seguinte.
 
-<a id="2026-schedule" aria-hidden="true"></a>
+<FragmentTarget id="2026-schedule" />
 
 ### Cronograma de lançamentos de 2027 {:#release-schedule}
 
@@ -135,7 +135,7 @@ Para ver o que mudou em uma versão beta, compare as tags de versão no GitHub.
 Por exemplo: [`flutter/flutter@3.38.0-0.1.pre...3.38.0-0.2.pre`](https://github.com/flutter/flutter/compare/3.38.0-0.1.pre...3.38.0-0.2.pre)
 :::
 
-<a id="master-channel" aria-hidden="true"></a>
+<FragmentTarget id="master-channel" />
 
 ## Canal main (Main channel) {:#main-channel}
 
@@ -150,7 +150,7 @@ $ git clone -b main https://github.com/flutter/flutter.git
 $ ./flutter/bin/flutter --version
 ```
 
-<a id="install-from-an-archive" aria-hidden="true"></a>
+<FragmentTarget id="install-from-an-archive" />
 
 ## Mais informações {:#more-information}
 

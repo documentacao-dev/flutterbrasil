@@ -15,7 +15,7 @@ description: >-
   </li>
 </ul>
 
-<a id="installation-and-setup" aria-hidden="true"></a>
+<FragmentTarget id="installation-and-setup" />
 
 ## Instalação e configuração {: #setup}
 

@@ -77,7 +77,7 @@ flutter:
           style: italic
 ```
 
-<a id="use" aria-hidden="true"></a>
+<FragmentTarget id="use" />
 
 ## 3. Usar a font {:#3-use-the-font}
 

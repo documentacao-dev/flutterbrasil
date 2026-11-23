@@ -300,7 +300,7 @@ confira a [referência do IntelliJ para Flutter][ij-more].
 [ij-more]: /tools/android-studio
 [ij-run]: /tools/android-studio#running-and-debugging
 
-<a id="project-idx" aria-hidden="true"></a>
+<FragmentTarget id="project-idx" />
 
 ## Antigravity
 

@@ -148,7 +148,7 @@ Para mais detalhes, confira a
 [git-install]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [vscode-install]: https://code.visualstudio.com/docs/setup/setup-overview
 
-<a id="install-flutter" aria-hidden="true"></a>
+<FragmentTarget id="install-flutter" />
 
 ## Instale e configure o Flutter {: #install}
 

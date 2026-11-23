@@ -160,7 +160,7 @@ ou podem se sobrepor parcial ou completamente.
 
 * [Staggered Animations][]
 
-<a id="concepts"></a>
+<FragmentTarget id="concepts" />
 
 ## Conceitos e classes essenciais de animação {:#essential-animation-concepts-and-classes}
 
@@ -172,7 +172,7 @@ ou podem usar as animações como base de
 animações mais elaboradas que passam para
 outros widgets.
 
-<a id="animation-class"></a>
+<FragmentTarget id="animation-class" />
 
 ### Animation<wbr>\<double>
 

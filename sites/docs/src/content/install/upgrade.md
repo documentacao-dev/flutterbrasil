@@ -1,173 +1,165 @@
 ---
-title: Atualizar o Flutter
-shortTitle: Atualizar
-description: Aprenda como atualizar o Flutter e mudar para outro canal.
-ia-translate: true
+title: Upgrade Flutter
+shortTitle: Upgrade
+description: Learn how to upgrade Flutter and switch to another channel.
 ---
 
-Não importa qual dos canais de lançamento do Flutter
-você segue, você pode usar o comando `flutter` para atualizar seu
-Flutter SDK ou os packages dos quais seu app depende.
+No matter which one of the Flutter release channels
+you follow, you can use the `flutter` command to upgrade your
+Flutter SDK or the packages that your app depends on.
 
-<a id="upgrading-the-flutter-sdk" aria-hidden="true"></a>
+<FragmentTarget id="upgrading-the-flutter-sdk" />
 
-## Atualizar o Flutter SDK {:#upgrade-the-flutter-sdk}
+## Upgrade the Flutter SDK
 
-Para atualizar o Flutter SDK use o comando `flutter upgrade`:
+To update the Flutter SDK use the `flutter upgrade` command:
 
 ```console
 $ flutter upgrade
 ```
 
-Este comando obtém a versão mais recente do Flutter SDK
-que está disponível no seu canal Flutter atual.
+This command gets the most recent version of the Flutter SDK
+that's available on your current Flutter channel.
 
-Se você está usando o canal **stable**
-e quer uma versão ainda mais recente do Flutter SDK,
-mude para o canal **beta** usando `flutter channel beta`,
-e então execute `flutter upgrade`.
+If you are using the **stable** channel
+and want an even more recent version of the Flutter SDK,
+switch to the **beta** channel using `flutter channel beta`,
+and then run `flutter upgrade`.
 
-<a id="keep-informed" aria-hidden="true"></a>
+### Keep informed
 
-### Mantenha-se informado {:#keep-informed}
+We publish [migration guides][] for known breaking changes.
 
-Nós publicamos [guias de migração][migration guides] para mudanças breaking conhecidas.
+We send announcements regarding these changes to the
+[Flutter announcements mailing list][flutter-announce].
 
-Nós enviamos anúncios sobre essas mudanças para a
-[lista de e-mails de anúncios do Flutter][flutter-announce].
-
-Para evitar ser quebrado por versões futuras do Flutter,
-considere submeter seus testes ao nosso [registro de testes][test registry].
+To avoid being broken by future versions of Flutter,
+consider submitting your tests to our [test registry][].
 
 
-<a id="switching-flutter-channels" aria-hidden="true"></a>
+## Switching Flutter channels
 
-## Mudando canais do Flutter {:#switching-flutter-channels}
+Flutter has two release channels:
+**stable** and **beta**.
 
-O Flutter tem dois canais de lançamento:
-**stable** e **beta**.
+### The **stable** channel
 
-### O canal **stable** {:#the-stable-channel}
+We recommend the **stable** channel for new users
+and for production app releases.
+The team updates this channel about every three months.
+The channel might receive occasional hot fixes
+for high-severity or high-impact issues.
 
-Nós recomendamos o canal **stable** para novos usuários
-e para lançamentos de apps em produção.
-A equipe atualiza este canal aproximadamente a cada três meses.
-O canal pode receber hot fixes ocasionais
-para problemas de alta severidade ou alto impacto.
+The continuous integration for the Flutter team's plugins and packages
+includes testing against the latest **stable** release.
 
-A integração contínua para plugins e packages da equipe Flutter
-inclui testes contra o lançamento **stable** mais recente.
+The latest documentation for the **stable** branch
+is at: <https://api.flutter.dev>
 
-A documentação mais recente para o branch **stable**
-está em: <https://api.flutter.dev>
+### The **beta** channel
 
-<a id="the-beta-channel" aria-hidden="true"></a>
+The **beta** channel has the latest stable release.
+This is the most recent version of Flutter that we have heavily tested.
+This channel has passed all our public testing,
+has been verified against test suites for Google products that use Flutter,
+and has been vetted against [contributed private test suites][test registry].
+The **beta** channel receives regular hot fixes
+to address newly discovered important issues.
 
-### O canal **beta** {:#the-beta-channel}
+The **beta** channel is essentially the same as the **stable** channel
+but updated monthly instead of quarterly.
+Indeed, when the **stable** channel is updated,
+it is updated to the latest **beta** release.
 
-O canal **beta** tem o lançamento estável mais recente.
-Esta é a versão mais recente do Flutter que testamos intensamente.
-Este canal passou por todos os nossos testes públicos,
-foi verificado contra suítes de teste para produtos Google que usam Flutter,
-e foi examinado contra [suítes de teste privadas contribuídas][test registry].
-O canal **beta** recebe hot fixes regulares
-para resolver problemas importantes recém-descobertos.
+### Other channels
 
-O canal **beta** é essencialmente o mesmo que o canal **stable**
-mas atualizado mensalmente em vez de trimestralmente.
-De fato, quando o canal **stable** é atualizado,
-ele é atualizado para o lançamento **beta** mais recente.
+We currently have one other channel, **main** (previously known as **master**).
+People who [contribute to Flutter][] use this channel.
 
-### Outros canais {:#other-channels}
+This channel is not as thoroughly tested as
+the **beta** and **stable** channels.
 
-Atualmente temos um outro canal, **main** (anteriormente conhecido como **master**).
-Pessoas que [contribuem para o Flutter][contribute to Flutter] usam este canal.
+We do not recommend using this channel as
+it is more likely to contain serious regressions.
 
-Este canal não é tão completamente testado quanto
-os canais **beta** e **stable**.
+The latest documentation for the **main** branch
+is at: <https://main-api.flutter.dev>
 
-Nós não recomendamos usar este canal já que
-é mais provável que contenha regressões sérias.
+<FragmentTarget id="changing-channels" />
 
-A documentação mais recente para o branch **main**
-está em: <https://main-api.flutter.dev>
+### Change channels
 
-<a id="changing-channels" aria-hidden="true"></a>
-<a id="change-channels" aria-hidden="true"></a>
-
-### Mudar canais {:#change-channels}
-
-Para visualizar seu canal atual, use o seguinte comando:
+To view your current channel, use the following command:
 
 ```console
 $ flutter channel
 ```
 
-Para mudar para outro canal, use `flutter channel <channel-name>`.
-Uma vez que você mudou seu canal, use `flutter upgrade`
-para baixar o Flutter SDK mais recente e packages dependentes para aquele canal.
-Por exemplo:
+To change to another channel, use `flutter channel <channel-name>`.
+Once you've changed your channel, use `flutter upgrade`
+to download the latest Flutter SDK and dependent packages for that channel.
+For example:
 
 ```console
 $ flutter channel beta
 $ flutter upgrade
 ```
 
-<a id="switching-to-a-specific-flutter-version" aria-hidden="true"></a>
+<FragmentTarget id="switching-to-a-specific-flutter-version" />
 
-## Mudar para uma versão específica do Flutter {:#switch-to-a-specific-flutter-version}
+## Switch to a specific Flutter version
 
-Para mudar para uma versão específica do Flutter:
+To switch to a specific Flutter version:
 
-1. Encontre sua **versão Flutter** desejada no [arquivo do Flutter SDK][Flutter SDK archive].
+1. Find your desired **Flutter version** on the [Flutter SDK archive][].
 
-1. Navegue até o Flutter SDK:
+1. Navigate to the Flutter SDK:
 
    ```console
    $ cd /path/to/flutter
    ```
 
    :::tip
-   Você pode encontrar o caminho do Flutter SDK usando `flutter doctor --verbose`.
+   You can find the Flutter SDK's path using `flutter doctor --verbose`.
    :::
 
-1. Use `git checkout` para mudar para sua **versão Flutter** desejada:
+1. Use `git checkout` to switch to your desired **Flutter version**:
 
    ```console
    $ git checkout <Flutter version>
    ```
 
-<a id="upgrading-packages" aria-hidden="true"></a>
+<FragmentTarget id="upgrading-packages" />
 
-## Atualizar packages {:#upgrade-packages}
+## Upgrade packages
 
-Se você modificou seu arquivo `pubspec.yaml`, ou você quer atualizar
-apenas os packages dos quais seu app depende
-(em vez de tanto os packages quanto o Flutter em si),
-então use um dos comandos `flutter pub`.
+If you've modified your `pubspec.yaml` file, or you want to update
+only the packages that your app depends upon
+(instead of both the packages and Flutter itself),
+then use one of the `flutter pub` commands.
 
-Para atualizar para as _versões compatíveis mais recentes_ de
-todas as dependências listadas no arquivo `pubspec.yaml`,
-use o comando `upgrade`:
+To update to the _latest compatible versions_ of
+all the dependencies listed in the `pubspec.yaml` file,
+use the `upgrade` command:
 
 ```console
 $ flutter pub upgrade
 ```
 
-Para atualizar para a _versão mais recente possível_ de
-todas as dependências listadas no arquivo `pubspec.yaml`,
-use o comando `upgrade --major-versions`:
+To update to the _latest possible version_ of
+all the dependencies listed in the `pubspec.yaml` file,
+use the `upgrade --major-versions` command:
 
 ```console
 $ flutter pub upgrade --major-versions
 ```
 
-Isso também atualiza automaticamente as constraints
-no arquivo `pubspec.yaml`.
+This also automatically update the constraints
+in the `pubspec.yaml` file.
 
-Para identificar dependências de packages desatualizadas e obter conselhos
-sobre como atualizá-las, use o comando `outdated`. Para detalhes, veja
-a [documentação `pub outdated` do Dart]({{site.dart-site}}/tools/pub/cmd/pub-outdated).
+To identify out-of-date package dependencies and get advice
+on how to update them, use the `outdated` command. For details, see
+the Dart [`pub outdated` documentation]({{site.dart-site}}/tools/pub/cmd/pub-outdated).
 
 ```console
 $ flutter pub outdated

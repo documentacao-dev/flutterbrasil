@@ -1,8 +1,9 @@
 ---
-title: Learn Flutter when coming from another platform
-shortTitle: Flutter for
+ia-translate: true
+title: Aprenda Flutter vindo de outra plataforma
+shortTitle: Flutter para
 layout: toc
 description: >-
-  Utilize your background developing for another platform
-  to learn the basics of Flutter!
+  Aproveite sua experiência desenvolvendo para outra plataforma
+  para aprender o básico do Flutter!
 ---
